@@ -1,10 +1,10 @@
-import Banner from "../../components/banner/Banner";
+import Carousel from "../../components/Caruosel/Carousel";
 
 const Home = () => {
   return (
     <div>
-      <section>
-        <Banner></Banner>
+      <section className=" min-h-screen">
+        <Carousel></Carousel>
       </section>
       this is home
     </div>
