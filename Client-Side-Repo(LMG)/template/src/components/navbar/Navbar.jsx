@@ -4,6 +4,7 @@ import logo from '../../assets/logo.png'
 import useAuth from '../../hooks/useAuth';
 import { FaSignOutAlt, FaUser } from "react-icons/fa";
 import { RxDashboard } from "react-icons/rx";
+import ThemeControl from '../../ReuseableCompo/ThemeControl';
 
 
 const Navbar = () => {
@@ -33,6 +34,7 @@ const Navbar = () => {
     </ul>
   </div>
   <div className="navbar-end">
+    <ThemeControl></ThemeControl>
     {
       !user?<div className="dropdown dropdown-end">
       <div tabIndex={0} role="button" className=""><div>
