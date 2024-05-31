@@ -9,10 +9,13 @@ import ThemeControl from '../../ReuseableCompo/ThemeControl';
 
 const Navbar = () => {
   const {user}=useAuth()
-  const navLinks=<div className=' flex gap-5 '>
-    <NavLink className={'font-semibold text-lg hover:underline'} to={'/'}>Home</NavLink>
-    <NavLink className={'font-semibold text-lg hover:underline'} to={'/allClasses'}>All Classes</NavLink>
-    <NavLink className={'font-semibold text-lg hover:underline'} to={'/teachOnLearnMonitorGate'}>Teach on Learn Monitor Gate</NavLink>
+  const navLinks=<div className=' flex  gap-2 lg:gap-5 flex-col lg:flex-row'>
+    <div className=' flex lg:hidden'>
+      <ThemeControl></ThemeControl>
+    </div>
+    <NavLink className={'font-semibold text-base lg:text-lg hover:underline'} to={'/'}>Home</NavLink>
+    <NavLink className={'font-semibold text-base lg:text-lg hover:underline'} to={'/allClasses'}>All Classes</NavLink>
+    <NavLink className={'font-semibold text-base lg:text-lg hover:underline'} to={'/teachOnLearnMonitorGate'}>Teach on Learn Monitor Gate</NavLink>
   </div>
   
   return (
@@ -22,11 +25,11 @@ const Navbar = () => {
       <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
       </div>
-      <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+      <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] bg-base-300 p-2 shadow border rounded-md w-52">
         {navLinks}
       </ul>
     </div>
-    <Link to={'/'} className=" text-xl font-bold"> <img className=' h-12 lg:h-16' src={logo} alt="" /></Link>
+    <Link to={'/'} className=" text-xl font-bold"> <img className=' h-12 md:h-14' src={logo} alt="" /></Link>
   </div>
   <div className="navbar-center hidden lg:flex">
     <ul className="menu menu-horizontal px-1">
@@ -34,7 +37,9 @@ const Navbar = () => {
     </ul>
   </div>
   <div className="navbar-end">
+    <div className=' mr-3 hidden md:flex'>
     <ThemeControl></ThemeControl>
+    </div>
     {
       !user?<div className="dropdown dropdown-end">
       <div tabIndex={0} role="button" className=""><div>
