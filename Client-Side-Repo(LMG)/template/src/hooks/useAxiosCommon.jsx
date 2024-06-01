@@ -1,13 +1,9 @@
 import axios from 'axios'
 const axiosCommon=axios.create({
-  baseURL:''
+  baseURL:'http://localhost:5000'
 })
 const useAxiosCommon = () => {
-  return (
-    <div>
-      
-    </div>
-  );
+  return axiosCommon;
 };
 
 export default useAxiosCommon;
