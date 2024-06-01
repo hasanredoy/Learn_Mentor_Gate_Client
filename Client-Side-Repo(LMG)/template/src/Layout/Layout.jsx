@@ -3,8 +3,8 @@ import Navbar from '../components/navbar/Navbar';
 import Footer from '../components/footer/Footer';
 const Layout = () => {
   return (
-    <div>
-      <div>
+    <div className=''>
+      <div className='fixed w-full  z-50 top-0 '>
         <Navbar></Navbar>
       </div>
       <div>

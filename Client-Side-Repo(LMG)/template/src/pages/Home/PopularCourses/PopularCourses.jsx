@@ -34,9 +34,11 @@ const PopularCourses = () => {
         modules={[Autoplay, Pagination, Navigation]}
         className="mySwiper"
       >
-        <SwiperSlide><div className='bg-black relative'>
+        <SwiperSlide>
+          <div className='bg-black relative'>
          
-          </div></SwiperSlide>
+          </div>
+          </SwiperSlide>
         <SwiperSlide><div className=' bg-black relative'>
        
           </div></SwiperSlide>
