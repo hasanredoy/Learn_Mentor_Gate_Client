@@ -1,5 +1,5 @@
+import Banner from "./banner/Banner";
 
-import Banner from "../../components/banner/Banner";
 
 const Home = () => {
   return (

@@ -1,4 +1,5 @@
 import Carousel from "../Caruosel/Carousel";
+
 const Banner = () => {
   return (
     <div className=" flex flex-col lg:flex-row gap-5">
