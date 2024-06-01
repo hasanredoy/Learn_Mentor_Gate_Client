@@ -1,12 +1,12 @@
-import Carousel from "../../components/Caruosel/Carousel";
+
+import Banner from "../../components/banner/Banner";
 
 const Home = () => {
   return (
-    <div>
-      <section className=" min-h-screen">
-        <Carousel></Carousel>
+    <div >
+      <section className=" bg-base-200 container mx-auto my-10 ">
+       <Banner></Banner>
       </section>
-      this is home
     </div>
   );
 };
