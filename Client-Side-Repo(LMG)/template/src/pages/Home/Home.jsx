@@ -1,3 +1,4 @@
+import Achievements from "./Achievements/Achievements";
 import OurPartners from "./OurPatners/OurPartners";
 import PopularCourses from "./PopularCourses/PopularCourses";
 import Reviews from "./Reviews/Reviews";
@@ -18,6 +19,9 @@ const Home = () => {
       </section>
       <section className=" border container mx-auto my-20 ">
        <Reviews></Reviews>
+      </section>
+      <section>
+        <Achievements></Achievements>
       </section>
     </div>
   );
