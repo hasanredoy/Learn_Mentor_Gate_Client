@@ -1,5 +1,6 @@
 import OurPartners from "./OurPatners/OurPartners";
 import PopularCourses from "./PopularCourses/PopularCourses";
+import Reviews from "./Reviews/Reviews";
 import Banner from "./banner/Banner";
 
 
@@ -14,6 +15,9 @@ const Home = () => {
       </section>
       <section className="  container mx-auto my-20 ">
        <PopularCourses></PopularCourses>
+      </section>
+      <section className="  container mx-auto my-20 ">
+       <Reviews></Reviews>
       </section>
     </div>
   );
