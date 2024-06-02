@@ -55,9 +55,9 @@ const PopularCourses = () => {
                     alt="Movie"
                   />
                 </figure>
-                <div className=" mt-5 w-full lg:w-1/2 flex flex-col gap-5 justify-start items-start pl-1  lg:p-10 ">
-                  <h2 className=" text-xl pr-10 lg:text-3xl font-bold">{course?.Title}</h2>
-                  <p className=" pr-5 lg:pr-20">{course?.['Short_description']}</p>
+                <div className=" mt-5 w-full lg:w-1/2 flex flex-col items-center lg:items-start  gap-5 justify-start pl-1  lg:p-10 ">
+                  <h2 className=" text-xl lg:pr-10 lg:text-3xl font-bold">{course?.Title}</h2>
+                  <p className=" px-4 lg:px-0 text-center lg:text-start pr-0 lg:pr-20">{course?.['Short_description']}</p>
                   <h2 className=" text-lg font-bold">Total Enrollments: {course?.['Total_enrollment']}</h2>
                   <h2 className=" text-base font-bold">Course By: {course?.Name}</h2>
                   <div className=" mb-3">

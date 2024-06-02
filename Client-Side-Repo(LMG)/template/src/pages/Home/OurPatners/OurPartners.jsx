@@ -40,7 +40,7 @@ const OurPartners = () => {
             alt=""
             className="object-cover object-center mx-auto rounded-md h-44  "
           />
-          <div className="mt-6 mb-2">
+          <div className="mt-6  mb-2">
             <h2 className="text-2xl  rounded-lg text-center font-bold ">
               Become Our <span className=" text-green-600">Partner</span>
             </h2>

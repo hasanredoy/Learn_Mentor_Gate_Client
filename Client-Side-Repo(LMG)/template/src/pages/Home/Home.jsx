@@ -16,7 +16,7 @@ const Home = () => {
       <section className="  container mx-auto my-20 ">
        <PopularCourses></PopularCourses>
       </section>
-      <section className="  container mx-auto my-20 ">
+      <section className=" border container mx-auto my-20 ">
        <Reviews></Reviews>
       </section>
     </div>
