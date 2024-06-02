@@ -3,6 +3,7 @@ import FaQ from "./FAQ/FaQ";
 import OurPartners from "./OurPatners/OurPartners";
 import PopularCourses from "./PopularCourses/PopularCourses";
 import Reviews from "./Reviews/Reviews";
+import TeachOn from "./TeachOnLMG/TeachOn";
 import Banner from "./banner/Banner";
 
 
@@ -26,6 +27,9 @@ const Home = () => {
       </section>
       <section className=" my-10">
         <FaQ></FaQ>
+      </section>
+      <section className="container mx-auto border bg-base-200 my-10">
+        <TeachOn></TeachOn>
       </section>
     </div>
   );

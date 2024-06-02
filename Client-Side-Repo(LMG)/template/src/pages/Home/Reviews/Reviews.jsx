@@ -77,7 +77,7 @@ const Reviews = () => {
         </SwiperSlide>
       ))}
     </Swiper>
-   <div className="w-full  lg:w-[38%]">
+   <div className="w-full md:w-1/2 mx-auto lg:w-[38%]">
     <img className=" h-[300px] w-full" src={feedback} alt="" />
    </div>
      </div>
