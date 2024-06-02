@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import { Autoplay, Pagination, Navigation } from "swiper/modules";
+import {  Pagination, Navigation } from "swiper/modules";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosCommon from "../../../hooks/useAxiosCommon";
 // import slide1 from '../../../assets/slide1.png'
@@ -26,10 +26,10 @@ const PopularCourses = () => {
     },
   });
 
-  console.log(courses);
+   console.log(courses);
   return (
-    <div className=" mt-10">
-      <h1 className=" text-2xl lg:text-4xl font-bold text-center">
+    <div className="">
+      <h1 className=" text-2xl mb-10 lg:text-4xl font-bold text-center">
         Have a Look Some of Our{" "}
         <span className=" text-green-600 ">Popular</span> Courses
       </h1>
@@ -37,32 +37,31 @@ const PopularCourses = () => {
         <Swiper
           spaceBetween={30}
           centeredSlides={true}
-          autoplay={{
-            delay: 1500,
-            disableOnInteraction: false,
-          }}
+       
           pagination={{
             clickable: true,
           }}
           navigation={true}
-          modules={[Autoplay, Pagination, Navigation]}
+          modules={[Pagination, Navigation]}
           className="mySwiper"
         >
           {courses?.map((course) => (
-            <SwiperSlide key={course?._id}>
-              <div className="card card-side bg-base-100 shadow-xl">
-                <figure>
+            <SwiperSlide className=" py-10" key={course?._id}>
+              <div className="card min-h-[400px] max-h-[400px] flex flex-col gap-5 lg:flex-row bg-base-100 shadow-xl">
+                <figure className="  w-full lg:w-1/2">
                   <img
+                  className=" h-full w-full"
                     src={course?.Image}
                     alt="Movie"
                   />
                 </figure>
-                <div className="card-body">
-                  <h2 className="card-title">{course?.Title}</h2>
-                  <p>{course?.['Short description']}</p>
-                  <h2 className="card-title">Total Enrollments{course?.['Total enrollment']}</h2>
-                  <div className="card-actions justify-end">
-                    <button className="text-white bg-green-500 p-2 rounded-lg font-black hover:bg-white hover:text-green-700  hover:border hover:border-green-500">Enroll</button>
+                <div className=" w-full lg:w-1/2 flex flex-col gap-5 justify-start items-start  p-3  lg:p-10 ">
+                  <h2 className=" text-3xl font-bold">{course?.Title}</h2>
+                  <p className=" pr-5 lg:pr-20">{course?.['Short_description']}</p>
+                  <h2 className=" text-lg font-bold">Total Enrollments: {course?.['Total_enrollment']}</h2>
+                  <h2 className=" text-base font-bold">Course By: {course?.Name}</h2>
+                  <div className="">
+                    <button className="text-white bg-green-500 p-2 rounded-lg font-black hover:bg-white hover:text-green-700  hover:border hover:border-green-500">Enroll Now!</button>
                   </div>
                 </div>
               </div>
