@@ -16,21 +16,21 @@ const Achievements = () => {
               <img className=' w-20 h-20' src={users} alt="" />
             </div>
             <div className="stat-title text-xl text-black  font-bold">  Users</div>
-            <div className="stat-value font-bold">31</div>
+            <div className="stat-value font-bold">31+</div>
           </div>
           <div className="stat bg-amber-50 border-b-8 border-green-300 border-r-8 ">
             <div className="stat-figure text-secondary">
               <img className=' w-20 h-20' src={classes} alt="" />
             </div>
             <div className="stat-title text-xl text-black  font-bold">  Classes</div>
-            <div className="stat-value font-bold">5</div>
+            <div className="stat-value font-bold">5+</div>
           </div>
           <div className="stat bg-yellow-100 border-b-8 border-sky-300 border-r-8 ">
             <div className="stat-figure text-secondary">
               <img className=' w-40 h-20' src={enroll} alt="" />
             </div>
             <div className="stat-title text-xl text-black  font-bold">  Enrollments</div>
-            <div className="stat-value font-bold">15</div>
+            <div className="stat-value font-bold">15+</div>
           </div>
 
         </div>

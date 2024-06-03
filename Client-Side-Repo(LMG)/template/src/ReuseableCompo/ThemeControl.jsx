@@ -4,6 +4,7 @@ import { MdWbSunny } from "react-icons/md";
 
 const ThemeControl = () => {
 const [theme, setTheme]=useState(localStorage.getItem('theme'))
+
 const handleTheme=(e)=>{
   // console.log(e.target.value);
   localStorage.setItem('theme',e.target.value)
