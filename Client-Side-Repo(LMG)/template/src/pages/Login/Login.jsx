@@ -41,7 +41,7 @@ const Login = () => {
         console.log(res.user);
 
         console.log(location);
-        toast.success("Registered Successfully");
+        toast.success("Logged in Successfully");
 
         navigate(
           location?.state

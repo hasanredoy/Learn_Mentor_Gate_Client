@@ -32,8 +32,8 @@ const GoogleLogin = () => {
         >
           Login With <FcGoogle className=" text-2xl"></FcGoogle>{" "}
         </button>
-      <Toaster></Toaster>
       </div>
+      <Toaster></Toaster>
 
     </>
   );

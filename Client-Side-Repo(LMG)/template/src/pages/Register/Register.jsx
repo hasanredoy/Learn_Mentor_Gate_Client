@@ -6,9 +6,14 @@ import { FaEyeSlash } from "react-icons/fa6";
 import toast, { Toaster } from "react-hot-toast";
 import "react-toastify/dist/ReactToastify.css";
 import { updateProfile } from "firebase/auth";
+import useUploadImage from "../../hooks/useUploadImage";
 import useAuth from "../../hooks/useAuth";
 import { useForm } from "react-hook-form"
+import axios from "axios";
+import GoogleLogin from '../../ReuseableCompo/GoogleLogin';
+
 const Register = () => {
+  const [image , setImage]=useState()
   const { register:create } = useAuth();
   const [eye, setEey] = useState(true);
   const navigate = useNavigate();
@@ -17,17 +22,26 @@ const Register = () => {
     handleSubmit,
     formState: { errors },
   } = useForm()
+  const handeleIMage=(e)=>{
+  setImage(e.target.files[0]);
+}
 
-  // const onSubmit = (data) => console.log(data)
-
-  const handleRegister = (e) => {
+  // console.log(imageUrl);
+  const handleRegister = async (e) => {
     // e.preventDefault();
     const form = e;
     const name = form.name ;
-    const photo = form.photo[0];
+    let photo = ''
     const email = form.email ;
     const password = form.password ;
     const user = { name, photo, email, password };
+    const formData = new FormData()
+  formData.append('image',image)
+  const api = import.meta.env.VITE_IMGBB_API;
+  const url = `https://api.imgbb.com/1/upload?key=${api}`;
+  const res = await axios.post(url , formData)
+
+  // console.log(photo);
     if (password.length < 6) {
       toast.error("Password Should Be 6 Character or More");
       return;
@@ -38,9 +52,9 @@ const Register = () => {
       );
       return;
     }
-
-    console.log(user);
-    create(email, )
+    if(res?.data?.data.url){
+      photo=res?.data?.data?.url;
+      create(email,password )
       .then((res) => {
         console.log(res.user);
         updateProfile(res.user, {
@@ -56,6 +70,10 @@ const Register = () => {
         console.log(err);
         toast.error("Please Check Email And Password And Try Again");
       });
+   }
+
+    // console.log(user);
+    
   };
   return (
    <div>
@@ -92,8 +110,9 @@ const Register = () => {
               <span className="text-xl font-semibold">Your Photo</span>
             </label>
             <input
+            onChange={handeleIMage}
               type='file'
-              {...register("photo", { required: true })}
+              // {...register("photo", { required: true })}
              
             />
           </div>
@@ -148,6 +167,8 @@ const Register = () => {
             </button>
           </div>
         </form>
+        <div className="divider">or</div>
+        <GoogleLogin></GoogleLogin>
         <p className=" text-center pb-3 font-semibold">
           Already have an account !{" "}
           <Link to={"/login"} className=" text-blue-700 font-bold">
