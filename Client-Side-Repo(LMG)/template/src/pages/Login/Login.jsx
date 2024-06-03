@@ -1,12 +1,11 @@
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa6";
 import { useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
 import useAuth from "../../hooks/useAuth";
 import Navbar from "../../components/navbar/Navbar";
 import { useForm } from "react-hook-form";
-import 'react-toastify/dist/ReactToastify.css';
 import GoogleLogin from "../../ReuseableCompo/GoogleLogin";
+import toast, { Toaster } from 'react-hot-toast';
 
 const Login = () => {
   const { login } = useAuth();
@@ -143,7 +142,7 @@ const Login = () => {
               </Link>
             </p>
           </div>
-          <ToastContainer></ToastContainer>
+          <Toaster></Toaster>
         </div>
       </div>
     </div>

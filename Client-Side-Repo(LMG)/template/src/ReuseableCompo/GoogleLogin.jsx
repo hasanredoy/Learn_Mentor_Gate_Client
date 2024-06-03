@@ -1,7 +1,7 @@
 import { FcGoogle } from "react-icons/fc";
-import { ToastContainer, toast } from "react-toastify";
 import useAuth from "../hooks/useAuth";
 import { useLocation, useNavigate } from "react-router-dom";
+import toast, { Toaster } from 'react-hot-toast';
 
 const GoogleLogin = () => {
   const { logInGoogle } = useAuth();
@@ -32,9 +32,9 @@ const GoogleLogin = () => {
         >
           Login With <FcGoogle className=" text-2xl"></FcGoogle>{" "}
         </button>
+      <Toaster></Toaster>
       </div>
 
-      <ToastContainer></ToastContainer>
     </>
   );
 };
