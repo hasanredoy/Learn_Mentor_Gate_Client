@@ -4,6 +4,7 @@ import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
 import AllClasses from "../pages/AllClasses/AllClasses";
+import SingleClass from "../pages/AllClasses/SingleClass/SingleClass";
 
 const router = createBrowserRouter([
   {
@@ -17,6 +18,11 @@ const router = createBrowserRouter([
       {
         path: "/allClasses",
         element: <AllClasses></AllClasses>,
+      },
+      {
+        path: "/class/:id",
+        element: <SingleClass></SingleClass>,
+     
       },
     ],
   },
