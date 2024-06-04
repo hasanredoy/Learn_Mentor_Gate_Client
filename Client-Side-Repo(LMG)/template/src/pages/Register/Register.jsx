@@ -6,17 +6,20 @@ import { FaEyeSlash } from "react-icons/fa6";
 import toast, { Toaster } from "react-hot-toast";
 import "react-toastify/dist/ReactToastify.css";
 import { updateProfile } from "firebase/auth";
-import useUploadImage from "../../hooks/useUploadImage";
 import useAuth from "../../hooks/useAuth";
 import { useForm } from "react-hook-form"
 import axios from "axios";
 import GoogleLogin from '../../ReuseableCompo/GoogleLogin';
+import usePostUsers from "../../hooks/usePostUsers";
+
 
 const Register = () => {
   const [image , setImage]=useState()
   const { register:create } = useAuth();
   const [eye, setEey] = useState(true);
   const navigate = useNavigate();
+  const mutateAsync = usePostUsers()
+  // console.log(mutate);
   const {
     register,
     handleSubmit,
@@ -34,7 +37,7 @@ const Register = () => {
     let photo = ''
     const email = form.email ;
     const password = form.password ;
-    const user = { name, photo, email, password };
+    const userData = { name, photo, email,isAdmin:"false",isTeacher:'false' };
     const formData = new FormData()
   formData.append('image',image)
   const api = import.meta.env.VITE_IMGBB_API;
@@ -56,11 +59,12 @@ const Register = () => {
       photo=res?.data?.data?.url;
       create(email,password )
       .then((res) => {
-        console.log(res.user);
+        // console.log(res.user);
         updateProfile(res.user, {
           displayName: name,
           photoURL: photo,
         });
+        mutateAsync(userData)
         toast.success("Registered Successfully");
         setTimeout(() => {
           navigate("/login");

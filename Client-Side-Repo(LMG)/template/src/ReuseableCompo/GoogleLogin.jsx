@@ -2,21 +2,28 @@ import { FcGoogle } from "react-icons/fc";
 import useAuth from "../hooks/useAuth";
 import { useLocation, useNavigate } from "react-router-dom";
 import toast, { Toaster } from 'react-hot-toast';
+import usePostUsers from "../hooks/usePostUsers";
 
 const GoogleLogin = () => {
   const { logInGoogle } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+  const mutateAsync = usePostUsers()
 
-  const handleGoogleLogin = () => {
+  const handleGoogleLogin =async () => {
     logInGoogle()
-      .then((res) => {
+      .then( async(res) => {
         console.log(res);
+        const userData ={
+          name:res.user?.displayName,
+          email:res.user?.email,
+          photo:res.user?.photoURL,
+          isAdmin:'false',
+          isTeacher:'false'
+                }
+        await mutateAsync(userData)
         toast.success("Logged In With Google Successfully");
-        navigate(
-          location?.state
-            ? location.state
-            : setTimeout(() => {
+        navigate(setTimeout(() => {
                 navigate(location?.pathname ? location.pathname : "/");
               }, 1000)
         );
