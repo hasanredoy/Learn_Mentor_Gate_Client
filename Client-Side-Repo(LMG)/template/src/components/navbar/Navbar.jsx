@@ -15,14 +15,14 @@ const Navbar = () => {
     </div>
     <NavLink className={'font-semibold text-base lg:text-lg hover:underline'} to={'/'}>Home</NavLink>
     <NavLink className={'font-semibold text-base lg:text-lg hover:underline'} to={'/allClasses'}>All Classes</NavLink>
-    <NavLink className={'font-semibold text-base lg:text-lg hover:underline'} to={'/teachOnLearnMonitorGate'}>Teach on Learn Monitor Gate</NavLink>
+    <NavLink className={'font-semibold text-base lg:text-lg hover:underline'} to={'/teachOnLearnMentorGate'}>Teach on Learn Monitor Gate</NavLink>
   </div>
   const handleLogout=()=>{
     logOut()
     .then()
   }
   return (
-    <div className="navbar bg-base-200">
+    <div className="navbar shadow-xl bg-base-200">
   <div className="navbar-start">
     <div className="dropdown">
       <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
