@@ -1,36 +1,15 @@
-import { Swiper, SwiperSlide } from "swiper/react";
+import useAllClasses from "../../hooks/useAllClasses";
 
-// Import Swiper styles
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
-import {  Pagination, Navigation } from "swiper/modules";
-import useAllClasses from "../../../hooks/useAllClasses";
-
-const PopularCourses = () => {
- 
-   const courses=useAllClasses()
-  //  console.log(courses);
+const AllClasses = () => {
+  const  courses = useAllClasses()
   return (
-    <div className="">
-      <h1 className=" text-2xl mb-10 lg:text-4xl font-bold text-center">
-        Have a Look Some of Our{" "}
-        <span className=" text-green-600 ">Popular</span> Courses
-      </h1>
-      <div>
-        <Swiper
-          spaceBetween={30}
-          centeredSlides={true}
-       
-          pagination={{
-            clickable: true,
-          }}
-          navigation={true}
-          modules={[Pagination, Navigation]}
-          className="mySwiper"
-        >
-          {courses?.map((course) => (
-            <SwiperSlide className=" py-10" key={course?._id}>
+    <div className=" pt-28 bg-base-300">
+     <div className=" container bg-base-100 mx-auto">
+     <h1 className=" text-3xl font-black text-center my-10 md:text-5xl">Knowledge Is <span className=" text-green-600">Wealth</span></h1>
+      <h3 className=" text-xl text-center font-bold">Drive into a Knowledge ocean With <span className=" text-green-500">Learn Mentor Gate</span> Online Courses...</h3>
+      <div className=" grid ">
+      {courses?.map((course) => (
+            <div className=" py-10" key={course?._id}>
               <div className="card min-h-[400px] lg:max-h-[400px] flex flex-col gap-5 lg:flex-row bg-base-100 shadow-xl">
                 <figure className="   w-full lg:w-1/2">
                   <img
@@ -49,12 +28,12 @@ const PopularCourses = () => {
                   </div>
                 </div>
               </div>
-            </SwiperSlide>
+            </div>
           ))}
-        </Swiper>
       </div>
+     </div>
     </div>
   );
 };
 
-export default PopularCourses;
+export default AllClasses;
