@@ -52,7 +52,7 @@ const AuthProvider = ({ children }) => {
 const {mutateAsync} = useMutation({
   mutationFn:async user=>{
     const res = await axios.post('http://localhost:5000/jwt',user)
-    console.log(res);
+    //console.log(res);
     localStorage.setItem('access_token',res.data)
   }
 })
@@ -60,7 +60,7 @@ const {mutateAsync} = useMutation({
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, currentUser => {
       setUser(currentUser)
-      console.log('CurrentUser-->', currentUser)
+      //console.log('CurrentUser-->', currentUser)
       const user = {
         email:currentUser?.email
       }

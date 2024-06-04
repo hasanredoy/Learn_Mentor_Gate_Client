@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 const PopularCourses = () => {
  
    const courses=useAllClasses()
-  //  console.log(courses);
+  //  //console.log(courses);
   return (
     <div className="">
       <h1 className=" text-2xl mb-10 lg:text-4xl font-bold text-center">

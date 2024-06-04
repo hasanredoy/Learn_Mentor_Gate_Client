@@ -20,7 +20,7 @@ const Register = () => {
   const navigate = useNavigate();
   const mutateAsync = usePostUsers()
   const location = useLocation()
-  // console.log(mutate);
+  // //console.log(mutate);
   const {
     register,
     handleSubmit,
@@ -30,7 +30,7 @@ const Register = () => {
   setImage(e.target.files[0]);
 }
 
-  // console.log(imageUrl);
+  // //console.log(imageUrl);
   const handleRegister = async (e) => {
     // e.preventDefault();
     const form = e;
@@ -45,7 +45,7 @@ const Register = () => {
   const url = `https://api.imgbb.com/1/upload?key=${api}`;
   const res = await axios.post(url , formData)
 
-  // console.log(photo);
+  // //console.log(photo);
     if (password.length < 6) {
       toast.error("Password Should Be 6 Character or More");
       return;
@@ -60,7 +60,7 @@ const Register = () => {
       photo=res?.data?.data?.url;
       create(email,password )
       .then((res) => {
-        // console.log(res.user);
+        // //console.log(res.user);
         updateProfile(res.user, {
           displayName: name,
           photoURL: photo,
@@ -77,7 +77,7 @@ const Register = () => {
       });
    }
 
-    // console.log(user);
+    // //console.log(user);
     
   };
   return (

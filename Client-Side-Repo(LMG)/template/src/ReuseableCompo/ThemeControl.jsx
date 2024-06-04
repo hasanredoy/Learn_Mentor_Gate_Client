@@ -6,14 +6,14 @@ const ThemeControl = () => {
 const [theme, setTheme]=useState(localStorage.getItem('theme'))
 
 const handleTheme=(e)=>{
-  // console.log(e.target.value);
+  // //console.log(e.target.value);
   localStorage.setItem('theme',e.target.value)
   setTheme(e.target.value)
 }
 useEffect(()=>{
   document.querySelector('html').setAttribute('data-theme',theme)
 },[theme])
-// console.log(theme);
+// //console.log(theme);
   return (
     <div title="Change Theme" className={`flex justify-center items-center gap-2 ${theme==='light'?'bg-white':'bg-base-300'} p-2 rounded-full border border-gray-300`}>
       <span>

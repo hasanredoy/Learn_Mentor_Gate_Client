@@ -13,7 +13,7 @@ const GoogleLogin = () => {
   const handleGoogleLogin =async () => {
     logInGoogle()
       .then( async(res) => {
-        console.log(res);
+        //console.log(res);
         const userData ={
           name:res.user?.displayName,
           email:res.user?.email,
@@ -28,7 +28,8 @@ const GoogleLogin = () => {
             
         
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err)
+    );
   };
   return (
     <>

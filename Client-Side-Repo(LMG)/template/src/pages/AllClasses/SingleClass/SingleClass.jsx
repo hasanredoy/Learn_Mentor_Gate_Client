@@ -11,12 +11,12 @@ const SingleClass = () => {
     queryKey: ["singleCourse"],
     queryFn: async () => {
       const res = await axiosSecure.get(`/course/${id}`);
-      console.log(res);
+      //console.log(res);
       return res.data;
       
     },
   });
-  console.log(course);
+  //console.log(course);
   return (
     <div className=" max-w-7xl mx-auto mt-10 py-10">
        <div

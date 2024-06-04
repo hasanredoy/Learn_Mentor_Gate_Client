@@ -21,7 +21,7 @@ const Reviews = () => {
     },
   });
 
-  console.log(reviews);
+  //console.log(reviews);
   return (
     <div className=" ">
        <div>

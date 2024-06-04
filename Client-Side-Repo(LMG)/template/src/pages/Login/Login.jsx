@@ -35,12 +35,12 @@ const Login = () => {
       return;
     }
 
-    console.log(user);
+    //console.log(user);
     login(email, password)
       .then((res) => {
-        console.log(res.user);
+        //console.log(res.user);
 
-        console.log(location);
+        //console.log(location);
         toast.success("Logged in Successfully");
 
       
@@ -50,7 +50,7 @@ const Login = () => {
         
       })
       .catch((err) => {
-        console.log(err);
+        //console.log(err);
         toast.error("Please Check Email And Password And Try Again");
       });
   };

@@ -3,7 +3,7 @@ import useAllClasses from "../../hooks/useAllClasses";
 import { Link } from "react-router-dom";
 const AllClasses = () => {
   const courses = useAllClasses();
-  console.log(courses);
+  //console.log(courses);
   return (
     <div className=" pt-20 lg:pt-28 bg-base-100">
       <div className=" container  mx-auto">
