@@ -11,6 +11,8 @@ import {
   updateProfile,
 } from 'firebase/auth'
 import app from '../firebase/firebase.config.js'
+import { useMutation } from '@tanstack/react-query'
+import axios from 'axios'
 // import { app } from '../firebase/firebase.config'
 
 export const AuthContext = createContext(null)
@@ -47,13 +49,28 @@ const AuthProvider = ({ children }) => {
       photoURL: photo,
     })
   }
-
+const {mutateAsync} = useMutation({
+  mutationFn:async user=>{
+    const res = await axios.post('http://localhost:5000/jwt',user)
+    console.log(res);
+    localStorage.setItem('access_token',res.data)
+  }
+})
   // onAuthStateChange
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, currentUser => {
       setUser(currentUser)
       console.log('CurrentUser-->', currentUser)
-      setLoading(false)
+      const user = {
+        email:currentUser?.email
+      }
+      if(currentUser){
+        mutateAsync(user)
+        setLoading(false)
+      }
+      else{localStorage.setItem('access_token','')
+        setLoading(false)}
+      
     })
     return () => {
       return unsubscribe()

@@ -23,10 +23,10 @@ const GoogleLogin = () => {
                 }
         await mutateAsync(userData)
         toast.success("Logged In With Google Successfully");
-        navigate(setTimeout(() => {
-                navigate(location?.pathname ? location.pathname : "/");
-              }, 1000)
-        );
+      
+                navigate(location?.state ? location?.state : "/");
+            
+        
       })
       .catch((err) => console.log(err));
   };

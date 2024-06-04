@@ -8,7 +8,7 @@ import ThemeControl from '../../ReuseableCompo/ThemeControl';
 
 
 const Navbar = () => {
-  const {user}=useAuth()
+  const {user,logOut}=useAuth()
   const navLinks=<div className=' flex  gap-2 lg:gap-5 flex-col lg:flex-row'>
     <div className=' flex lg:hidden'>
       <ThemeControl></ThemeControl>
@@ -17,7 +17,10 @@ const Navbar = () => {
     <NavLink className={'font-semibold text-base lg:text-lg hover:underline'} to={'/allClasses'}>All Classes</NavLink>
     <NavLink className={'font-semibold text-base lg:text-lg hover:underline'} to={'/teachOnLearnMonitorGate'}>Teach on Learn Monitor Gate</NavLink>
   </div>
-  
+  const handleLogout=()=>{
+    logOut()
+    .then()
+  }
   return (
     <div className="navbar bg-base-200">
   <div className="navbar-start">
@@ -44,13 +47,13 @@ const Navbar = () => {
       user?<div className="dropdown dropdown-end">
       <div tabIndex={0} role="button" className=""><div>
         {
-          user?.photoURL?<img src={logo} className=' w-12 lg:w-14 h-12 lg:h-14 border border-green-600 rounded-full' alt="" />:<FaUser className=' text-5xl  border border-green-600 rounded-full'></FaUser>
+          user?.photoURL?<img src={user?.photoURL} className=' w-12 lg:w-14 h-12 lg:h-14 border border-green-600 rounded-full' alt="" />:<FaUser className=' text-5xl  border border-green-600 rounded-full'></FaUser>
         }
       </div></div>
       <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52 flex flex-col gap-3">
         <li className=' text-xl font-bold'>{user?.displayName?user?.displayName:'Anonymous'}</li>
         <Link><button className=' text-lg font-bold text-white bg-green-700 px-4 py-2 rounded-lg hover:bg-white hover:text-green-600 hover:border hover:border-green-700 w-full flex gap-2 justify-center items-center '>Dashboard <RxDashboard></RxDashboard></button></Link>
-        <button className=' text-lg font-bold text-white bg-amber-500 px-4 py-2 rounded-lg hover:bg-white hover:text-amber-500 hover:border hover:border-amber-700 flex gap-2 justify-center items-center '>Logout <FaSignOutAlt></FaSignOutAlt></button>
+        <button onClick={handleLogout} className=' text-lg font-bold text-white bg-amber-500 px-4 py-2 rounded-lg hover:bg-white hover:text-amber-500 hover:border hover:border-amber-700 flex gap-2 justify-center items-center '>Logout <FaSignOutAlt></FaSignOutAlt></button>
       </ul>
     </div>: <Link to={'/login'}><button className=' text-lg font-bold text-white bg-green-700 px-4 py-2 rounded-lg hover:bg-white hover:text-green-600 hover:border hover:border-green-700 '>Login</button></Link>
     }

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Navbar from "../../components/navbar/Navbar";
 import { FaEye } from "react-icons/fa6";
 import { FaEyeSlash } from "react-icons/fa6";
@@ -19,6 +19,7 @@ const Register = () => {
   const [eye, setEey] = useState(true);
   const navigate = useNavigate();
   const mutateAsync = usePostUsers()
+  const location = useLocation()
   // console.log(mutate);
   const {
     register,
@@ -67,7 +68,7 @@ const Register = () => {
         mutateAsync(userData)
         toast.success("Registered Successfully");
         setTimeout(() => {
-          navigate("/login");
+          navigate(location?.state?location.state:"/login");
         }, 1000);
       })
       .catch((err) => {

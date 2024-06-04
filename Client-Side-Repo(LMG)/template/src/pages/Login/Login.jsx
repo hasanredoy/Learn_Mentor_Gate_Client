@@ -43,13 +43,11 @@ const Login = () => {
         console.log(location);
         toast.success("Logged in Successfully");
 
-        navigate(
-          location?.state
-            ? location.state
-            : setTimeout(() => {
-                navigate(location?.pathname?location.pathname:"/");
+      
+           setTimeout(() => {
+                navigate(location?.state?location.state:"/");
               }, 1000)
-        );
+        
       })
       .catch((err) => {
         console.log(err);
