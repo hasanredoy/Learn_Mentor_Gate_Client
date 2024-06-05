@@ -6,6 +6,7 @@ import Register from "../pages/Register/Register";
 import AllClasses from "../pages/AllClasses/AllClasses";
 import SingleClass from "../pages/AllClasses/SingleClass/SingleClass";
 import TeachOnLMG from "../pages/TeachOnLearnMentorGate/TeachOnLMG";
+import Dashboard from "../Layout/Dashboard";
 
 const router = createBrowserRouter([
   {
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
   {
     path: "/register",
     element: <Register></Register>,
+  },
+  {
+    path: "/dashboard",
+    element: <Dashboard></Dashboard>,
   },
 ]);
 
