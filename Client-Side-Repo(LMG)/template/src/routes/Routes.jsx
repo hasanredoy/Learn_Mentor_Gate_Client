@@ -7,6 +7,7 @@ import AllClasses from "../pages/AllClasses/AllClasses";
 import SingleClass from "../pages/AllClasses/SingleClass/SingleClass";
 import TeachOnLMG from "../pages/TeachOnLearnMentorGate/TeachOnLMG";
 import Dashboard from "../Layout/Dashboard";
+import AllUsers from "../pages/Dashboard/Admin/AllUsers";
 
 const router = createBrowserRouter([
   {
@@ -44,6 +45,12 @@ const router = createBrowserRouter([
   {
     path: "/dashboard",
     element: <Dashboard></Dashboard>,
+    children:[
+      {
+        path:'allUsers',
+        element:<AllUsers></AllUsers>
+      }
+    ]
   },
 ]);
 

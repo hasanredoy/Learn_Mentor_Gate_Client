@@ -60,7 +60,7 @@ const {mutateAsync} = useMutation({
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, currentUser => {
       setUser(currentUser)
-      //console.log('CurrentUser-->', currentUser)
+      console.log('CurrentUser-->', currentUser)
       const user = {
         email:currentUser?.email
       }

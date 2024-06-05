@@ -9,14 +9,14 @@ import ThemeControl from '../../ReuseableCompo/ThemeControl';
 
 const Navbar = () => {
   const {user,logOut}=useAuth()
-  const navLinks=<div className=' flex  gap-2 lg:gap-5 flex-col lg:flex-row'>
+  const navLinks=<section className=' flex  gap-2 lg:gap-5 flex-col lg:flex-row'>
     <div className=' flex lg:hidden'>
       <ThemeControl></ThemeControl>
     </div>
     <NavLink className={'font-semibold text-base lg:text-lg hover:underline'} to={'/'}>Home</NavLink>
     <NavLink className={'font-semibold text-base lg:text-lg hover:underline'} to={'/allClasses'}>All Classes</NavLink>
     <NavLink className={'font-semibold text-base lg:text-lg hover:underline'} to={'/teachOnLearnMentorGate'}>Teach on Learn Monitor Gate</NavLink>
-  </div>
+  </section>
   const handleLogout=()=>{
     logOut()
     .then()

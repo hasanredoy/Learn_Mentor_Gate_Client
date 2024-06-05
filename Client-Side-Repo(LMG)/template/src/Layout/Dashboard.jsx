@@ -3,7 +3,7 @@ import { NavLink, Outlet } from "react-router-dom";
 import { MdOutlineContactSupport } from "react-icons/md";
 import { TiThMenu } from "react-icons/ti";
 import useAuth from "../hooks/useAuth";
-import Swal from "sweetalert";
+import swal from "sweetalert";
 import { useEffect, useState } from "react";
 import { IoSunnySharp } from "react-icons/io5";
 import { MdAddShoppingCart } from "react-icons/md";
@@ -16,22 +16,19 @@ const Dashboard = () => {
   const {logOut}=useAuth()
   const [menu , setMenu]=useState(false)
   const handleLogOut=()=>{
-    Swal.fire({
+    swal({
       title: "Are you sure?",
       text: "You Want to Logout",
       icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#039396",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, Logout"
-    }).then((result) => {
-      if (result.isConfirmed) {
+ 
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
         logOut()
         .then(()=>{
-          Swal.fire({
-            title: "Logged Out Successfully",
-            icon: "success"
-          });
+         swal(
+            "Logged Out Successfully"
+          );
         })
       }
     });
@@ -92,28 +89,28 @@ const isTeacher=false
               </select>
             </div>
             {
-              !isTeacher?<>
+              isTeacher?<div>
               {/* teacher links */}
              
-              <NavLink to={'/dashboard/userProfile'} className={'flex items-center font-bold gap-2 text-white my-3'}><FaUser></FaUser > My Profile</NavLink>
-              <NavLink to={'/dashboard/myCart'} className={'flex items-center font-bold gap-2 my-3 text-white'}><FaPlus></FaPlus>Add Class</NavLink>
-              <NavLink to={'/dashboard/myCart'} className={'flex items-center font-bold gap-2 my-3 text-white'}><SiGoogleclassroom></SiGoogleclassroom>My Classes</NavLink>
+              <NavLink to={'/dashboard/teacherProfile'} className={'flex items-center font-bold gap-2 text-white my-3'}><FaUser></FaUser > My Profile</NavLink>
+              <NavLink to={'/dashboard/addClass'} className={'flex items-center font-bold gap-2 my-3 text-white'}><FaPlus></FaPlus>Add Class</NavLink>
+              <NavLink to={'/dashboard/myClasses'} className={'flex items-center font-bold gap-2 my-3 text-white'}><SiGoogleclassroom></SiGoogleclassroom>My Classes</NavLink>
              
-              </>:
-          isAdmin?<>
+              </div>:
+          isAdmin?<div>
           {/* admin links */}
           
           <NavLink to={'/dashboard/adminProfile'} className={'flex items-center font-bold gap-2 text-white my-3'}><FaUser></FaUser >Profile</NavLink>
           <NavLink to={'/dashboard/allUsers'} className={'flex items-center font-bold gap-2 my-3 text-white'}><FaUsers></FaUsers >All Users </NavLink>
-          <NavLink to={'/dashboard/allItems'} className={'flex items-center font-bold gap-2 my-3 text-white'}> <FaList></FaList>All Classes</NavLink>
-          <NavLink to={'/dashboard/addItems'} className={'flex items-center font-bold gap-2 my-3 text-white'}> <MdAddShoppingCart></MdAddShoppingCart>Teacher Request</NavLink>
-          </>:<>
+          <NavLink to={'/dashboard/allClasses'} className={'flex items-center font-bold gap-2 my-3 text-white'}> <FaList></FaList>All Classes</NavLink>
+          <NavLink to={'/dashboard/teacherRequests'} className={'flex items-center font-bold gap-2 my-3 text-white'}> <MdAddShoppingCart></MdAddShoppingCart>Teacher Request</NavLink>
+          </div>:<div>
           {/* user links */}
          
           <NavLink to={'/dashboard/userProfile'} className={'flex items-center font-bold gap-2 text-white my-3'}><FaUser></FaUser > My Profile</NavLink>
-          <NavLink to={'/dashboard/myCart'} className={'flex items-center font-bold gap-2 my-3 text-white'}><SiGoogleclassroom></SiGoogleclassroom>My Classes</NavLink>
+          <NavLink to={'/dashboard/userClass'} className={'flex items-center font-bold gap-2 my-3 text-white'}><SiGoogleclassroom></SiGoogleclassroom>My Classes</NavLink>
          
-          </>
+          </div>
         }
          
         </div>
@@ -158,30 +155,32 @@ const isTeacher=false
                 <option value="dark">Dark </option>
               </select>
             </div>
+            <div>
             {
-              !isTeacher?<>
+              isTeacher?<div>
               {/* teacher links */}
              
-              <NavLink to={'/dashboard/userProfile'} className={'flex items-center font-bold gap-2 text-white my-3'}><FaUser></FaUser > My Profile</NavLink>
-              <NavLink to={'/dashboard/myCart'} className={'flex items-center font-bold gap-2 my-3 text-white'}><FaPlus></FaPlus>Add Class</NavLink>
-              <NavLink to={'/dashboard/myCart'} className={'flex items-center font-bold gap-2 my-3 text-white'}><SiGoogleclassroom></SiGoogleclassroom>My Classes</NavLink>
+              <NavLink to={'/dashboard/teacherProfile'} className={'flex items-center font-bold gap-2 text-white my-3'}><FaUser></FaUser > My Profile</NavLink>
+              <NavLink to={'/dashboard/addClass'} className={'flex items-center font-bold gap-2 my-3 text-white'}><FaPlus></FaPlus>Add Class</NavLink>
+              <NavLink to={'/dashboard/myClasses'} className={'flex items-center font-bold gap-2 my-3 text-white'}><SiGoogleclassroom></SiGoogleclassroom>My Classes</NavLink>
              
-              </>:
-          isAdmin?<>
+              </div>:
+          isAdmin?<div>
           {/* admin links */}
           
           <NavLink to={'/dashboard/adminProfile'} className={'flex items-center font-bold gap-2 text-white my-3'}><FaUser></FaUser >Profile</NavLink>
           <NavLink to={'/dashboard/allUsers'} className={'flex items-center font-bold gap-2 my-3 text-white'}><FaUsers></FaUsers >All Users </NavLink>
-          <NavLink to={'/dashboard/allItems'} className={'flex items-center font-bold gap-2 my-3 text-white'}> <FaList></FaList>All Classes</NavLink>
-          <NavLink to={'/dashboard/addItems'} className={'flex items-center font-bold gap-2 my-3 text-white'}> <MdAddShoppingCart></MdAddShoppingCart>Teacher Request</NavLink>
-          </>:<>
+          <NavLink to={'/dashboard/allClasses'} className={'flex items-center font-bold gap-2 my-3 text-white'}> <FaList></FaList>All Classes</NavLink>
+          <NavLink to={'/dashboard/teacherRequests'} className={'flex items-center font-bold gap-2 my-3 text-white'}> <MdAddShoppingCart></MdAddShoppingCart>Teacher Request</NavLink>
+          </div>:<div>
           {/* user links */}
          
           <NavLink to={'/dashboard/userProfile'} className={'flex items-center font-bold gap-2 text-white my-3'}><FaUser></FaUser > My Profile</NavLink>
-          <NavLink to={'/dashboard/myCart'} className={'flex items-center font-bold gap-2 my-3 text-white'}><SiGoogleclassroom></SiGoogleclassroom>My Classes</NavLink>
+          <NavLink to={'/dashboard/userClass'} className={'flex items-center font-bold gap-2 my-3 text-white'}><SiGoogleclassroom></SiGoogleclassroom>My Classes</NavLink>
          
-          </>
+          </div>
         }
+            </div>
          
         </div>
         <div className="divider"></div>
