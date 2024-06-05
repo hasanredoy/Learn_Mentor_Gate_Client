@@ -8,11 +8,13 @@ const usePostTeacher = () => {
     mutationFn:async (teacherData) =>{
      // //console.log(userData);
          const {data}= await axiosSecure.post('/teachers',teacherData)
-         //console.log(data);
+          if(data.insertedId){
+            toast.success('Your Request Has Been Send Successfully ')
+
+          }  
          return data
     },
     onSuccess:()=>{
-      toast.success('Your Request Has Been Send Successfully ')
     }
 })
 return mutateAsync
