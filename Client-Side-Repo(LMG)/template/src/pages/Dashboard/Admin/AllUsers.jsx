@@ -1,9 +1,40 @@
-import { FaTrash } from "react-icons/fa";
 import useGetAllUsers from "../../../hooks/useGetAllUsers";
 import LoadingSpinner from "../../../ReuseableCompo/LoadingSpinner";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import swal from "sweetalert";
 
 const AllUsers = () => {
-  const [users,isPending]=useGetAllUsers()
+  const [users,isPending,refetch]=useGetAllUsers()
+  const axiosSecure =useAxiosSecure()
+  const handleAdmin=(id,name)=>{
+    swal({
+      title: "Are you sure?",
+      text: `You Want To Make ${name} Admin?`,
+      icon: "warning",
+  buttons: true,
+  dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+         axiosSecure.patch(`/users/admin/${id}`)
+         .then(res=>{
+          console.log(res.data);
+          if(res.data.modifiedCount>0){
+            refetch()
+            swal(`${name} is Now Admin`,{
+            icon:'success'}
+          );
+          }
+          
+         })
+         .catch(err=>{
+          console.log(err);
+         })
+          
+      
+      }
+    });
+  }
+
   if(isPending){
     return <LoadingSpinner></LoadingSpinner>
   }
@@ -35,10 +66,10 @@ const AllUsers = () => {
             <tr>
               <th></th>
               <th className=" text-base lg:text-xl font-medium lg:font-bold">Image</th>
-              <th className=" text-base lg:text-xl font-medium lg:font-bold">User Name</th>
-              <th className=" text-base lg:text-xl font-medium lg:font-bold"></th>
+              <th className=" text-base lg:text-xl font-medium lg:font-bold">Name</th>
+              <th className=" text-base lg:text-xl font-medium lg:font-bold">Email</th>
               <th className=" text-base lg:text-xl font-medium lg:font-bold">Role</th>
-              <th className=" text-base lg:text-xl font-medium lg:font-bold">Action</th>
+              
             </tr>
           </thead>
           <tbody>
@@ -60,13 +91,15 @@ const AllUsers = () => {
                   </span>
                 </td>
                 <td>
-                  
+                <span className="  text-base font-medium lg:font-bold">
+                    {user?.email?user?.email:'Not Found'}
+                  </span>
                 </td>
                 <th>
                  {
                   user?.role==='admin'?'Admin':<button
-                  //  onClick={()=>handleAdmin(user?._id,user?.name)}
-                    className=" btn bg-[#046351] text-white border-l-4 border-b-4 border-[#2efed8]">
+                   onClick={()=>handleAdmin(user?._id,user?.name)}
+                    className=" btn bg-[#04630a] text-white border-l-4 border-b-4 border-[#2efed8]">
                       Make Admin
                     </button>
                  }
@@ -75,13 +108,7 @@ const AllUsers = () => {
                     
                  
                 </th>
-                <td className=" text-center">
-                  <button
-                  //  onClick={()=>handleDelete(user?._id,user?.cart?.product_name)} 
-                   className=" text-white  bg-red-600  rounded-full p-3">
-                    <FaTrash></FaTrash>
-                  </button>
-                </td>
+                
               </tr>
             ))}
           </tbody>

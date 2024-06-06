@@ -18,8 +18,7 @@ const GoogleLogin = () => {
           name:res.user?.displayName,
           email:res.user?.email,
           photo:res.user?.photoURL,
-          isAdmin:'false',
-          isTeacher:'false'
+           role:'student'
                 }
         await mutateAsync(userData)
         toast.success("Logged In With Google Successfully");
