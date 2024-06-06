@@ -3,14 +3,16 @@ import { useQuery } from '@tanstack/react-query';
 
 const useGetAllUsers = () => {
   const axiosSecure = useAxiosSecure();
-  const { data: users = [],isPending,refetch } = useQuery({
+  const { isPending,data: users =[],refetch } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
+      
       const res = await axiosSecure.get("/users");
       return res.data;
     },
   });
-  return [users,isPending,refetch]
+
+  return [isPending,users,refetch]
 };
 
 export default useGetAllUsers;

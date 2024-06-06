@@ -4,7 +4,7 @@ import useAxiosSecure from "./useAxiosSecure";
 const useGetSingleUser = (email) => {
   const axiosSecure = useAxiosSecure();
   const { data: singleUser = [],isPending} = useQuery({
-    queryKey: ["users"],
+    queryKey: ["singleUser"],
     queryFn: async () => {
       const res = await axiosSecure.get(`/user?email=${email}`);
       return res.data;

@@ -4,7 +4,8 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import swal from "sweetalert";
 
 const AllUsers = () => {
-  const [users,isPending,refetch]=useGetAllUsers()
+  const [isPending,users=[],refetch]=useGetAllUsers()
+  console.log(users);
   const axiosSecure =useAxiosSecure()
   const handleAdmin=(id,name)=>{
     swal({
@@ -34,7 +35,9 @@ const AllUsers = () => {
       }
     });
   }
-
+ if(!users){
+  return <LoadingSpinner></LoadingSpinner>
+ }
   if(isPending){
     return <LoadingSpinner></LoadingSpinner>
   }
@@ -73,7 +76,7 @@ const AllUsers = () => {
             </tr>
           </thead>
           <tbody>
-            {users?.map((user, index) => (
+            {users?users?.map((user, index) => (
               <tr key={user._id}>
                 <th>{index + 1}</th>
                 <td>
@@ -110,7 +113,7 @@ const AllUsers = () => {
                 </th>
                 
               </tr>
-            ))}
+            )):'hello'}
           </tbody>
         </table>
       </div>
