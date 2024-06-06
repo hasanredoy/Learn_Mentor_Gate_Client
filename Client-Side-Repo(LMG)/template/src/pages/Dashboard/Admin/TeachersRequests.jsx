@@ -2,8 +2,11 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { FaX } from "react-icons/fa6";
 import { MdOutlineDoneOutline } from "react-icons/md";
+import swal from "sweetalert";
+import LoadingSpinner from "../../../ReuseableCompo/LoadingSpinner";
 
 const TeachersRequests = () => {
+  // getting teachers data 
   const axiosSecure = useAxiosSecure();
   const { data:teachers = [],isPending} = useQuery({
     queryKey: ["teacher"],
@@ -12,7 +15,41 @@ const TeachersRequests = () => {
       return res.data;
     },
   });
-  console.log(teachers);
+  
+  // making teacher 
+  const handleMakeTeacher=(data )=>{
+    // console.log(data.email);
+    swal({
+      title: "Are you sure?",
+      text: `Make ${data?.name} Teacher`,
+      icon: "info",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+        //  updating user role 
+        axiosSecure.patch(`/user/teacher/${data._id}?email=${data.email}`)
+        .then(res=>{
+          if(res.data?.result?.modifiedCount>0&&res?.data?.teacherCollectionResult?.modifiedCount>0){
+             swal(`${data?.name} is Teacher Now `, {
+          icon: "success",
+        });
+          }
+        })
+        
+      } else {
+        swal("Canceled ");
+      }
+    });
+    
+  }
+
+
+
+  if(isPending){
+    return <LoadingSpinner></LoadingSpinner>
+  }
   return (
     <div>
       
@@ -95,7 +132,7 @@ const TeachersRequests = () => {
              <th>
              {
               teacher?.role==='admin'?'Admin':<button
-              //  onClick={()=>handleAdmin(teacher?._id,teacher?.name)}
+               onClick={()=>handleMakeTeacher(teacher)}
                 className=" btn bg-[#fafcfa]  border-l-4 border-b-4 border-[#048522]">
 <span className="  flex flex-row justify-center items-center gap-2">
                  Approve <MdOutlineDoneOutline className=" text-green-600 text-xl"></MdOutlineDoneOutline>

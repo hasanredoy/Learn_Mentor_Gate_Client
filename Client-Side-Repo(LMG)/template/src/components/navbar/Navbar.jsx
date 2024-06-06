@@ -13,10 +13,8 @@ const Navbar = () => {
   const {user,logOut}=useAuth()
   
   const[ isFetching,role] = useGetUserRole()
-  if(isFetching){
-    return <LoadingSpinner></LoadingSpinner>
-  }
-  console.log(role);
+
+  // console.log(role);
   const navLinks=<section className=' flex  gap-2 lg:gap-5 flex-col lg:flex-row'>
     <div className=' flex lg:hidden'>
       <ThemeControl></ThemeControl>

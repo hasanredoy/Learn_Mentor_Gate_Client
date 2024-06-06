@@ -39,17 +39,23 @@ const Register = () => {
     // e.preventDefault();
     const form = e;
     const name = form.name;
-    let photo = "";
+   
     const email = form.email;
     const password = form.password;
-    const userData = { name, phone:value, photo, email, role: "student" };
+
+    // posting on imgbb 
     const formData = new FormData();
     formData.append("image", image);
     const api = import.meta.env.VITE_IMGBB_API;
     const url = `https://api.imgbb.com/1/upload?key=${api}`;
     const res = await axios.post(url, formData);
+    // console.log(res.data?.data?.display_url);
+    const photo =res.data?.data.display_url
 
-    // //console.log(photo);
+  //  user data 
+  const userData = { name, phone:value, photo, email, role: "student" };
+  // console.log(userData);
+
     if (password.length < 6) {
       toast.error("Password Should Be 6 Character or More");
       return;
@@ -60,8 +66,8 @@ const Register = () => {
       );
       return;
     }
-    if (res?.data?.data.url) {
-      photo = res?.data?.data?.url;
+    if (res?.data?.data?.display_url) {
+      // photo = res?.data?.data?.display_url;
       create(email, password)
         .then((res) => {
           // //console.log(res.user);

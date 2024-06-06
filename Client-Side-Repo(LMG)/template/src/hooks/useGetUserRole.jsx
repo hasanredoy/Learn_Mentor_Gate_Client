@@ -16,9 +16,9 @@ const useGetUserRole = () => {
   if(!role?.role){
     refetch()
   }
-  if(!email){
-    refetch()
-  }
+  // if(!email){
+  //   refetch()
+  // }
   return [isFetching,role];
 };
 
