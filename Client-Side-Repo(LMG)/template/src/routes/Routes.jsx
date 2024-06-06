@@ -8,7 +8,8 @@ import SingleClass from "../pages/AllClasses/SingleClass/SingleClass";
 import TeachOnLMG from "../pages/TeachOnLearnMentorGate/TeachOnLMG";
 import Dashboard from "../Layout/Dashboard";
 import AllUsers from "../pages/Dashboard/Admin/AllUsers";
-import AdminProfile from "../pages/Dashboard/Admin/AdminProfile";
+import Profile from "../pages/Dashboard/profile/Profile";
+import TeachersRequests from "../pages/Dashboard/Admin/TeachersRequests";
 
 const router = createBrowserRouter([
   {
@@ -53,8 +54,13 @@ const router = createBrowserRouter([
         element:<AllUsers></AllUsers>
       },
       {
-        path:'adminProfile',
-        element:<AdminProfile></AdminProfile>
+        path:'teacherRequests',
+        element:<TeachersRequests></TeachersRequests>
+      },
+      // common 
+      {
+        path:'profile',
+        element:<Profile></Profile>
       },
     ]
   },

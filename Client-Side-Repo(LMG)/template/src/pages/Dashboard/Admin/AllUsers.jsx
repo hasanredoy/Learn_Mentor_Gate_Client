@@ -65,7 +65,7 @@ const AllUsers = () => {
        
         <table className="table">
           {/* head */}
-          <thead className=" text-white  bg-[#039396]">
+          <thead className=" text-white  bg-[#039625]">
             <tr>
               <th></th>
               <th className=" text-base lg:text-xl font-medium lg:font-bold">Image</th>

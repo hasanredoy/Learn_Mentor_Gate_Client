@@ -2,7 +2,7 @@ import LoadingSpinner from "../../../ReuseableCompo/LoadingSpinner";
 import useAuth from "../../../hooks/useAuth";
 import useGetSingleUser from "../../../hooks/useGetSingleUser";
 
-const UserProfile = () => {
+const Profile = () => {
   const {user}=useAuth() 
    const email = user?.email;
    const [singleUser,isPending]=useGetSingleUser(email)
@@ -28,4 +28,4 @@ const UserProfile = () => {
   );
 };
 
-export default UserProfile;
+export default Profile;
