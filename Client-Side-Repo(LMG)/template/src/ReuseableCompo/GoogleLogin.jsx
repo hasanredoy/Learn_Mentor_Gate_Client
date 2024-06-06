@@ -18,6 +18,7 @@ const GoogleLogin = () => {
           name:res.user?.displayName,
           email:res.user?.email,
           photo:res.user?.photoURL,
+          phone: res.user?.phoneNumber?res.user?.phoneNumber:'Not Found',
            role:'student'
                 }
         await mutateAsync(userData)
