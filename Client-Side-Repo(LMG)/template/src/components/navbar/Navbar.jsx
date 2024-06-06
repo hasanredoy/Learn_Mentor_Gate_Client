@@ -6,7 +6,6 @@ import { FaSignOutAlt, FaUser } from "react-icons/fa";
 import { RxDashboard } from "react-icons/rx";
 import ThemeControl from '../../ReuseableCompo/ThemeControl';
 import useGetUserRole from '../../hooks/useGetUserRole';
-import LoadingSpinner from '../../ReuseableCompo/LoadingSpinner';
 
 
 const Navbar = () => {

@@ -37,7 +37,7 @@ const AllClasses = () => {
                   >
                     {course?.Instructor}
                   </a>
-                  <span className=" text-sm lg:text-base ">{course?.Posted_on}</span>
+                  <span className=" text-sm lg:text-base ">{course?.Posted_on?.split('T')[0]}</span>
                 </div>
               </div>
               <div>

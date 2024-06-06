@@ -4,8 +4,11 @@ import { FaX } from "react-icons/fa6";
 import { MdOutlineDoneOutline } from "react-icons/md";
 import swal from "sweetalert";
 import LoadingSpinner from "../../../ReuseableCompo/LoadingSpinner";
+import { useState } from "react";
 
 const TeachersRequests = () => {
+  // state for disable reject and approve btn 
+  const[disableBtn , setDisableBtn]=useState(localStorage.getItem('id'))
   // getting teachers data 
   const axiosSecure = useAxiosSecure();
   const { data:teachers = [],isPending} = useQuery({
@@ -32,7 +35,37 @@ const TeachersRequests = () => {
         axiosSecure.patch(`/user/teacher/${data._id}?email=${data.email}`)
         .then(res=>{
           if(res.data?.result?.modifiedCount>0&&res?.data?.teacherCollectionResult?.modifiedCount>0){
+            localStorage.setItem('id',data._id)
+            setDisableBtn(data?._id)
              swal(`${data?.name} is Teacher Now `, {
+          icon: "success",
+        });
+          }
+        })
+        
+      } else {
+        swal("Canceled ");
+      }
+    });
+    
+  }
+  const handleRejectTeacher=(data )=>{
+    swal({
+      title: "Are you sure?",
+      text: `You Wanna Reject This Teacher Request`,
+      icon: "info",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+        //  updating user role 
+        axiosSecure.patch(`/teacher/${data._id}`)
+        .then(res=>{
+          if(res.data?.modifiedCount>0){
+            localStorage.setItem('id',data?._id)
+            setDisableBtn(data?._id)
+             swal(`Teacher  request rejected Successfully`, {
           icon: "success",
         });
           }
@@ -131,9 +164,10 @@ const TeachersRequests = () => {
             </td>
              <th>
              {
-              teacher?.role==='admin'?'Admin':<button
+             <button
+              // disabled={disableBtn}
                onClick={()=>handleMakeTeacher(teacher)}
-                className=" btn bg-[#fafcfa]  border-l-4 border-b-4 border-[#048522]">
+                className={` btn bg-[#fafcfa]  border-l-4 border-b-4 border-[#048522] ${disableBtn===teacher?._id?'btn-disabled':''}`}>
 <span className="  flex flex-row justify-center items-center gap-2">
                  Approve <MdOutlineDoneOutline className=" text-green-600 text-xl"></MdOutlineDoneOutline>
                   </span>                </button>
@@ -141,9 +175,10 @@ const TeachersRequests = () => {
               </th>
             <th className=" border-l border-gray-500">
              {
-              teacher?.role==='admin'?'Admin':<button
-              //  onClick={()=>handleAdmin(teacher?._id,teacher?.name)}
-                className=" btn bg-[#ffbd07] text-white border-l-4 border-b-4 border-[#fe2e2e]">
+              <button
+              // disabled={disableBtn}
+               onClick={()=>handleRejectTeacher(teacher)}
+                className={` btn bg-[#ffbd07] text-white border-l-4 border-b-4 border-[#fe2e2e] ${disableBtn===teacher?._id?'btn-disabled':''}`}>
                   <span className="  flex flex-row justify-center items-center gap-2">
                   Reject <FaX className=" text-red-600 text-xl"></FaX>
                   </span>
