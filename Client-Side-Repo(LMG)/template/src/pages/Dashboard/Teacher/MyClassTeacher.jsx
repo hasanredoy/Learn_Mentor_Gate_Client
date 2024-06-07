@@ -3,6 +3,7 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAuth from "../../../hooks/useAuth";
 import { Link } from "react-router-dom";
 import {  FaUsers } from "react-icons/fa";
+import swal from "sweetalert";
 
 const MyClassTeacher = () => {
   const {user}=useAuth()
@@ -19,10 +20,39 @@ const MyClassTeacher = () => {
   if(!email){
     refetch
   }
+
+  const handleDelete=(course)=>{
+    swal({
+      title: "Are you sure?",
+      text: `You Want to delete this class ${course?.Title}?`,
+      icon: "warning",
+  buttons: true,
+  dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+         axiosSecure.delete(`/delete-course/${course?._id}`)
+         .then(res=>{
+          console.log(res.data);
+          if(res.data.deletedCount>0){
+            refetch()
+            swal(`${course?.Title} deleted successfully`,{
+            icon:'success'}
+          );
+          }
+          
+         })
+         .catch(err=>{
+          console.log(err);
+         })
+          
+      
+      }
+    });
+  }
   return (
     <div className=" my-20">
       <h1 className=" text-5xl font-bold text-center">Welcome <span className=" text-green-600">{user?.displayName?user.displayName:'Back'}</span>!</h1>
-      
+      <h4 className=" text-xl font-semibold py-5">All Classes: {classes.length}</h4>
        <div className=" mt-5 grid grid-cols-1 lg:grid-cols-2 gap-5">
        {classes?.map((course) => (
             <div
@@ -71,11 +101,12 @@ const MyClassTeacher = () => {
                   Update?
                 </button>
                 </Link>
-                <Link to={``}>
-                <button className="text-red-600 bg-white p-2 rounded-lg font-black hover:bg-red-500 hover:text-white  hover:border hover:border-red-500 border border-red-500">
+                
+                <button
+                onClick={()=>handleDelete(course)}
+                className="text-red-600 bg-white p-2 rounded-lg font-black hover:bg-red-500 hover:text-white  hover:border hover:border-red-500 border border-red-500">
                   Delete?
                 </button>
-                </Link>
               </div>
                 <Link to={``}>
                 <button className=" bg-gray-100 p-2 rounded-lg font-black hover:bg-white border border-b-4  hover:text-green-700  hover:border hover:border-green-500 w-full border-gray-400">
