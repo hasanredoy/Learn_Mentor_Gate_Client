@@ -13,6 +13,7 @@ import TeachersRequests from "../pages/Dashboard/Admin/TeachersRequests";
 import AddClass from "../pages/Dashboard/Teacher/AddClass";
 import AllClassesAdmin from "../pages/Dashboard/Admin/AllClassesAdmin";
 import MyClassTeacher from "../pages/Dashboard/Teacher/MyClassTeacher";
+import UpdateClassTeacher from "../pages/Dashboard/Teacher/UpdateClassTeacher";
 
 const router = createBrowserRouter([
   {
@@ -77,6 +78,10 @@ const router = createBrowserRouter([
       {
         path:'myClasses',
         element:<MyClassTeacher></MyClassTeacher>
+      },
+      {
+        path:'/dashboard/my-class/:id',
+        element:<UpdateClassTeacher></UpdateClassTeacher>
       },
        
     ]
