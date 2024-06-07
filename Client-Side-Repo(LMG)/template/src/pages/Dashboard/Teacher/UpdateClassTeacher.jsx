@@ -59,13 +59,15 @@ const UpdateClassTeacher = () => {
       Short_description: description,
       Long_description: description,
       Duration: duration,
-      Enrollment: 0,
+      Enrollment: singleClass?.Enrollment,
       Price: price,
-      Posted_on: new Date(),
+      Posted_on: singleClass?.Posted_on,
       Instructor_Image: user?.photoURL,
       Course_Image: photo,
       email: user?.email,
-      status: "pending",
+      status: singleClass?.status,
+      perDayAssignment:singleClass?.perDayAssignment,
+      assignments:singleClass?.assignments,
     };
     console.log(classData);
     if (photo) {

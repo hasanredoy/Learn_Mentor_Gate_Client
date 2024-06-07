@@ -4,10 +4,12 @@ import useAuth from "../../../hooks/useAuth";
 import { useState } from "react";
 import axios from "axios";
 import usePostClass from "../../../hooks/usePostClass";
+import { useNavigate } from "react-router-dom";
 
 const AddClass = () => {
   const {user}=useAuth()
   const [image, setImage] = useState();
+  const navigate = useNavigate()
 
   const {
     register,
@@ -36,7 +38,7 @@ const AddClass = () => {
        const api = import.meta.env.VITE_IMGBB_API;
        const url = `https://api.imgbb.com/1/upload?key=${api}`;
        const result = await axios.post(url, formData);
-       console.log(result.data?.data?.display_url);
+      //  console.log(result.data?.data?.display_url);
 
        const photo =result.data?.data.display_url
     const classData = {
@@ -53,23 +55,26 @@ const AddClass = () => {
       Course_Image:photo,
       email: user?.email,
       status: "pending",
+      perDayAssignment:0,
+      assignments:0
     };
-    console.log(classData);
+    // console.log(classData);
     if(photo){
 
       const res = await mutateAsync(classData);
      if(res.data?.insertedId>0){
+      console.log( res); 
+      navigate('/dashboard/myClasses')
+
       toast.success('Class Added Successfully')
      }
-     else{
-      toast.error('Class Already Exist')
-     }
+    
     }
   };
 
   return (
     <div className=" my-20">
-      <h1 className=" text-3xl font-bold text-center">Hello <span className=" text-green-600">Sir!</span> Would You Like To Add an Class<span className=" text-red-600">?</span></h1>
+      <h1 className=" text-3xl font-bold text-center">Hello <span className=" text-green-600">{user?.displayName}</span> Would You Like To Add an Class<span className=" text-red-600">?</span></h1>
 
       {/* form div  */}
       <div>

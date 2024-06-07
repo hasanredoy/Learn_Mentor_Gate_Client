@@ -3,6 +3,7 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { FaX } from "react-icons/fa6";
 import { MdOutlineDoneOutline } from "react-icons/md";
 import swal from "sweetalert";
+import { Link } from "react-router-dom";
 
 const AllClassesAdmin = () => {
   // getting all class 
@@ -144,7 +145,7 @@ const AllClassesAdmin = () => {
                   }
                 </th>
                 <td className="border-l border-gray-500 ">
-                  <button className=" btn">See Progress</button>
+                  <Link className={`  btn ${course.status==='pending'&&'btn-disabled'} ${course.status==='rejected'&&'btn'}`}>See Progress</Link>
                 </td>
               </tr>
             ))}

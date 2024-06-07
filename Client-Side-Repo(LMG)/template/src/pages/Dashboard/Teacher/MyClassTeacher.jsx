@@ -1,25 +1,26 @@
-import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAuth from "../../../hooks/useAuth";
 import { Link } from "react-router-dom";
 import {  FaUsers } from "react-icons/fa";
 import swal from "sweetalert";
+import useGetAllClassesByEmail from "../../../hooks/useGetAllClassesByEmail";
 
 const MyClassTeacher = () => {
   const {user}=useAuth()
-  const email = user?.email||undefined
+  // const email = user?.email||undefined
   const axiosSecure = useAxiosSecure();
-  const { data: classes = [],refetch } = useQuery({
-    queryKey: ["teacher-classes"],
-    queryFn: async () => {
-      const res = await axiosSecure.get(`/teacher-classes?email=${email}`);
-      return res.data;
-    },
-  });
-  console.log(classes);
-  if(!email){
-    refetch
-  }
+  // const { data: classes = [],refetch } = useQuery({
+  //   queryKey: ["teacher-classes"],
+  //   queryFn: async () => {
+  //     const res = await axiosSecure.get(`/teacher-classes?email=${email}`);
+  //     return res.data;
+  //   },
+  // });
+  // console.log(classes);
+  // if(!email){
+  //   refetch
+  // }
+  const [classes,refetch]=useGetAllClassesByEmail()
 
   const handleDelete=(course)=>{
     swal({
@@ -52,7 +53,22 @@ const MyClassTeacher = () => {
   return (
     <div className=" my-20">
       <h1 className=" text-5xl font-bold text-center">Welcome <span className=" text-green-600">{user?.displayName?user.displayName:'Back'}</span>!</h1>
-      <h4 className=" text-xl font-semibold py-5">All Classes: {classes.length}</h4>
+     {
+      classes.length<1
+      ?
+      <div  className=" min-h-[400px] gap-5 flex flex-col justify-center items-center">
+         <h3 className=" text-3xl font-bold text-red-500">No Class Added Yet. Please Add a Class First!</h3>
+         <div>
+         <Link to={`/dashboard/addClass`}>
+                <button className="text-white bg-green-500 p-2 rounded-lg font-black hover:bg-white hover:text-green-700  hover:border hover:border-green-500 ">
+                  Add Class
+                </button>
+                </Link>
+         </div>
+      </div>
+      :
+      <>
+       <h4 className=" text-xl font-semibold py-5">All Classes: {classes.length}</h4>
        <div className=" mt-5 grid grid-cols-1 lg:grid-cols-2 gap-5">
        {classes?.map((course) => (
             <div
@@ -108,15 +124,16 @@ const MyClassTeacher = () => {
                   Delete?
                 </button>
               </div>
-                <Link to={``}>
-                <button className=" bg-gray-100 p-2 rounded-lg font-black hover:bg-white border border-b-4  hover:text-green-700  hover:border hover:border-green-500 w-full border-gray-400">
+                <Link to={`/dashboard/myClass/${course?._id}`} className={` btn ${course.status==="pending"?'btn-disabled':'btn'} text-black bg-gray-100 p-2 rounded-lg font-black hover:bg-white border border-b-4  hover:text-green-700  hover:border hover:border-green-500 w-full border-gray-400`}>
                   View Details
-                </button>
+               
                 </Link>
             </div>
             
           ))}
        </div>
+      </>
+     }
     </div>
   );
 };
