@@ -167,7 +167,7 @@ const TeachersRequests = () => {
              <button
               // disabled={disableBtn}
                onClick={()=>handleMakeTeacher(teacher)}
-                className={` btn bg-[#fafcfa]  border-l-4 border-b-4 border-[#048522] ${disableBtn===teacher?._id?'btn-disabled':''}`}>
+                className={` btn ${teacher.status==='approved'&&'btn-disabled'} ${teacher.status==='rejected'&&'btn'} bg-[#fafcfa]  border-l-4 border-b-4 border-[#048522] ${disableBtn===teacher?._id?'btn-disabled':''}`}>
 <span className="  flex flex-row justify-center items-center gap-2">
                  Approve <MdOutlineDoneOutline className=" text-green-600 text-xl"></MdOutlineDoneOutline>
                   </span>                </button>
@@ -178,7 +178,7 @@ const TeachersRequests = () => {
               <button
               // disabled={disableBtn}
                onClick={()=>handleRejectTeacher(teacher)}
-                className={` btn bg-[#ffbd07] text-white border-l-4 border-b-4 border-[#fe2e2e] ${disableBtn===teacher?._id?'btn-disabled':''}`}>
+                className={`  btn ${teacher.status==='approved'&&'btn-disabled'} ${teacher.status==='rejected'&&'btn'} bg-[#ffbd07] text-white border-l-4 border-b-4 border-[#fe2e2e] `}>
                   <span className="  flex flex-row justify-center items-center gap-2">
                   Reject <FaX className=" text-red-600 text-xl"></FaX>
                   </span>

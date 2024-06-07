@@ -2,17 +2,50 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { FaX } from "react-icons/fa6";
 import { MdOutlineDoneOutline } from "react-icons/md";
+import swal from "sweetalert";
 
 const AllClassesAdmin = () => {
+  // getting all class 
   const axiosSecure = useAxiosSecure();
-  const { data: allCourses = [] } = useQuery({
+  const { data: allCourses = [],refetch } = useQuery({
     queryKey: ["allCourses"],
     queryFn: async () => {
       const res = await axiosSecure.get("/allCourses");
       return res.data;
     },
   });
-  console.log(allCourses);
+  // console.log(allCourses);
+
+
+  // approve class
+  const handleApproveClass=(course)=>{
+    swal({
+      title: "Are you sure?",
+      text: `You Wanna Approve This Class`,
+      icon: "info",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+        //  updating user role 
+        axiosSecure.patch(`/approve-course/${course._id}`)
+        .then(res=>{
+          if(res.data?.modifiedCount>0){
+           refetch()
+             swal(`Class Approved Successfully`, {
+          icon: "success",
+        });
+          }
+        })
+        
+      } else {
+        swal("Canceled ");
+      }
+    });
+ 
+  } 
+
   return (
     <div>
       <div>
@@ -20,14 +53,14 @@ const AllClassesAdmin = () => {
           -- Welcome Back --
         </h4>
         <h1 className=" my-5 text-3xl lg:text-4xl text-center font-bold">
-          Here Are All Teacher Request in This Website
+          Here Are All Classes in This Website
         </h1>
       </div>
       <div className="divider"></div>
       <div className=" flex justify-between items-center px-2 lg:px-10 my-7">
         <div className="flex flex-col lg:w-[80%] gap-3 justify-between lg:flex-row">
           <h1 className=" text-base lg:text-xl font-bold">
-            Total Request : {allCourses?.length}
+            Total Class : {allCourses?.length}
           </h1>
         </div>
       </div>
@@ -53,7 +86,7 @@ const AllClassesAdmin = () => {
               <th >
               </th>
 
-              <th className=" text-base lg:text-xl font-medium lg:font-bold">
+              <th >
                
               </th>
               <th></th>
@@ -87,8 +120,8 @@ const AllClassesAdmin = () => {
                   {
                     <button
                       // disabled={disableBtn}
-                      // onClick={() => handleMakeTeacher(teacher)}
-                      className={` btn bg-[#fafcfa]  border-l-4 border-b-4 border-[#048522]`}
+                      onClick={() => handleApproveClass(course)}
+                      className={` btn ${course.status==='approved'&&'btn-disabled'} ${course.status==='rejected'&&'btn'} bg-[#fafcfa]  border-l-4 border-b-4 border-[#048522]`}
                     >
                       <span className="  flex flex-row justify-center items-center gap-2">
                         Approve{" "}
@@ -102,7 +135,7 @@ const AllClassesAdmin = () => {
                     <button
                       // disabled={disableBtn}
                       // onClick={() => handleRejectTeacher(teacher)}
-                      className={` btn bg-[#ffbd07] text-white border-l-4 border-b-4 border-[#fe2e2e]`}
+                      className={`  btn ${course.status==='approved'&&'btn-disabled'} ${course.status==='rejected'&&'btn'} bg-[#ffbd07] text-white border-l-4 border-b-4 border-[#fe2e2e]`}
                     >
                       <span className="  flex flex-row justify-center items-center gap-2">
                         Reject <FaX className=" text-red-600 text-xl"></FaX>
@@ -110,7 +143,8 @@ const AllClassesAdmin = () => {
                     </button>
                   }
                 </th>
-                <td className="border-r border-gray-500 ">
+                <td className="border-l border-gray-500 ">
+                  <button className=" btn">See Progress</button>
                 </td>
               </tr>
             ))}

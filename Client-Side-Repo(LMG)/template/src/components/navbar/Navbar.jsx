@@ -5,13 +5,11 @@ import useAuth from '../../hooks/useAuth';
 import { FaSignOutAlt, FaUser } from "react-icons/fa";
 import { RxDashboard } from "react-icons/rx";
 import ThemeControl from '../../ReuseableCompo/ThemeControl';
-import useGetUserRole from '../../hooks/useGetUserRole';
 
 
 const Navbar = () => {
   const {user,logOut}=useAuth()
   
-  const[ isFetching,role] = useGetUserRole()
 
   // console.log(role);
   const navLinks=<section className=' flex  gap-2 lg:gap-5 flex-col lg:flex-row'>

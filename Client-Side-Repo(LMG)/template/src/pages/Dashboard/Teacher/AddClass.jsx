@@ -1,4 +1,4 @@
-import { Toaster } from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import { useForm } from "react-hook-form";
 import useAuth from "../../../hooks/useAuth";
 import { useState } from "react";
@@ -58,7 +58,12 @@ const AddClass = () => {
     if(photo){
 
       const res = await mutateAsync(classData);
-      console.log(res);
+     if(res.data?.insertedId>0){
+      toast.success('Class Added Successfully')
+     }
+     else{
+      toast.error('Class Already Exist')
+     }
     }
   };
 
