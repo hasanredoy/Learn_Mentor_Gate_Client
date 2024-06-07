@@ -11,6 +11,7 @@ import AllUsers from "../pages/Dashboard/Admin/AllUsers";
 import Profile from "../pages/Dashboard/profile/Profile";
 import TeachersRequests from "../pages/Dashboard/Admin/TeachersRequests";
 import AddClass from "../pages/Dashboard/Teacher/AddClass";
+import AllClassesAdmin from "../pages/Dashboard/Admin/AllClassesAdmin";
 
 const router = createBrowserRouter([
   {
@@ -57,6 +58,10 @@ const router = createBrowserRouter([
       {
         path:'teacherRequests',
         element:<TeachersRequests></TeachersRequests>
+      },
+      {
+        path:'allClasses',
+        element:<AllClassesAdmin></AllClassesAdmin>
       },
       // common 
       {
