@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import useAuth from "../../../hooks/useAuth";
 import assignment from "../../../assets/icons/assignment.png";
 import perDayAssignment from "../../../assets/icons/contract.png";
@@ -44,7 +44,23 @@ const SeeProgress = () => {
   });
 
 //  console.log(singleClass);
-
+const {mutateAsync}=useMutation({
+  mutationFn:async (assignmentData) =>{
+   // //console.log(userData);
+       const {data}= await axiosSecure.post('/assignments',assignmentData)
+       console.log(data);
+       if(data?.insertedId!==null){
+         toast.success('Assignment Added Successfully')
+         setModal(false)
+       }
+       if(data?.insertedId===null){
+         toast.error('Assignment Already Exist')
+       }
+       return data
+  },
+  onSuccess:()=>{
+  }
+})
   //  posting modal data in db
   const handlePost = async (e) => {
     // e.preventDefault();
@@ -59,6 +75,7 @@ const SeeProgress = () => {
     if(deadline<=newCurrentDate){
       return toast.error('Invalid Date')
     }
+    
 
     const assignmentData = {
       Assignment_Title:title,
@@ -69,16 +86,18 @@ const SeeProgress = () => {
       status:'pending'
 
     }; 
-    axiosSecure.post('/assignments',assignmentData)
-    .then(res=>{
-      console.log(res.data);
-      if(res.data?.insertedId!==null){
-        toast.success('Assignment Added Successfully')
-      }
-      if(res.data?.insertedId===null){
-        toast.error('Assignment Already Exist')
-      }
-    })
+    await mutateAsync(assignmentData)
+    // axiosSecure.post('/assignments',assignmentData)
+    // .then(res=>{
+    //   console.log(res.data);
+    //   if(res.data?.insertedId!==null){
+    //     setModal(false)
+    //     toast.success('Assignment Added Successfully')
+    //   }
+    //   if(res.data?.insertedId===null){
+    //     toast.error('Assignment Already Exist')
+    //   }
+    // })
 
   };
   return (
@@ -88,6 +107,9 @@ const SeeProgress = () => {
         <div>
           <div>
             <div className="card shrink-0 shadow-2xl  w-full h-full  lg:w-2/3 mx-auto my-10 bg-base-200">
+              <div className=" flex justify-end " >
+              <a className=" text-xl font-bold  btn btn-circle" onClick={()=>setModal(false)}>X</a>
+              </div>
               <h1 className=" text-xl font-bold text-center py-5">
                 Please Fill The From Given Blew !
               </h1>
