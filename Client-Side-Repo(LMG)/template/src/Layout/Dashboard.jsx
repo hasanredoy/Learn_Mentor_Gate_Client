@@ -63,7 +63,7 @@ const isTeacher=role?.role
     <div className=" flex gap-10 container mx-auto">
 
       {/* sidebar */}
-       <button onClick={()=>setMenu(!menu)} className={`${theme==='light'?'text-black':'text-white'} z-50 lg:hidden text-2xl  absolute`}><TiThMenu></TiThMenu></button>
+       <button onClick={()=>setMenu(!menu)} className={` z-50 lg:hidden text-2xl  absolute`}><TiThMenu></TiThMenu></button>
       <div className={` ${menu?"block":'hidden'} absolute z-40 w-[50%] lg:hidden min-h-screen  px-5 pt-4  bg-[#03962A] `}>
        <div className=" h-full flex max-h-screen flex-col justify-evenly">
        <div className=" flex-1">
@@ -111,7 +111,7 @@ const isTeacher=role?.role
           {/* user links */}
          
           <NavLink to={'/dashboard/profile'} className={'flex items-center font-bold gap-2 text-white my-3'}><FaUser></FaUser > My Profile</NavLink>
-          <NavLink to={'/dashboard/userClass'} className={'flex items-center font-bold gap-2 my-3 text-white'}><SiGoogleclassroom></SiGoogleclassroom>My Classes</NavLink>
+          <NavLink to={'/dashboard/myEnrollClass'} className={'flex items-center font-bold gap-2 my-3 text-white'}><SiGoogleclassroom></SiGoogleclassroom>My Classes</NavLink>
          
           </div>
         }
@@ -179,7 +179,7 @@ const isTeacher=role?.role
           {/* user links */}
          
           <NavLink to={'/dashboard/profile'} className={'flex items-center font-bold gap-2 text-white my-3'}><FaUser></FaUser > My Profile</NavLink>
-          <NavLink to={'/dashboard/userClass'} className={'flex items-center font-bold gap-2 my-3 text-white'}><SiGoogleclassroom></SiGoogleclassroom>My Classes</NavLink>
+          <NavLink to={'/dashboard/myEnrollClass'} className={'flex items-center font-bold gap-2 my-3 text-white'}><SiGoogleclassroom></SiGoogleclassroom>My Classes</NavLink>
          
           </div>
         }

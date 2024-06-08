@@ -27,7 +27,7 @@ const {id}=useParams()
    },
  });
  const totalPrice=course?.Price
-//  console.log(course);
+ console.log(course);
 
 
  useEffect(()=>{
@@ -93,12 +93,15 @@ const {id}=useParams()
           email:user?.email,
           transectionID:paymentIntent.id,
           price:totalPrice,
+          image:course?.Course_Image,
           date:new Date(),
           courseId:course._id,
+          title:course?.Title,
+          instructor:course?.Instructor
         }
-        const res= await axiosSecure.post('/paid-course',payment)
+        const res= await axiosSecure.post(`/paid-course?id=${course._id}`,payment)
         console.log(res.data);
-        if(res.data.insertedId){
+        if(res.data?.result?.insertedId){
           navigate('/dashboard/myEnrollClass')
         }
         if(res.data.insertedId===null){

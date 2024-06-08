@@ -16,6 +16,8 @@ import MyClassTeacher from "../pages/Dashboard/Teacher/MyClassTeacher";
 import UpdateClassTeacher from "../pages/Dashboard/Teacher/UpdateClassTeacher";
 import SeeProgress from "../pages/Dashboard/Teacher/SeeProgress";
 import PaymentPage from "../pages/Payment/PaymentPage";
+import UserClasses from "../pages/Dashboard/User/UserClasses";
+import UserClassDetails from "../pages/Dashboard/User/UserClassDetails";
 
 const router = createBrowserRouter([
   {
@@ -95,6 +97,17 @@ const router = createBrowserRouter([
         element:<UpdateClassTeacher></UpdateClassTeacher>
       },
        
+      // user 
+      {
+        path:'myEnrollClass',
+        element:<UserClasses></UserClasses>
+      },
+      {
+        path:'my_Enroll_Class/:id',
+        element:<UserClassDetails></UserClassDetails>
+      },
+       
+
     ]
   },
 ]);

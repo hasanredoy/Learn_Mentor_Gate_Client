@@ -62,10 +62,11 @@ const SeeProgress = () => {
 
     const assignmentData = {
       Assignment_Title:title,
-      Assignment_Deadline:description,
-      Assignment_Description:deadline,
+      Assignment_Deadline:deadline,
+      Assignment_Description:description,
       title:singleClass?.Title,
-      assignmentId:singleClass?._id
+      assignmentId:singleClass?._id,
+      status:'pending'
 
     }; 
     axiosSecure.post('/assignments',assignmentData)
@@ -186,7 +187,7 @@ const SeeProgress = () => {
                 {/* 2 stat per day assignment */}
               <div className="stat bg-amber-50 border-b-8 border-green-300 border-r-8 ">
                 <div
-                  className="radial-progress bg-amber-200 rotate-180 border-2 border-green-400 my-2"
+                  className="radial-progress bg-amber-200  border-2 border-green-400 my-2"
                   style={{ "--value": singleClass?.perDayAssignment }}
                   role="progressbar"
                 >
@@ -208,7 +209,7 @@ const SeeProgress = () => {
                 {/* 1 enrollment  */}
               <div className="stat bg-yellow-100 border-b-8 border-sky-300 border-r-8 ">
                 <div
-                  className="radial-progress bg-blue-200 rotate-180 border-2 border-green-400 my-2"
+                  className="radial-progress bg-blue-200  border-2 border-green-400 my-2"
                   style={{ "--value": singleClass?.Enrollment }}
                   role="progressbar"
                 >
