@@ -7,9 +7,10 @@ import perDayAssignment from "../../../assets/icons/contract.png";
 import enroll from "../../../assets/icons/document.png";
 import { FaPlus } from "react-icons/fa";
 import { useState } from "react";
-import { Toaster } from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import { useForm } from "react-hook-form";
-import { DateRange } from 'react-date-range';
+import moment from 'moment'
+
 const SeeProgress = () => {
   // for modal control
   const [modal, setModal] = useState(false);
@@ -32,15 +33,17 @@ const SeeProgress = () => {
       return res.data;
     },
   });
-
-  // date picker
-  const [state, setState] = useState([
-    {
-      startDate: new Date(),
-      endDate: null,
-      key: "selection",
+  // getting sindgle class by params id
+  const { data: assignments = [] } = useQuery({
+    queryKey: ["all assignments"],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/assignments?id=${singleClass._id}`);
+      //console.log(res);
+      return res.data;
     },
-  ]);
+  });
+
+//  console.log(singleClass);
 
   //  posting modal data in db
   const handlePost = async (e) => {
@@ -50,11 +53,33 @@ const SeeProgress = () => {
     const title = form.title;
     const description = form.description;
     const deadline = form.deadline;
+    const currentDate = Date()
+    const newCurrentDate = moment(currentDate).format().split('T')[0]
+  
+    if(deadline<=newCurrentDate){
+      return toast.error('Invalid Date')
+    }
 
-    const classData = {};
-    console.log(classData);
+    const assignmentData = {
+      Assignment_Title:title,
+      Assignment_Deadline:description,
+      Assignment_Description:deadline,
+      title:singleClass?.Title,
+      assignmentId:singleClass?._id
+
+    }; 
+    axiosSecure.post('/assignments',assignmentData)
+    .then(res=>{
+      console.log(res.data);
+      if(res.data?.insertedId!==null){
+        toast.success('Assignment Added Successfully')
+      }
+      if(res.data?.insertedId===null){
+        toast.error('Assignment Already Exist')
+      }
+    })
+
   };
-  console.log(state);
   return (
     <div>
       {modal ? (
@@ -79,20 +104,26 @@ const SeeProgress = () => {
                     {...register("title", { required: true })}
                   />
 
-                  {errors.password && (
+                  {errors.title && (
                     <span className="text-red-600">This field is required</span>
                   )}
                 </div>
 
                 {/* deadline */}
-               
-                  <DateRange
-                  rangeColors={['#f66a6a']}
-                    editableDateInputs={true}
-                    onChange={(item) => setState(item.selection)}
-                    moveRangeOnFirstSelection={false}
-                    ranges={[state]}
+                <div className="form-control w-full">
+                  <label className="label">
+                    <span className="text-xl font-semibold">Assignment Deadline</span>
+                  </label>
+                  <input
+                  type="date"
+                    className=" input"
+                    {...register("deadline", { required: true })}
                   />
+                  {errors.deadline && (
+                    <span className="text-red-600">This field is required</span>
+                  )}
+                </div>
+                
                 {/* description */}
                 <div className="form-control w-full">
                   <label className="label">
@@ -103,7 +134,7 @@ const SeeProgress = () => {
                     className=" textarea"
                     {...register("description", { required: true })}
                   />
-                  {errors.email && (
+                  {errors.description && (
                     <span className="text-red-600">This field is required</span>
                   )}
                 </div>
@@ -132,13 +163,14 @@ const SeeProgress = () => {
               ! Your Stats Are...
             </h1>
             <div className=" my-5  text-black mx-auto flex flex-col lg:flex-row gap-5">
+              {/* 1 stat assignments  */}
               <div className="stat bg-green-50 border border-b-8 border-gray-300 border-r-8 ">
                 <div
-                  className="radial-progress rotate-180 bg-green-400 border-2 border-amber-400"
-                  style={{ "--value": singleClass.assignments }}
+                  className="radial-progress  bg-green-400 border-2 border-amber-400"
+                  style={{ "--value": assignments.length }}
                   role="progressbar"
                 >
-                  {singleClass.assignments}
+                  {assignments.length}
                 </div>
                 <div className="stat-figure text-secondary">
                   <img className=" w-20 h-20" src={assignment} alt="" />
@@ -148,9 +180,10 @@ const SeeProgress = () => {
                   Assignments{" "}
                 </div>
                 <div className="stat-value font-bold">
-                  {singleClass?.assignments}
+                  {assignments.length}
                 </div>
               </div>
+                {/* 2 stat per day assignment */}
               <div className="stat bg-amber-50 border-b-8 border-green-300 border-r-8 ">
                 <div
                   className="radial-progress bg-amber-200 rotate-180 border-2 border-green-400 my-2"
@@ -172,6 +205,7 @@ const SeeProgress = () => {
                   {singleClass?.perDayAssignment}
                 </div>
               </div>
+                {/* 1 enrollment  */}
               <div className="stat bg-yellow-100 border-b-8 border-sky-300 border-r-8 ">
                 <div
                   className="radial-progress bg-blue-200 rotate-180 border-2 border-green-400 my-2"
