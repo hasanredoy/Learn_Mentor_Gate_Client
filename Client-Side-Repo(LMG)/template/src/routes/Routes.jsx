@@ -15,6 +15,7 @@ import AllClassesAdmin from "../pages/Dashboard/Admin/AllClassesAdmin";
 import MyClassTeacher from "../pages/Dashboard/Teacher/MyClassTeacher";
 import UpdateClassTeacher from "../pages/Dashboard/Teacher/UpdateClassTeacher";
 import SeeProgress from "../pages/Dashboard/Teacher/SeeProgress";
+import PaymentPage from "../pages/Payment/PaymentPage";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,11 @@ const router = createBrowserRouter([
       {
         path: "/class/:id",
         element: <SingleClass></SingleClass>,
+     
+      },
+      {
+        path: "/paymentPage/:id",
+        element:<PaymentPage/>
      
       },
       {

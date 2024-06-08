@@ -1,4 +1,4 @@
-import {   useParams } from "react-router-dom";
+import {   Link, useParams } from "react-router-dom";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import { FaUsers } from "react-icons/fa";
@@ -63,9 +63,11 @@ const SingleClass = () => {
               </div>
               <h3 className=" text-base lg:text-xl py-3 font-bold ">Duration: <span className=" text-amber-500">{course?.Duration}</span></h3>
               <div className=" my-3">
+                <Link to={`/paymentPage/${course._id}`}>
                 <button className="text-white  bg-green-500 p-2 rounded-lg font-black hover:bg-white hover:text-green-700  hover:border hover:border-green-500 ">
                   Pay Now!
                 </button>
+                </Link>
               </div>
              </div>
             </div>
