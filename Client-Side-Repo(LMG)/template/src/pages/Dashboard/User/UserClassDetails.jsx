@@ -29,7 +29,7 @@ const UserClassDetails = () => {
       return res.data;
     },
   });
-  console.log(assignments);
+  // console.log(assignments);
   const handleAssingment = (assignment) => {
     axiosSecure
       .patch(`/assignments/${assignment._id}?id=${assignment?.assignmentId}`)
@@ -67,7 +67,7 @@ const UserClassDetails = () => {
   })
 
   const ratingChanged = (newRating) => {
-    console.log(newRating);
+    // console.log(newRating);
     setRating(newRating)
   };
   // post review

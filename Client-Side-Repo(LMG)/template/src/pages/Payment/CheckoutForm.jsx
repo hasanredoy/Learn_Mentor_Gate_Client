@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useNavigate, useParams } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import toast from "react-hot-toast";
 
 
 const CheckoutForm = () => {
@@ -27,24 +28,50 @@ const {id}=useParams()
    },
  });
  const totalPrice=course?.Price
- console.log(course);
+//  console.log(course);
 
+const {mutateAsync:mutate}=useMutation({
+  mutationFn:async (totalPrice) =>{
+   // //console.log(userData);
+       const {data}= await axiosSecure.post('/create-payment-intent',{price:totalPrice})
+       console.log(data);
+       if(data?.clientSecret){
+        console.log(data.clientSecret);
+          setClientSecret(data.clientSecret);
+       }
+       
+       return data
+  },
+  onSuccess:()=>{
+  }
+})
 
  useEffect(()=>{
   if(totalPrice>0){
-    axiosSecure.post('/create-payment-intent',{price:totalPrice})
-  .then(res=>{
-    console.log(res.data.clientSecret);
-    setClientSecret(res.data.clientSecret);
-  })
-  .catch(err=>{
-    console.log(err);
-  })
+    mutate(totalPrice)
+
   }
- },[axiosSecure,totalPrice])
+ },[mutate,totalPrice])
 
  
-
+ const {mutateAsync}=useMutation({
+  mutationFn:async (payment) =>{
+   // //console.log(userData);
+       const {data}= await axiosSecure.post(`/paid-course?id=${course._id}`,payment)
+       console.log(data);
+       if(data?.result?.insertedId){
+         toast.success('Payment Successfully')
+         navigate('/dashboard/myEnrollClass')
+       }
+       if(data?.insertedId===null){
+        setTransectionID(null)
+        setError('Already Paid')
+      }
+       return data
+  },
+  onSuccess:()=>{
+  }
+})
 
    const handleSubmit=async event=>{
      event.preventDefault()
@@ -99,15 +126,16 @@ const {id}=useParams()
           title:course?.Title,
           instructor:course?.Instructor
         }
-        const res= await axiosSecure.post(`/paid-course?id=${course._id}`,payment)
-        console.log(res.data);
-        if(res.data?.result?.insertedId){
-          navigate('/dashboard/myEnrollClass')
-        }
-        if(res.data.insertedId===null){
-          setTransectionID(null)
-          setError('Already Paid')
-        }
+        // const res= await axiosSecure.post(`/paid-course?id=${course._id}`,payment)
+        // console.log(res.data);
+        // if(res.data?.result?.insertedId){
+        //   navigate('/dashboard/myEnrollClass')
+        // }
+        // if(res.data.insertedId===null){
+        //   setTransectionID(null)
+        //   setError('Already Paid')
+        // }
+        await mutateAsync(payment)
 
       }
     }

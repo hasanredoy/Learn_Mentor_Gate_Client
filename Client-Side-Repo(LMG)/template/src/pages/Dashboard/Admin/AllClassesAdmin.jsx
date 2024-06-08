@@ -145,7 +145,7 @@ const AllClassesAdmin = () => {
                   }
                 </th>
                 <td className="border-l border-gray-500 ">
-                  <Link className={`  btn ${course.status==='pending'&&'btn-disabled'} ${course.status==='rejected'&&'btn'}`}>See Progress</Link>
+                  <Link to={`/dashboard/class/${course._id}`} className={`  btn ${course.status==='pending'&&'btn-disabled'} ${course.status==='rejected'&&'btn'}`}>See Progress</Link>
                 </td>
               </tr>
             ))}

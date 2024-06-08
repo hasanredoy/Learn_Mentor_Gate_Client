@@ -18,6 +18,9 @@ import SeeProgress from "../pages/Dashboard/Teacher/SeeProgress";
 import PaymentPage from "../pages/Payment/PaymentPage";
 import UserClasses from "../pages/Dashboard/User/UserClasses";
 import UserClassDetails from "../pages/Dashboard/User/UserClassDetails";
+import SeeDetailsClass from "../pages/Dashboard/Admin/SeeDetailsClass";
+import PrivetRoute from "./PrivetRoute/PrivetRoute";
+import AdminPrivetRoute from "./PrivetRoute/AdminPrivetRoute";
 
 const router = createBrowserRouter([
   {
@@ -34,17 +37,23 @@ const router = createBrowserRouter([
       },
       {
         path: "/class/:id",
-        element: <SingleClass></SingleClass>,
+        element: <PrivetRoute>
+          <SingleClass></SingleClass>
+        </PrivetRoute>,
      
       },
       {
         path: "/paymentPage/:id",
-        element:<PaymentPage/>
+        element:<PrivetRoute>
+          <PaymentPage/>
+        </PrivetRoute>
      
       },
       {
         path: "/teachOnLearnMentorGate",
-        element: <TeachOnLMG></TeachOnLMG>,
+        element: <PrivetRoute>
+          <TeachOnLMG></TeachOnLMG>
+        </PrivetRoute>,
      
       },
     ],
@@ -59,20 +68,26 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <Dashboard></Dashboard>,
+    element: <PrivetRoute><Dashboard></Dashboard></PrivetRoute>,
     children:[
       // admin routes 
       {
         path:'allUsers',
-        element:<AllUsers></AllUsers>
+        element:<AdminPrivetRoute><AllUsers></AllUsers></AdminPrivetRoute>
       },
       {
         path:'teacherRequests',
-        element:<TeachersRequests></TeachersRequests>
+        element:<AdminPrivetRoute><TeachersRequests></TeachersRequests></AdminPrivetRoute>
       },
       {
         path:'allClasses',
-        element:<AllClassesAdmin></AllClassesAdmin>
+        element:<AdminPrivetRoute><AllClassesAdmin></AllClassesAdmin></AdminPrivetRoute>
+      },
+      {
+        path:'class/:id',
+        element:<AdminPrivetRoute>
+          <SeeDetailsClass></SeeDetailsClass>
+        </AdminPrivetRoute>
       },
       // common 
       {

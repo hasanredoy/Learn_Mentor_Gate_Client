@@ -7,7 +7,7 @@ const UserClasses = () => {
   const { user } = useAuth();
   const email = user?.email;
   const axiosSecure = useAxiosSecure();
-  console.log(email);
+  // console.log(email);
   const { data: enrollClasses = [], refetch } = useQuery({
     queryKey: ["enroll classes"],
     queryFn: async () => {
@@ -22,7 +22,7 @@ const UserClasses = () => {
   if (email) {
     refetch();
   }
-  console.log(enrollClasses);
+  // console.log(enrollClasses);
   return (
     <div className=" my-20 ">
       <h1 className=" text-5xl font-bold text-center">
