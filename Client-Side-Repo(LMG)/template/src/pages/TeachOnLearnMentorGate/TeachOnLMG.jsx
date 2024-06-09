@@ -73,7 +73,7 @@ const TeachOnLMG = () => {
       isTeacherPending?.status==='approved'
       ?
       <div className=" flex flex-col gap-3 h-[500px] items-center justify-center">
-        <h1 className=" text-5xl font-bold text-center">Hi, <span className=" text-green-600">{user?.displayName}</span> Your Now Teacher</h1>
+        <h1 className=" text-5xl font-bold text-center">Hi, <span className=" text-green-600">{user?.displayName}</span>  Now Your Teacher</h1>
         <div className=" flex justify-center items-center">
           <Link to={'/dashboard/profile'}>
           <button

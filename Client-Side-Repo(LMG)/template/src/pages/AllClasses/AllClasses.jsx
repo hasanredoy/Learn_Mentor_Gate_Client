@@ -1,8 +1,33 @@
 import { FaUsers } from "react-icons/fa";
 import useAllClasses from "../../hooks/useAllClasses";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import useGetAllCallsesForAllClassesPageCount from "../../hooks/useGetAllCallsesForAllClassesPageCount";
+import { FaGreaterThan, FaLessThan } from "react-icons/fa6";
 const AllClasses = () => {
-  const courses = useAllClasses();
+     //  get all classes length
+     const [currentPage, setCurrentPage] = useState(0);
+     const  allApprovedClassCount= useGetAllCallsesForAllClassesPageCount();
+      console.log( allApprovedClassCount);
+     const itemsPerPage = 10;
+     const numberOfPage = Math.ceil( allApprovedClassCount / itemsPerPage);
+     //  console.log(numberOfPage);
+     let pages = [];
+     for (let num = 0; num < numberOfPage; num++) {
+       pages.push(num);
+     }
+     console.log(pages);
+     const handlePrev=()=>{
+       if(currentPage>0){
+         setCurrentPage(currentPage-1)
+       }
+     }
+     const handleNext=()=>{
+       if(currentPage<pages.length-1){
+         setCurrentPage(currentPage+1)
+       }
+     }
+  const courses = useAllClasses(currentPage,itemsPerPage);
   //console.log(courses);
   return (
     <div className=" pt-20 lg:pt-28 bg-base-100">
@@ -70,6 +95,33 @@ const AllClasses = () => {
           ))}
         </div>
       </div>
+      {pages.length > 0 ?  <div
+        className={` ${
+          pages.length > 10 && "overflow-scroll"
+        } flex justify-center  gap-5 bg-gray-200 w-full my-5`}
+      >  
+      <button onClick={handlePrev} className=" btn bg-gray-300"><FaLessThan></FaLessThan></button>
+     
+            {pages.map((page, index) => (
+             <div  key={page} >
+               <button
+                onClick={()=>setCurrentPage(page)}
+                // onMouseOut={() => refetch()}
+                className={`btn ${
+                  currentPage === page ? "btn-warning" : "bg-gray-400"
+                }`}
+              
+              >
+                {index + 1}
+              </button>
+             </div>
+            ))}
+             <button 
+             onClick={handleNext}
+             className=" btn bg-gray-300"><FaGreaterThan></FaGreaterThan></button>
+      </div>: (
+          <></>
+        )}
     </div>
   );
 };

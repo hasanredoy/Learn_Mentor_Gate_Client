@@ -60,9 +60,9 @@ const Register = () => {
       toast.error("Password Should Be 6 Character or More");
       return;
     }
-    if (!/[A-Z][a-z]/.test(password)) {
+    if (!/[A-Z]/.test(password)) {
       toast.error(
-        "Password Must Have Contain One Uppercase And One Lowercase Latter"
+        "Password Must Have Contain One Uppercase Latter"
       );
       return;
     }
@@ -101,7 +101,7 @@ const Register = () => {
         <div className="card shrink-0 shadow-2xl  w-full h-full  lg:w-1/2 bg-base-200">
           <form onSubmit={handleSubmit(handleRegister)} className="card-body">
             {/* name */}
-            <div className="form-control">
+            <div className="  form-control">
               <label className="label">
                 <span className="text-xl font-semibold">
                   You&apos;re Full Name
@@ -118,7 +118,7 @@ const Register = () => {
               )}
             </div>
             {/* Photo */}
-            <div className="form-control">
+            <div className="overflow-auto form-control">
               <label className="label">
                 <span className="text-xl font-semibold">Your Photo</span>
               </label>

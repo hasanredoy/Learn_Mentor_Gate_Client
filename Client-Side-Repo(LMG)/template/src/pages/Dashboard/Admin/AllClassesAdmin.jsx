@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import { FaX } from "react-icons/fa6";
+import { FaGreaterThan, FaLessThan, FaX } from "react-icons/fa6";
 import { MdOutlineDoneOutline } from "react-icons/md";
 import swal from "sweetalert";
 import { Link } from "react-router-dom";
@@ -20,6 +20,17 @@ const AllClassesAdmin = () => {
     pages.push(num);
   }
   console.log(pages);
+// handle prev 
+const handlePrev=()=>{
+  if(currentPage>0){
+    setCurrentPage(currentPage-1)
+  }
+}
+const handleNext=()=>{
+  if(currentPage<pages.length-1){
+    setCurrentPage(currentPage+1)
+  }
+}
 
   // getting all class
   const axiosSecure = useAxiosSecure();
@@ -182,13 +193,13 @@ const AllClassesAdmin = () => {
           </tbody>
         </table>
       </div>
-      <div
+     {pages.length > 0 ?  <div
         className={` ${
           pages.length > 10 && "overflow-scroll"
         } flex justify-center  gap-5 bg-gray-200 w-full my-5`}
-      >
-        {pages.length > 0 ? (
-          <>
+      >  
+      <button onClick={handlePrev} className=" btn bg-gray-300"><FaLessThan></FaLessThan></button>
+     
             {pages.map((page, index) => (
              <div  key={page} >
                <button
@@ -203,11 +214,12 @@ const AllClassesAdmin = () => {
               </button>
              </div>
             ))}
-          </>
-        ) : (
-          ""
+             <button 
+             onClick={handleNext}
+             className=" btn bg-gray-300"><FaGreaterThan></FaGreaterThan></button>
+      </div>: (
+          <></>
         )}
-      </div>
     </div>
   );
 };

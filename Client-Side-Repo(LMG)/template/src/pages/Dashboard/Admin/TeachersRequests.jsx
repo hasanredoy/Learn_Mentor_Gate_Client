@@ -1,20 +1,46 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import { FaX } from "react-icons/fa6";
+import { FaGreaterThan, FaLessThan, FaX } from "react-icons/fa6";
 import { MdOutlineDoneOutline } from "react-icons/md";
 import swal from "sweetalert";
 import LoadingSpinner from "../../../ReuseableCompo/LoadingSpinner";
 import { useState } from "react";
+import useGetTeacherQeqLength from "../../../hooks/useGetTeacherQeqLength";
 
 const TeachersRequests = () => {
+
+
+   //  get all classes length
+   const [currentPage, setCurrentPage] = useState(0);
+   const  allTeacherReqCount= useGetTeacherQeqLength();
+    console.log( allTeacherReqCount);
+   const itemsPerPage = 10;
+   const numberOfPage = Math.ceil( allTeacherReqCount / itemsPerPage);
+   //  console.log(numberOfPage);
+   let pages = [];
+   for (let num = 0; num < numberOfPage; num++) {
+     pages.push(num);
+   }
+   console.log(pages);
+   const handlePrev=()=>{
+     if(currentPage>0){
+       setCurrentPage(currentPage-1)
+     }
+   }
+   const handleNext=()=>{
+     if(currentPage<pages.length-1){
+       setCurrentPage(currentPage+1)
+     }
+   }
+
   // state for disable reject and approve btn 
   const[disableBtn , setDisableBtn]=useState(localStorage.getItem('id'))
   // getting teachers data 
   const axiosSecure = useAxiosSecure();
-  const { data:teachers = [],isPending} = useQuery({
-    queryKey: ["teacher"],
+  const { data:teachers = [],isPending,refetch} = useQuery({
+    queryKey: ["teacher",currentPage],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/teachers`);
+      const res = await axiosSecure.get(`/teachers?size=${itemsPerPage}&page=${currentPage}`);
       return res.data;
     },
   });
@@ -37,6 +63,7 @@ const TeachersRequests = () => {
           if(res.data?.result?.modifiedCount>0&&res?.data?.teacherCollectionResult?.modifiedCount>0){
             localStorage.setItem('id',data._id)
             setDisableBtn(data?._id)
+            refetch()
              swal(`${data?.name} is Teacher Now `, {
           icon: "success",
         });
@@ -65,6 +92,7 @@ const TeachersRequests = () => {
           if(res.data?.modifiedCount>0){
             localStorage.setItem('id',data?._id)
             setDisableBtn(data?._id)
+            refetch()
              swal(`Teacher  request rejected Successfully`, {
           icon: "success",
         });
@@ -167,7 +195,7 @@ const TeachersRequests = () => {
              <button
               // disabled={disableBtn}
                onClick={()=>handleMakeTeacher(teacher)}
-                className={` btn ${teacher.status==='approved'&&'btn-disabled'} ${teacher.status==='rejected'&&'btn'} bg-[#fafcfa]  border-l-4 border-b-4 border-[#048522] ${disableBtn===teacher?._id?'btn-disabled':''}`}>
+                className={` btn ${teacher.status==='approved'&&'btn-disabled'} ${teacher.status==='rejected'&&'btn-disabled'} bg-[#fafcfa]  border-l-4 border-b-4 border-[#048522] ${disableBtn===teacher?._id?'btn-disabled':''}`}>
 <span className="  flex flex-row justify-center items-center gap-2">
                  Approve <MdOutlineDoneOutline className=" text-green-600 text-xl"></MdOutlineDoneOutline>
                   </span>                </button>
@@ -178,7 +206,7 @@ const TeachersRequests = () => {
               <button
               // disabled={disableBtn}
                onClick={()=>handleRejectTeacher(teacher)}
-                className={`  btn ${teacher.status==='approved'&&'btn-disabled'} ${teacher.status==='rejected'&&'btn'} bg-[#ffbd07] text-white border-l-4 border-b-4 border-[#fe2e2e] `}>
+                className={`  btn ${teacher.status==='approved'&&'btn-disabled'} ${teacher.status==='rejected'&&'btn-disabled'} bg-[#ffbd07] text-white border-l-4 border-b-4 border-[#fe2e2e] `}>
                   <span className="  flex flex-row justify-center items-center gap-2">
                   Reject <FaX className=" text-red-600 text-xl"></FaX>
                   </span>
@@ -195,6 +223,33 @@ const TeachersRequests = () => {
       </tbody>
     </table>
   </div>
+  {pages.length > 0 ?  <div
+        className={` ${
+          pages.length > 10 && "overflow-scroll"
+        } flex justify-center  gap-5 bg-gray-200 w-full my-5`}
+      >  
+      <button onClick={handlePrev} className=" btn bg-gray-300"><FaLessThan></FaLessThan></button>
+     
+            {pages.map((page, index) => (
+             <div  key={page} >
+               <button
+                onClick={()=>setCurrentPage(page)}
+                // onMouseOut={() => refetch()}
+                className={`btn ${
+                  currentPage === page ? "btn-warning" : "bg-gray-400"
+                }`}
+              
+              >
+                {index + 1}
+              </button>
+             </div>
+            ))}
+             <button 
+             onClick={handleNext}
+             className=" btn bg-gray-300"><FaGreaterThan></FaGreaterThan></button>
+      </div>: (
+          <></>
+        )}
 </div>
   );
 };

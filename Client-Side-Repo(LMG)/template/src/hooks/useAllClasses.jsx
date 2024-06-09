@@ -1,12 +1,12 @@
 import useAxiosCommon from './useAxiosCommon';
 import { useQuery } from '@tanstack/react-query';
 
-const useAllClasses = () => {
+const useAllClasses = (currentPage,itemsPerPage) => {
   const axiosCommon = useAxiosCommon();
   const { data: courses = [] } = useQuery({
-    queryKey: ["courses"],
+    queryKey: ["courses",currentPage],
     queryFn: async () => {
-      const res = await axiosCommon.get("/courses");
+      const res = await axiosCommon.get(`/courses?size=${itemsPerPage}&page=${currentPage}`);
       return res.data;
     },
   });

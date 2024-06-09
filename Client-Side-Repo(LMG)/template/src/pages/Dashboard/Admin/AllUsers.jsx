@@ -2,9 +2,36 @@ import useGetAllUsers from "../../../hooks/useGetAllUsers";
 import LoadingSpinner from "../../../ReuseableCompo/LoadingSpinner";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import swal from "sweetalert";
+import { useState } from "react";
+import useGetAllUsersLength from "../../../hooks/useGetAllUsersLength";
+import { FaGreaterThan, FaLessThan } from "react-icons/fa6";
 
 const AllUsers = () => {
-  const [isPending,users=[],refetch]=useGetAllUsers()
+    //  get all user length
+    const [currentPage, setCurrentPage] = useState(0);
+    const allUserCount= useGetAllUsersLength();
+     console.log(allUserCount);
+    const itemsPerPage = 10;
+    const numberOfPage = Math.ceil(allUserCount / itemsPerPage);
+    //  console.log(numberOfPage);
+    let pages = [];
+    for (let num = 0; num < numberOfPage; num++) {
+      pages.push(num);
+    }
+    console.log(pages);
+    const handlePrev=()=>{
+      if(currentPage>0){
+        setCurrentPage(currentPage-1)
+      }
+    }
+    const handleNext=()=>{
+      if(currentPage<pages.length-1){
+        setCurrentPage(currentPage+1)
+      }
+    }
+
+    // getting user 
+  const [isPending,users=[],refetch]=useGetAllUsers(currentPage,itemsPerPage)
   console.log(users);
   const axiosSecure =useAxiosSecure()
   const handleAdmin=(id,name)=>{
@@ -56,7 +83,7 @@ const AllUsers = () => {
       <div className="divider"></div>
       <div className=" flex justify-between items-center px-2 lg:px-10 my-7">
          <div className="flex flex-col lg:w-[80%] gap-3 justify-between lg:flex-row">
-         <h1 className=" text-base lg:text-xl font-bold">Total Users: {users?.length}</h1>
+         <h1 className=" text-base lg:text-xl font-bold">Total Users: {allUserCount}</h1>
           
          </div>
           
@@ -117,6 +144,33 @@ const AllUsers = () => {
           </tbody>
         </table>
       </div>
+      {pages.length > 0 ?  <div
+        className={` ${
+          pages.length > 10 && "overflow-scroll"
+        } flex justify-center  gap-5 bg-gray-200 w-full my-5`}
+      >  
+      <button onClick={handlePrev} className=" btn bg-gray-300"><FaLessThan></FaLessThan></button>
+     
+            {pages.map((page, index) => (
+             <div  key={page} >
+               <button
+                onClick={()=>setCurrentPage(page)}
+                // onMouseOut={() => refetch()}
+                className={`btn ${
+                  currentPage === page ? "btn-warning" : "bg-gray-400"
+                }`}
+              
+              >
+                {index + 1}
+              </button>
+             </div>
+            ))}
+             <button 
+             onClick={handleNext}
+             className=" btn bg-gray-300"><FaGreaterThan></FaGreaterThan></button>
+      </div>: (
+          <></>
+        )}
     </div>
   );
 };

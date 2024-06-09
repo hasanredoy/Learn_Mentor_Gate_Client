@@ -2,16 +2,45 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAuth from "../../../hooks/useAuth";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import useGetPaidCourseLenth from "../../../hooks/useGetPaidCourseLenth";
+import { FaGreaterThan, FaLessThan} from "react-icons/fa6";
+
 
 const UserClasses = () => {
   const { user } = useAuth();
   const email = user?.email;
+
+
+   //  get all classes length
+   const [currentPage, setCurrentPage] = useState(0);
+   const userClasses=useGetPaidCourseLenth()
+    console.log(userClasses);
+   const itemsPerPage = 10;
+   const numberOfPage = Math.ceil(userClasses / itemsPerPage);
+   //  console.log(numberOfPage);
+   let pages = [];
+   for (let num = 0; num < numberOfPage; num++) {
+     pages.push(num);
+   }
+   console.log(pages);
+   const handlePrev=()=>{
+     if(currentPage>0){
+       setCurrentPage(currentPage-1)
+     }
+   }
+   const handleNext=()=>{
+     if(currentPage<pages.length-1){
+       setCurrentPage(currentPage+1)
+     }
+   }
+
   const axiosSecure = useAxiosSecure();
   // console.log(email);
   const { data: enrollClasses = [], refetch } = useQuery({
-    queryKey: ["enroll classes"],
+    queryKey: ["enroll classes",currentPage],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/paid-course?email=${email}`);
+      const res = await axiosSecure.get(`/paid-course?email=${email}&size=${itemsPerPage}&page=${currentPage}`);
       //console.log(res);
       return res.data;
     },
@@ -61,8 +90,36 @@ const UserClasses = () => {
           </div>
         </div>)
         }
+        
       </div>
       }
+{pages.length > 0 ?  <div
+        className={` ${
+          pages.length > 10 && "overflow-scroll"
+        } flex justify-center  gap-5 bg-gray-200 w-full my-5`}
+      >  
+      <button onClick={handlePrev} className=" btn bg-gray-300"><FaLessThan></FaLessThan></button>
+     
+            {pages.map((page, index) => (
+             <div  key={page} >
+               <button
+                onClick={()=>setCurrentPage(page)}
+                // onMouseOut={() => refetch()}
+                className={`btn ${
+                  currentPage === page ? "btn-warning" : "bg-gray-400"
+                }`}
+              
+              >
+                {index + 1}
+              </button>
+             </div>
+            ))}
+             <button 
+             onClick={handleNext}
+             className=" btn bg-gray-300"><FaGreaterThan></FaGreaterThan></button>
+      </div>: (
+          <></>
+        )}
     </div>
   );
 };

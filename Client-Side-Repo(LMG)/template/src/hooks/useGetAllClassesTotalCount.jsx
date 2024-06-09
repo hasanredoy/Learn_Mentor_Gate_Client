@@ -1,13 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
-import useAxiosSecure from "./useAxiosSecure";
+import useAxiosCommon from "./useAxiosCommon";
 
 const useGetAllClassesTotalCount = () => {
    // getting all class length 
-   const axiosSecure = useAxiosSecure();
+   const axiosCommon= useAxiosCommon();
    const { data: allCoursesCount = [] } = useQuery({
      queryKey: ["allCourses-count"],
      queryFn: async () => {
-       const res = await axiosSecure.get("/allCourses-length");
+       const res = await axiosCommon.get("/allCourses-length");
        return res.data;
      },
    });
