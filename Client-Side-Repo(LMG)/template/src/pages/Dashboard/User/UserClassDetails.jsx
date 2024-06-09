@@ -9,6 +9,7 @@ import useAuth from "../../../hooks/useAuth";
 
 
 import ReactStars from "react-rating-stars-component";
+import { FaGreaterThan, FaLessThan } from "react-icons/fa6";
 
 const UserClassDetails = () => {
   const { user } = useAuth();
@@ -20,11 +21,46 @@ const UserClassDetails = () => {
     formState: { errors },
   } = useForm();
   const { id } = useParams();
+
+// get assignets length 
+ const { data: assignmentsCount = {} } = useQuery({
+    queryKey: ["assignmentForUserLength"],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/assignments-length?id=${id}`);
+      //console.log(res);
+      return res.data.length;
+    },
+  });
+  // console.log(assignmentsCount);
+   //  get all classes length
+   const [currentPage, setCurrentPage] = useState(0);
+ 
+   const itemsPerPage = 10;
+   const numberOfPage = Math.ceil(assignmentsCount / itemsPerPage);
+   //  console.log(numberOfPage);
+   let pages = [];
+   for (let num = 0; num < numberOfPage; num++) {
+     pages.push(num);
+   }
+   console.log(pages);
+   const handlePrev=()=>{
+     if(currentPage>0){
+       setCurrentPage(currentPage-1)
+     }
+   }
+   const handleNext=()=>{
+     if(currentPage<pages.length-1){
+       setCurrentPage(currentPage+1)
+     }
+   }
+  
+
+  // get assignment 
   const axiosSecure = useAxiosSecure();
   const { data: assignments = [], refetch } = useQuery({
     queryKey: ["assignments for user"],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/assignments?id=${id}`);
+      const res = await axiosSecure.get(`/assignments?id=${id}&size=${itemsPerPage}&page=${currentPage}`);
       //console.log(res);
       return res.data;
     },
@@ -86,17 +122,7 @@ const UserClassDetails = () => {
       reviewId: id,
     };
     await mutateAsync(reviewData)
-  //   axiosSecure.post("/reviews", reviewData).then((res) => {
-  //     console.log(res.data);
-  //     if (res.data?.insertedId) {
-  //       toast.success("Review Added Successfully");
-  //      setTimeout(()=>{
-        
-  //       setModal(false);
-  //      },600)
-  //     }
-    
-  // });
+
 }
 
   return (
@@ -226,6 +252,33 @@ const UserClassDetails = () => {
             </table>
             <Toaster></Toaster>
           </div>
+          {pages.length > 0 ?  <div
+        className={` ${
+          pages.length > 10 && "overflow-scroll"
+        } flex justify-center  gap-5 bg-gray-200 w-full my-5`}
+      >  
+      <button onClick={handlePrev} className=" btn bg-gray-300"><FaLessThan></FaLessThan></button>
+     
+            {pages.map((page, index) => (
+             <div  key={page} >
+               <button
+                onClick={()=>setCurrentPage(page)}
+                // onMouseOut={() => refetch()}
+                className={`btn ${
+                  currentPage === page ? "btn-warning" : "bg-gray-400"
+                }`}
+              
+              >
+                {index + 1}
+              </button>
+             </div>
+            ))}
+             <button 
+             onClick={handleNext}
+             className=" btn bg-gray-300"><FaGreaterThan></FaGreaterThan></button>
+      </div>: (
+          <></>
+        )}
         </>
       )}
     </div>

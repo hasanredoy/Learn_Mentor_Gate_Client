@@ -4,24 +4,46 @@ import { Link } from "react-router-dom";
 import {  FaUsers } from "react-icons/fa";
 import swal from "sweetalert";
 import useGetAllClassesByEmail from "../../../hooks/useGetAllClassesByEmail";
+import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
+import { FaGreaterThan, FaLessThan } from "react-icons/fa6";
 
 const MyClassTeacher = () => {
   const {user}=useAuth()
-  // const email = user?.email||undefined
+ const email = user?.email
   const axiosSecure = useAxiosSecure();
-  // const { data: classes = [],refetch } = useQuery({
-  //   queryKey: ["teacher-classes"],
-  //   queryFn: async () => {
-  //     const res = await axiosSecure.get(`/teacher-classes?email=${email}`);
-  //     return res.data;
-  //   },
-  // });
-  // console.log(classes);
-  // if(!email){
-  //   refetch
-  // }
-  const [classes,refetch]=useGetAllClassesByEmail()
+  
+  const { data: classesLength = 0} = useQuery({
+    queryKey: ["teacher-classes-length"],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/teacher-classes-length?email=${email}`);
+      return res.data.length;
+    },
+  });
+  console.log(classesLength);
+     //  get all classes length
+     const [currentPage, setCurrentPage] = useState(0);
+     const itemsPerPage = 10;
+     const numberOfPage = Math.ceil(classesLength / itemsPerPage);
+     //  console.log(numberOfPage);
+     let pages = [];
+     for (let num = 0; num < numberOfPage; num++) {
+       pages.push(num);
+     }
+     console.log(pages);
+     const handlePrev=()=>{
+       if(currentPage>0){
+         setCurrentPage(currentPage-1)
+       }
+     }
+     const handleNext=()=>{
+       if(currentPage<pages.length-1){
+         setCurrentPage(currentPage+1)
+       }
+     }
 
+  // get teacher classes 
+  const [classes,refetch]=useGetAllClassesByEmail(currentPage,itemsPerPage)
   const handleDelete=(course)=>{
     swal({
       title: "Are you sure?",
@@ -68,7 +90,7 @@ const MyClassTeacher = () => {
       </div>
       :
       <>
-       <h4 className=" text-xl font-semibold py-5">All Classes: {classes.length}</h4>
+       <h4 className=" text-xl font-semibold py-5">All Classes: {classesLength}</h4>
        <div className=" mt-5 grid grid-cols-1 lg:grid-cols-2 gap-5">
        {classes?.map((course) => (
             <div
@@ -132,6 +154,33 @@ const MyClassTeacher = () => {
             
           ))}
        </div>
+       {pages.length > 0 ?  <div
+        className={` ${
+          pages.length > 10 && "overflow-scroll"
+        } flex justify-center  gap-5 bg-gray-200 w-full my-5`}
+      >  
+      <button onClick={handlePrev} className=" btn bg-gray-300"><FaLessThan></FaLessThan></button>
+     
+            {pages.map((page, index) => (
+             <div  key={page} >
+               <button
+                onClick={()=>setCurrentPage(page)}
+                // onMouseOut={() => refetch()}
+                className={`btn ${
+                  currentPage === page ? "btn-warning" : "bg-gray-400"
+                }`}
+              
+              >
+                {index + 1}
+              </button>
+             </div>
+            ))}
+             <button 
+             onClick={handleNext}
+             className=" btn bg-gray-300"><FaGreaterThan></FaGreaterThan></button>
+      </div>: (
+          <></>
+        )}
       </>
      }
     </div>
