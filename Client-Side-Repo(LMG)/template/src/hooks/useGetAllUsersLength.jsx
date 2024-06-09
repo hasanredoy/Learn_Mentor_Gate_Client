@@ -3,7 +3,7 @@ import useAxiosCommon from "./useAxiosCommon";
 
 const useGetAllUsersLength = () => {
   const axiosCommon = useAxiosCommon();
-  const { data: allUserCount = {} } = useQuery({
+  const { data: allUserCount = 0 } = useQuery({
     queryKey: ["all-user-count"],
     queryFn: async () => {
       const res = await axiosCommon.get("/users-length");

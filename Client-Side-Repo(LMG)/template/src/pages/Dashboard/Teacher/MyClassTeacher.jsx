@@ -7,6 +7,7 @@ import useGetAllClassesByEmail from "../../../hooks/useGetAllClassesByEmail";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { FaGreaterThan, FaLessThan } from "react-icons/fa6";
+import HelmetPorvider from "../../../ReuseableCompo/HelmetPorvider";
 
 const MyClassTeacher = () => {
   const {user}=useAuth()
@@ -74,6 +75,7 @@ const MyClassTeacher = () => {
   }
   return (
     <div className=" my-20">
+      <HelmetPorvider title={"My Class| Dashboard"}></HelmetPorvider>
       <h1 className=" text-5xl font-bold text-center">Welcome <span className=" text-green-600">{user?.displayName?user.displayName:'Back'}</span>!</h1>
      {
       classes.length<1

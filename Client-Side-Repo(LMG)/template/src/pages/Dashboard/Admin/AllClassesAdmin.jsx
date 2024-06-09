@@ -6,6 +6,7 @@ import swal from "sweetalert";
 import { Link } from "react-router-dom";
 import useGetAllClassesTotalCount from "../../../hooks/useGetAllClassesTotalCount";
 import { useState } from "react";
+import HelmetPorvider from "../../../ReuseableCompo/HelmetPorvider";
 
 const AllClassesAdmin = () => {
   //  get all classes length
@@ -76,6 +77,7 @@ const handleNext=()=>{
 
   return (
     <div>
+      <HelmetPorvider title={"All Class| Dashboard"}></HelmetPorvider>
       <div>
         <h4 className=" my-5 text-lg text-center font-bold text-[#11c93f]">
           -- Welcome Back --

@@ -5,6 +5,7 @@ import { useState } from "react";
 import axios from "axios";
 import usePostClass from "../../../hooks/usePostClass";
 import { useNavigate } from "react-router-dom";
+import HelmetPorvider from "../../../ReuseableCompo/HelmetPorvider";
 
 const AddClass = () => {
   const {user}=useAuth()
@@ -74,6 +75,7 @@ const AddClass = () => {
 
   return (
     <div className=" my-20">
+      <HelmetPorvider title={"Add Class| Dashboard"}></HelmetPorvider>
       <h1 className=" text-3xl font-bold text-center">Hello <span className=" text-green-600">{user?.displayName}</span> Would You Like To Add an Class<span className=" text-red-600">?</span></h1>
 
       {/* form div  */}
@@ -135,7 +137,7 @@ const AddClass = () => {
                   {...register("title", { required: true })}
                 />
 
-                {errors.password && (
+                {errors.title && (
                   <span className="text-red-600">This field is required</span>
                 )}
               </div>
@@ -149,7 +151,7 @@ const AddClass = () => {
                     {...register("price", { required: true })}
                     placeholder="Price"
                  />
-                  {errors.email && (
+                  {errors.price && (
                     <span className="text-red-600">This field is required</span>
                   )}
                 </div>
@@ -163,7 +165,7 @@ const AddClass = () => {
                     {...register("duration", { required: true })}
                     placeholder="Duration"
                  />
-                  {errors.email && (
+                  {errors.duration && (
                     <span className="text-red-600">This field is required</span>
                   )}
                 </div>
@@ -177,7 +179,7 @@ rows={5}
 className=" textarea"
                     {...register("description", { required: true })}
                  />
-                  {errors.email && (
+                  {errors.description && (
                     <span className="text-red-600">This field is required</span>
                   )}
                 </div>

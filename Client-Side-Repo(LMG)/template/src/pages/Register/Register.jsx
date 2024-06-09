@@ -14,6 +14,7 @@ import usePostUsers from "../../hooks/usePostUsers";
 
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
+import HelmetPorvider from "../../ReuseableCompo/HelmetPorvider";
 
 const Register = () => {
   const [value, setValue] = useState();
@@ -34,36 +35,33 @@ const Register = () => {
     setImage(e.target.files[0]);
   };
 
-  
   const handleRegister = async (e) => {
     // e.preventDefault();
     const form = e;
     const name = form.name;
-   
+
     const email = form.email;
     const password = form.password;
 
-    // posting on imgbb 
+    // posting on imgbb
     const formData = new FormData();
     formData.append("image", image);
     const api = import.meta.env.VITE_IMGBB_API;
     const url = `https://api.imgbb.com/1/upload?key=${api}`;
     const res = await axios.post(url, formData);
     // console.log(res.data?.data?.display_url);
-    const photo =res.data?.data.display_url
+    const photo = res.data?.data.display_url;
 
-  //  user data 
-  const userData = { name, phone:value, photo, email, role: "student" };
-  // console.log(userData);
+    //  user data
+    const userData = { name, phone: value, photo, email, role: "student" };
+    // console.log(userData);
 
     if (password.length < 6) {
       toast.error("Password Should Be 6 Character or More");
       return;
     }
     if (!/[A-Z]/.test(password)) {
-      toast.error(
-        "Password Must Have Contain One Uppercase Latter"
-      );
+      toast.error("Password Must Have Contain One Uppercase Latter");
       return;
     }
     if (res?.data?.data?.display_url) {
@@ -91,6 +89,8 @@ const Register = () => {
   };
   return (
     <div>
+      <HelmetPorvider title={"Register"}></HelmetPorvider>
+
       <div className="fixed z-50 w-full top-0">
         <Navbar></Navbar>
       </div>
@@ -99,6 +99,7 @@ const Register = () => {
    min-h-screen mt-20 w-full flex justify-center items-center py-5 "
       >
         <div className="card shrink-0 shadow-2xl  w-full h-full  lg:w-1/2 bg-base-200">
+        <h1 className="text-2xl font-bold text-center">Please Register !!</h1>
           <form onSubmit={handleSubmit(handleRegister)} className="card-body">
             {/* name */}
             <div className="  form-control">
@@ -134,9 +135,9 @@ const Register = () => {
                 <span className="text-xl font-semibold">Your Phone Number</span>
               </label>
               <PhoneInput
-              className="input"
-              international
-              countryCallingCodeEditable={false}
+                className="input"
+                international
+                countryCallingCodeEditable={false}
                 placeholder="Enter phone number"
                 value={value}
                 onChange={setValue}

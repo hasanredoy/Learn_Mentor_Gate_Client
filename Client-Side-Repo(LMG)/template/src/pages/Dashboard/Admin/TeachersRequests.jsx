@@ -6,6 +6,7 @@ import swal from "sweetalert";
 import LoadingSpinner from "../../../ReuseableCompo/LoadingSpinner";
 import { useState } from "react";
 import useGetTeacherQeqLength from "../../../hooks/useGetTeacherQeqLength";
+import HelmetPorvider from "../../../ReuseableCompo/HelmetPorvider";
 
 const TeachersRequests = () => {
 
@@ -113,7 +114,7 @@ const TeachersRequests = () => {
   }
   return (
     <div>
-      
+      <HelmetPorvider title={"Teacher Request | Dashboard"}></HelmetPorvider>
     <div>
     <h4 className=" my-5 text-lg text-center font-bold text-[#11c93f]">
       -- Welcome Back --
@@ -126,7 +127,7 @@ const TeachersRequests = () => {
   <div className="divider"></div>
   <div className=" flex justify-between items-center px-2 lg:px-10 my-7">
      <div className="flex flex-col lg:w-[80%] gap-3 justify-between lg:flex-row">
-     <h1 className=" text-base lg:text-xl font-bold">Total Request : {teachers?.length}</h1>
+     <h1 className=" text-base lg:text-xl font-bold">Total Request : {allTeacherReqCount}</h1>
       
      </div>
       

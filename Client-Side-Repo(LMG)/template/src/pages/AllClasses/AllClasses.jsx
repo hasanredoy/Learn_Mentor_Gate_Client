@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import useGetAllCallsesForAllClassesPageCount from "../../hooks/useGetAllCallsesForAllClassesPageCount";
 import { FaGreaterThan, FaLessThan } from "react-icons/fa6";
+import HelmetPorvider from "../../ReuseableCompo/HelmetPorvider";
 const AllClasses = () => {
      //  get all classes length
      const [currentPage, setCurrentPage] = useState(0);
@@ -31,6 +32,7 @@ const AllClasses = () => {
   //console.log(courses);
   return (
     <div className=" pt-20 lg:pt-28 bg-base-100">
+      <HelmetPorvider title={"All Class"}></HelmetPorvider>
       <div className=" container  mx-auto">
         <div>
           <h1 className=" px-2 lg:px-0 text-3xl font-black text-center my-5 lg:my-10 md:text-5xl">

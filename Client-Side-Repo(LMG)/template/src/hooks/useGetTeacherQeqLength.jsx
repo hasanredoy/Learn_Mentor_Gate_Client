@@ -3,7 +3,7 @@ import useAxiosCommon from "./useAxiosCommon";
 
 const useGetTeacherQeqLength = () => {
   const axiosCommon = useAxiosCommon();
-  const { data: allTeacherReqCount = {} } = useQuery({
+  const { data: allTeacherReqCount = 0 } = useQuery({
     queryKey: ["all-teacher-count"],
     queryFn: async () => {
       const res = await axiosCommon.get("/teachers-length");

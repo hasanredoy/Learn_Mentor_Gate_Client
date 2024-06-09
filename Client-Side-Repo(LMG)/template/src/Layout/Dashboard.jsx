@@ -1,6 +1,5 @@
-import { FaHome, FaList, FaMoon, FaPlus,  FaSignOutAlt, FaStar, FaUser, FaUsers } from "react-icons/fa";
+import { FaHome, FaList, FaMoon, FaPlus,  FaSignOutAlt, FaUser, FaUsers } from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
-import { MdOutlineContactSupport } from "react-icons/md";
 import { TiThMenu } from "react-icons/ti";
 import useAuth from "../hooks/useAuth";
 import swal from "sweetalert";
@@ -11,6 +10,8 @@ import { SiGoogleclassroom } from "react-icons/si";
 import tutorial from '../assets/icons/tutorial.png';
 import './dashboard.css'
 import useGetUserRole from "../hooks/useGetUserRole";
+import { GiTeacher } from "react-icons/gi";
+
 
 
 const Dashboard = () => {
@@ -124,8 +125,8 @@ const isTeacher=role?.role
           
           <NavLink to={'/'} className={'flex items-center font-bold gap-2 text-white'}><FaHome></FaHome > Home</NavLink>
           <NavLink to={'/allClasses'} className={'flex items-center font-bold gap-2 text-white my-3'}><img src={tutorial} className=" bg-white"></img> All Classes</NavLink>
-          <NavLink to={'/contact'} className={'flex items-center font-bold gap-2 my-3 text-white'}><MdOutlineContactSupport></MdOutlineContactSupport >Contact</NavLink>
-          <NavLink to={'/reviews'} className={'flex items-center font-bold gap-2 my-3 text-white'}> <FaStar></FaStar>Reviews</NavLink>
+          <NavLink to={'/teachOnLearnMentorGate'} className={'flex items-center font-bold gap-2 text-white'}><GiTeacher></GiTeacher>Teach On LMG</NavLink>
+        
           <h3 onClick={handleLogOut}  className={' cursor-pointer flex items-center font-bold gap-2 my-3 text-white'}> <FaSignOutAlt></FaSignOutAlt>Logout</h3>
         </div>
        </div>
@@ -193,8 +194,8 @@ const isTeacher=role?.role
           
           <NavLink to={'/'} className={'flex items-center font-bold gap-2 text-white'}><FaHome></FaHome > Home</NavLink>
           <NavLink to={'/allClasses'} className={'flex items-center font-bold gap-2 text-white my-3'}><img src={tutorial} className=" bg-white"></img> All Classes</NavLink>
-          <NavLink to={'/contact'} className={'flex items-center font-bold gap-2 my-3 text-white'}><MdOutlineContactSupport></MdOutlineContactSupport >Contact</NavLink>
-          <NavLink to={'/reviews'} className={'flex items-center font-bold gap-2 my-3 text-white'}> <FaStar></FaStar>Reviews</NavLink>
+          <NavLink to={'/teachOnLearnMentorGate'} className={'flex items-center font-bold gap-2 text-white'}><GiTeacher></GiTeacher>Teach On LMG</NavLink>
+        
           <h3 onClick={handleLogOut}  className={' cursor-pointer flex items-center font-bold gap-2 my-3 text-white'}> <FaSignOutAlt></FaSignOutAlt>Logout</h3>
         </div>
        </div>

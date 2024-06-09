@@ -6,6 +6,7 @@ import Navbar from "../../components/navbar/Navbar";
 import { useForm } from "react-hook-form";
 import GoogleLogin from "../../ReuseableCompo/GoogleLogin";
 import toast, { Toaster } from 'react-hot-toast';
+import HelmetPorvider from "../../ReuseableCompo/HelmetPorvider";
 
 const Login = () => {
   const { login } = useAuth();
@@ -23,7 +24,7 @@ const Login = () => {
   const onSubmit = (data) => {
     const email = data.email
     const password = data.password
-    const user = { email, password };
+    // const user = { email, password };
     if (password.length < 6) {
       toast.error("Password Should Be 6 Character or More");
       return;
@@ -37,7 +38,7 @@ const Login = () => {
 
     //console.log(user);
     login(email, password)
-      .then((res) => {
+      .then(() => {
         //console.log(res.user);
 
         //console.log(location);
@@ -50,7 +51,7 @@ const Login = () => {
         
       })
       .catch((err) => {
-        //console.log(err);
+        console.log(err);
         toast.error("Please Check Email And Password And Try Again");
       });
   };
@@ -61,6 +62,7 @@ const Login = () => {
 
   return (
     <div className="relative">
+      <HelmetPorvider title={'Login'}></HelmetPorvider>
       <div className="fixed z-50 w-full top-0">
         <Navbar></Navbar>
       </div>

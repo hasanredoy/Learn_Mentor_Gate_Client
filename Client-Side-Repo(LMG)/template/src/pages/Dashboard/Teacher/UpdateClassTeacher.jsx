@@ -6,6 +6,7 @@ import { useState } from "react";
 import useAuth from "../../../hooks/useAuth";
 import { useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
+import HelmetPorvider from "../../../ReuseableCompo/HelmetPorvider";
 
 const UpdateClassTeacher = () => {
   const { user } = useAuth();
@@ -91,6 +92,7 @@ const UpdateClassTeacher = () => {
 
       {/* form div  */}
       <div>
+      <HelmetPorvider title={"Update Class| Dashboard"}></HelmetPorvider>
         <div className="card shrink-0 shadow-2xl  w-full h-full  lg:w-2/3 mx-auto my-10 bg-base-200">
           <h1 className=" text-xl font-bold text-center py-5">
             Please Fill The From Given Blew !
@@ -154,7 +156,7 @@ const UpdateClassTeacher = () => {
                 {...register("title", { required: true })}
               />
 
-              {errors.password && (
+              {errors.title && (
                 <span className="text-red-600">This field is required</span>
               )}
             </div>
@@ -169,7 +171,7 @@ const UpdateClassTeacher = () => {
                 {...register("price", { required: true })}
                 placeholder="Price"
               />
-              {errors.email && (
+              {errors.price && (
                 <span className="text-red-600">This field is required</span>
               )}
             </div>
@@ -184,7 +186,7 @@ const UpdateClassTeacher = () => {
                 {...register("duration", { required: true })}
                 placeholder="Duration"
               />
-              {errors.email && (
+              {errors.duration && (
                 <span className="text-red-600">This field is required</span>
               )}
             </div>
@@ -200,7 +202,7 @@ const UpdateClassTeacher = () => {
                 className=" textarea"
                 {...register("description", { required: true })}
               />
-              {errors.email && (
+              {errors.description && (
                 <span className="text-red-600">This field is required</span>
               )}
             </div>

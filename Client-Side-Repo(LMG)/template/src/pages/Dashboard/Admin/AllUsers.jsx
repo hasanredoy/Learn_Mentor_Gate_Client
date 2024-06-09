@@ -5,6 +5,7 @@ import swal from "sweetalert";
 import { useState } from "react";
 import useGetAllUsersLength from "../../../hooks/useGetAllUsersLength";
 import { FaGreaterThan, FaLessThan } from "react-icons/fa6";
+import HelmetPorvider from "../../../ReuseableCompo/HelmetPorvider";
 
 const AllUsers = () => {
     //  get all user length
@@ -70,7 +71,7 @@ const AllUsers = () => {
   }
   return (
     <div>
-      
+      <HelmetPorvider title={"All Users| Dashboard"}></HelmetPorvider>
         <div>
         <h4 className=" my-5 text-lg text-center font-bold text-[#11c93f]">
           -- Welcome Back --

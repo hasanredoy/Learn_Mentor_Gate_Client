@@ -1,3 +1,4 @@
+import HelmetPorvider from "../../ReuseableCompo/HelmetPorvider";
 import Achievements from "./Achievements/Achievements";
 import FaQ from "./FAQ/FaQ";
 import OurPartners from "./OurPatners/OurPartners";
@@ -11,6 +12,7 @@ import Banner from "./banner/Banner";
 const Home = () => {
   return (
     <div className=" mt-28" >
+      <HelmetPorvider title={'Home'}></HelmetPorvider>
       <section className=" bg-base-200  mx-auto my-10 ">
        <Banner></Banner>
       </section>

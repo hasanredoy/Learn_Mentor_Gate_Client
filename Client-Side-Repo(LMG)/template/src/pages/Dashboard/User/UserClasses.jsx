@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import useGetPaidCourseLenth from "../../../hooks/useGetPaidCourseLenth";
 import { FaGreaterThan, FaLessThan} from "react-icons/fa6";
+import HelmetPorvider from "../../../ReuseableCompo/HelmetPorvider";
 
 
 const UserClasses = () => {
@@ -54,6 +55,7 @@ const UserClasses = () => {
   // console.log(enrollClasses);
   return (
     <div className=" my-20 ">
+      <HelmetPorvider title={"My Class| Dashboard"}></HelmetPorvider>
       <h1 className=" text-5xl font-bold text-center">
         Welcome{" "}
         <span className=" text-green-600">

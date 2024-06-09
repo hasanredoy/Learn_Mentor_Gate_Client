@@ -10,6 +10,7 @@ import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { useForm } from "react-hook-form";
 import moment from 'moment'
+import HelmetPorvider from "../../../ReuseableCompo/HelmetPorvider";
 
 const SeeProgress = () => {
   // for modal control
@@ -102,6 +103,8 @@ const {mutateAsync}=useMutation({
   };
   return (
     <div>
+      <HelmetPorvider title={"See Progress| Dashboard"}></HelmetPorvider>
+
       {modal ? (
         // modal
         <div>
