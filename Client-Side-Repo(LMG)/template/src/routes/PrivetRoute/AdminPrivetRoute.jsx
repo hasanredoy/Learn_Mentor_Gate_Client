@@ -1,7 +1,9 @@
+/* eslint-disable react/prop-types */
 import { Navigate, useLocation } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import { useState } from "react";
 import useGetUserRole from "../../hooks/useGetUserRole";
+import LoadingSpinner from "../../ReuseableCompo/LoadingSpinner";
 
 
 const AdminPrivetRoute = ({children}) => {
@@ -15,11 +17,11 @@ const AdminPrivetRoute = ({children}) => {
   //  }
 
    const location = useLocation()
-   if(loading || isFetching)return <span className="text-center loading loading-infinity loading-lg"></span>
+   if(loading || isFetching)return <LoadingSpinner></LoadingSpinner>
    if (user && isAdmin) {
      return children
    }
-   return <Navigate to={'/'} state={{from:location}} ></Navigate>
+   return <Navigate to={'/'} state={location.pathname} ></Navigate>
 };
 
 export default AdminPrivetRoute;

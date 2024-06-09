@@ -1,9 +1,11 @@
 import users from '../../../assets/icons/group (1).png'
 import  classes from '../../../assets/icons/webinar (1).png'
 import  enroll from '../../../assets/icons/document.png'
+import useGetAllClassesTotalCount from '../../../hooks/useGetAllClassesTotalCount';
 
 
 const Achievements = () => {
+  const allCoursesCount=useGetAllClassesTotalCount()
   return (
     <div>
       <h1 className=" text-4xl text-center font-bold">
@@ -23,7 +25,7 @@ const Achievements = () => {
               <img className=' w-20 h-20' src={classes} alt="" />
             </div>
             <div className="stat-title text-xl text-black  font-bold">  Classes</div>
-            <div className="stat-value font-bold">5+</div>
+            <div className="stat-value font-bold">{allCoursesCount.count}+</div>
           </div>
           <div className="stat bg-yellow-100 border-b-8 border-sky-300 border-r-8 ">
             <div className="stat-figure text-secondary">
