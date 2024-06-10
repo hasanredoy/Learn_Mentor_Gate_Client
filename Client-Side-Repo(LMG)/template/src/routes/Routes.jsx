@@ -21,11 +21,13 @@ import UserClassDetails from "../pages/Dashboard/User/UserClassDetails";
 import SeeDetailsClass from "../pages/Dashboard/Admin/SeeDetailsClass";
 import PrivetRoute from "./PrivetRoute/PrivetRoute";
 import AdminPrivetRoute from "./PrivetRoute/AdminPrivetRoute";
+import ErrorPage from "../pages/Error/ErrorPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout></Layout>,
+    errorElement:<ErrorPage></ErrorPage>,
     children: [
       {
         path: "/",
@@ -69,6 +71,7 @@ const router = createBrowserRouter([
   {
     path: "/dashboard",
     element: <PrivetRoute><Dashboard></Dashboard></PrivetRoute>,
+    errorElement:<ErrorPage></ErrorPage>,
     children:[
       // admin routes 
       {
