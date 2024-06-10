@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 
 const PopularCourses = () => {
  
-   const courses=useAllClasses()
+   const [courses,]=useAllClasses()
   //  //console.log(courses);
   return (
     <div className="">
@@ -46,7 +46,9 @@ const PopularCourses = () => {
                   <h2 className=" text-lg font-bold">Total Enrollments: {course?.Enrollment}</h2>
                   <h2 className=" text-base font-bold">Course By: {course?.Instructor}</h2>
                   <div className=" mb-3">
+                    <Link to={`/class/${course?._id}`}>
                     <button className="text-white bg-green-500 p-2 rounded-lg font-black hover:bg-white hover:text-green-700  hover:border hover:border-green-500 ">Enroll Now!</button>
+                    </Link>
                   </div>
                 </div>
               </div>

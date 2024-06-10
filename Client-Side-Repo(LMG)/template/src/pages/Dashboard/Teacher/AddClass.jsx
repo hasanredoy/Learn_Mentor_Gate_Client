@@ -64,7 +64,7 @@ const AddClass = () => {
 
       const res = await mutateAsync(classData);
      if(res.data?.insertedId>0){
-      console.log( res); 
+      // console.log( res); 
       navigate('/dashboard/myClasses')
 
       toast.success('Class Added Successfully')

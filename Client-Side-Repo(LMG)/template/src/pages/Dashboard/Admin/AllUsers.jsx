@@ -11,7 +11,7 @@ const AllUsers = () => {
     //  get all user length
     const [currentPage, setCurrentPage] = useState(0);
     const allUserCount= useGetAllUsersLength();
-     console.log(allUserCount);
+    //  console.log(allUserCount);
     const itemsPerPage = 10;
     const numberOfPage = Math.ceil(allUserCount / itemsPerPage);
     //  console.log(numberOfPage);
@@ -19,7 +19,7 @@ const AllUsers = () => {
     for (let num = 0; num < numberOfPage; num++) {
       pages.push(num);
     }
-    console.log(pages);
+    // console.log(pages);
     const handlePrev=()=>{
       if(currentPage>0){
         setCurrentPage(currentPage-1)
@@ -33,7 +33,7 @@ const AllUsers = () => {
 
     // getting user 
   const [isPending,users=[],refetch]=useGetAllUsers(currentPage,itemsPerPage)
-  console.log(users);
+  // console.log(users);
   const axiosSecure =useAxiosSecure()
   const handleAdmin=(id,name)=>{
     swal({
@@ -46,7 +46,7 @@ const AllUsers = () => {
       if (willDelete) {
          axiosSecure.patch(`/users/admin/${id}`)
          .then(res=>{
-          console.log(res.data);
+          // console.log(res.data);
           if(res.data.modifiedCount>0){
             refetch()
             swal(`${name} is Now Admin`,{
@@ -157,7 +157,7 @@ const AllUsers = () => {
                <button
                 onClick={()=>setCurrentPage(page)}
                 // onMouseOut={() => refetch()}
-                className={`btn ${
+                className={`btn text-black ${
                   currentPage === page ? "btn-warning" : "bg-gray-400"
                 }`}
               

@@ -22,7 +22,7 @@ const TeachersRequests = () => {
    for (let num = 0; num < numberOfPage; num++) {
      pages.push(num);
    }
-   console.log(pages);
+  //  console.log(pages);
    const handlePrev=()=>{
      if(currentPage>0){
        setCurrentPage(currentPage-1)
@@ -236,7 +236,7 @@ const TeachersRequests = () => {
                <button
                 onClick={()=>setCurrentPage(page)}
                 // onMouseOut={() => refetch()}
-                className={`btn ${
+                className={`btn text-black ${
                   currentPage === page ? "btn-warning" : "bg-gray-400"
                 }`}
               

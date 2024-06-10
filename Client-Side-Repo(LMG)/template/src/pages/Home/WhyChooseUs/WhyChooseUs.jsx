@@ -10,7 +10,7 @@ const WhyChooseUs = () => {
     AOS.init();
   }, [])
   return (
-    <div className="hero  bg-cover" style={{backgroundImage: `url(${bg})`}}>
+    <div className="hero  bg-cover" style={{backgroundImage: `url(https://i.postimg.cc/HLXhS69Q/zig-zag.png)`}}>
     <div className="hero-overlay  bg-opacity-60"></div>
     <div className="hero-content text-center text-neutral-content">
       <div className="">

@@ -13,11 +13,11 @@ const {id}=useParams()
     queryKey: ["review of class"],
     queryFn: async () => {
       const res = await axiosSecure.get(`/reviews/${id}`);
-      console.log(res);
+      // console.log(res);
       return res.data;
     },
   });
-  console.log(reviews);
+  // console.log(reviews);
   return (
     <div className=" my-20">
       <h1 className=" text-5xl font-bold text-center">

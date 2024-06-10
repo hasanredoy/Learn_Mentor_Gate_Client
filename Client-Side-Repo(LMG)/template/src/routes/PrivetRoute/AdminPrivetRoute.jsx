@@ -11,7 +11,7 @@ const AdminPrivetRoute = ({children}) => {
   const [isFetching,role]=useGetUserRole()
    const [isAdmin,setIsAdmin] = useState(role.role=="admin")
    
-   console.log(isAdmin);
+  //  console.log(isAdmin);
   //  if(role.role==='admin'){
   //   setIsAdmin(true)
   //  }

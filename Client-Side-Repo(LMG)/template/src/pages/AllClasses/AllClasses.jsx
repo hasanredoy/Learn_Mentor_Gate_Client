@@ -1,15 +1,20 @@
 import { FaUsers } from "react-icons/fa";
 import useAllClasses from "../../hooks/useAllClasses";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useGetAllCallsesForAllClassesPageCount from "../../hooks/useGetAllCallsesForAllClassesPageCount";
 import { FaGreaterThan, FaLessThan } from "react-icons/fa6";
 import HelmetPorvider from "../../ReuseableCompo/HelmetPorvider";
+import LoadingSpinner from "../../ReuseableCompo/LoadingSpinner";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
+
 const AllClasses = () => {
      //  get all classes length
      const [currentPage, setCurrentPage] = useState(0);
      const  allApprovedClassCount= useGetAllCallsesForAllClassesPageCount();
-      console.log( allApprovedClassCount);
+      // console.log( allApprovedClassCount);
      const itemsPerPage = 10;
      const numberOfPage = Math.ceil( allApprovedClassCount / itemsPerPage);
      //  console.log(numberOfPage);
@@ -23,13 +28,22 @@ const AllClasses = () => {
          setCurrentPage(currentPage-1)
        }
      }
+     useEffect(() => {
+      AOS.init();
+    }, [])
      const handleNext=()=>{
        if(currentPage<pages.length-1){
          setCurrentPage(currentPage+1)
        }
      }
-  const courses = useAllClasses(currentPage,itemsPerPage);
+  const [courses,isFetching] = useAllClasses(currentPage,itemsPerPage);
   //console.log(courses);
+  console.log(courses);
+  const sortedCourses=courses.sort((a,b)=>b.Enrollment-a.Enrollment)
+  console.log('sorted array',sortedCourses);
+  if(isFetching){
+    return<LoadingSpinner></LoadingSpinner>
+  }
   return (
     <div className=" pt-20 lg:pt-28 bg-base-100">
       <HelmetPorvider title={"All Class"}></HelmetPorvider>
@@ -45,8 +59,9 @@ const AllClasses = () => {
           </h3>
         </div>
         <div className=" my-20 grid grid-cols-1 gap-10 lg:grid-cols-2 ">
-          {courses?.map((course) => (
+          {sortedCourses?.map((course,index) => (
             <div
+            data-aos-duration={1000} data-aos={index%2===0?'fade-up':'fade-down'}
               key={course._id}
               className=" border bg-base-200 flex flex-col w-full p-6 space-y-6 overflow-hidden rounded-lg shadow-md  "
             >
@@ -109,7 +124,7 @@ const AllClasses = () => {
                <button
                 onClick={()=>setCurrentPage(page)}
                 // onMouseOut={() => refetch()}
-                className={`btn ${
+                className={`btn text-black ${
                   currentPage === page ? "btn-warning" : "bg-gray-400"
                 }`}
               

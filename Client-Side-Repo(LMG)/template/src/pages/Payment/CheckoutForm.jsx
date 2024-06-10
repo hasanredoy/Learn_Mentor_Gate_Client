@@ -34,9 +34,9 @@ const {mutateAsync:mutate}=useMutation({
   mutationFn:async (totalPrice) =>{
    // //console.log(userData);
        const {data}= await axiosSecure.post('/create-payment-intent',{price:totalPrice})
-       console.log(data);
+      //  console.log(data);
        if(data?.clientSecret){
-        console.log(data.clientSecret);
+        // console.log(data.clientSecret);
           setClientSecret(data.clientSecret);
        }
        
@@ -58,7 +58,7 @@ const {mutateAsync:mutate}=useMutation({
   mutationFn:async (payment) =>{
    // //console.log(userData);
        const {data}= await axiosSecure.post(`/paid-course?id=${course._id}`,payment)
-       console.log(data);
+      //  console.log(data);
        if(data?.result?.insertedId){
          toast.success('Payment Successfully')
          navigate('/dashboard/myEnrollClass')
@@ -91,7 +91,7 @@ const {mutateAsync:mutate}=useMutation({
       console.log('payment error', error);
       setError(error.message)
      }else{
-      console.log('payment method',paymentMethod);
+      // console.log('payment method',paymentMethod);
       setError('')
      }
 

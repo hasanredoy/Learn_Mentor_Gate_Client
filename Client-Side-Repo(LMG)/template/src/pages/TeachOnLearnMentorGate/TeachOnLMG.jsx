@@ -57,9 +57,9 @@ const TeachOnLMG = () => {
       experience,
       status: "pending",
     };
-    console.log(teacherData);
+    // console.log(teacherData);
     const res = await mutateAsync(teacherData);
-    console.log(res);
+    // console.log(res);
   };
   if (isLoading) {
     return <LoadingSpinner></LoadingSpinner>;
@@ -67,7 +67,7 @@ const TeachOnLMG = () => {
   if (loading) {
     return <LoadingSpinner></LoadingSpinner>;
   }
-  console.log(isTeacherPending);
+  // console.log(isTeacherPending);
   return (
     <div className="  max-w-7xl min-h-screen mx-auto mt-20">
       <HelmetPorvider title={"Teach on"}></HelmetPorvider>

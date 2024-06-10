@@ -7,7 +7,7 @@ const Profile = () => {
   const {user}=useAuth() 
    const email = user?.email;
    const [singleUser,isPending]=useGetSingleUser(email)
-   console.log(singleUser);
+  //  console.log(singleUser);
    if(isPending){
     return <LoadingSpinner></LoadingSpinner>
    }

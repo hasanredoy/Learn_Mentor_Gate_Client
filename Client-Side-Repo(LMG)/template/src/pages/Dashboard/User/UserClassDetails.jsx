@@ -264,7 +264,7 @@ const UserClassDetails = () => {
                <button
                 onClick={()=>setCurrentPage(page)}
                 // onMouseOut={() => refetch()}
-                className={`btn ${
+                className={`btn text-black ${
                   currentPage === page ? "btn-warning" : "bg-gray-400"
                 }`}
               

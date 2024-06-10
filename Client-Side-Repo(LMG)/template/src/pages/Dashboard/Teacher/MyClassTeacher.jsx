@@ -31,7 +31,7 @@ const MyClassTeacher = () => {
      for (let num = 0; num < numberOfPage; num++) {
        pages.push(num);
      }
-     console.log(pages);
+    //  console.log(pages);
      const handlePrev=()=>{
        if(currentPage>0){
          setCurrentPage(currentPage-1)
@@ -56,7 +56,7 @@ const MyClassTeacher = () => {
       if (willDelete) {
          axiosSecure.delete(`/delete-course/${course?._id}`)
          .then(res=>{
-          console.log(res.data);
+          // console.log(res.data);
           if(res.data.deletedCount>0){
             refetch()
             swal(`${course?.Title} deleted successfully`,{
@@ -168,7 +168,7 @@ const MyClassTeacher = () => {
                <button
                 onClick={()=>setCurrentPage(page)}
                 // onMouseOut={() => refetch()}
-                className={`btn ${
+                className={`btn text-black ${
                   currentPage === page ? "btn-warning" : "bg-gray-400"
                 }`}
               

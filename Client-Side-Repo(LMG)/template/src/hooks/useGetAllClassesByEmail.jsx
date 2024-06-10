@@ -14,7 +14,7 @@ const useGetAllClassesByEmail = (currentPage,itemsPerPage) => {
       return res.data;
     },
   });
-  console.log(classes);
+  // console.log(classes);
   if(!email){
     refetch()
   }

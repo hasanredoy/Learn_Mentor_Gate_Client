@@ -8,7 +8,7 @@ const usePostUsers = () => {
      mutationFn:async (userData) =>{
       // //console.log(userData);
           const {data}= await axiosCommon.post('/users',userData)
-          console.log(data);
+          // console.log(data);
           return data
      },
      onSuccess:()=>{
