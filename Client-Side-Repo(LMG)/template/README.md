@@ -1,14 +1,48 @@
 # Learn Mentor Gate
 
-Welcome to **Learn Mentor Gate** – your comprehensive online learning platform designed to enhance your educational journey. Visit our website [here](https://learn-mentor-gate.web.app/).
+Welcome to **Learn Mentor Gate** – an online learning platform designed to enhance  educational journey. Visit  website [here](https://learn-mentor-gate.web.app/).
+
+## Tech Used 
+   - HTML
+   - CSS 
+   - Java Script 
+   - React Js 
+   - React Router DOM 
+   - Google Firebase
+   - Tanstack Query 
 
 ## Features
 
-- **Diverse Course Selection**: Access a wide range of courses across various subjects and disciplines.
-- **Interactive Online Learning**: Real time online assignments and classes . 
-- **Best user Management**: I this website we manage our user in a best way.
-- **Become Teacher**: Any One can become a teacher is our website by clicking on --Teach on Learn Mentor Gate--   .
-- **Admin Panel**: In this website we implement admin panel system.
+- ### Online Learning 
+  - Wide range online courses
+  - Free Registration
+  - Best Teachers With various courses
+  - Online Assignments
+
+
+- ### Website Management 
+  - #### User
+    - Login And Sign Up
+    - Role Base Access
+    - Purchases Course 
+    - Get access of own purchases courses
+    - Unlimited Support
+  - #### Teacher
+    - Login And Sign Up
+    - Request for become teacher 
+    - Role Base Access
+    - Add courses
+    - Add assignment 
+    - Can see total enrollments in their added courses
+    
+  - #### Admin
+    - All user Management
+    - Teacher Management 
+    - Course Management
+    - Assignment Management 
+    
+    
+   
 
 ## Getting Started
 
@@ -16,11 +50,22 @@ Welcome to **Learn Mentor Gate** – your comprehensive online learning platform
 2. **Browse Courses**: Explore our diverse catalog of courses and find the ones that suit your interests and needs.
 3. **Enroll and Learn**: Enroll in courses and start learning through interactive sessions and comprehensive materials.
 
-4. **Engage with the Community**: Join forums to discuss topics, ask questions, and collaborate with other learners.
+
 
 
 Happy Learning!
 
----
 
-For more information, visit [Learn Mentor Gate](https://learn-mentor-gate.web.app/).
+### How to Start this application
+      $ npm install
+
+### Environment Variables
+   - VITE_APIKEY
+   - VITE_AUTHDOMAIN
+   - VITE_PROJECTID
+   - VITE_STORAGEBUCKET
+   - VITE_MESSAGINGSENDERID
+   - VITE_APPID
+   - VITE_IMGBB_API
+   - VITE_Payment_Gate_Way
+  

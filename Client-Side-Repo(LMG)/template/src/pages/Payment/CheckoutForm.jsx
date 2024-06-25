@@ -112,7 +112,7 @@ const {mutateAsync:mutate}=useMutation({
       // console.log('confirm error');
     }else{
       // console.log('paymentIntent',paymentIntent);
-      if(paymentIntent.status==='succeeded'){
+      if(paymentIntent?.status==='succeeded'){
         // console.log('transectionID', paymentIntent.id);
         setTransectionID( paymentIntent.id);
         const payment ={ 
