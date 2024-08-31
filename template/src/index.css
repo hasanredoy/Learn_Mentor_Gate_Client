@@ -5,3 +5,31 @@ body{
   font-family: "Manrope", sans-serif;
 
 }
+
+:root {
+  background-color: white;
+  color: black;
+}
+
+[data-theme="dark"] {
+  color: white;
+  background-color: black;
+}
+
+
+.btn-primary{
+  /* text-lg font-bold text-white bg-green-700 px-4 py-2 rounded-lg hover:bg-white hover:text-green-600 hover:border hover:border-green-700  */
+  font-size: 18px;
+  background-color: #15803D;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 5px;
+  border: 1px solid #15803D;
+
+}
+.btn-primary:hover{
+
+  background-color: white;
+  color: #15803D;
+
+}
