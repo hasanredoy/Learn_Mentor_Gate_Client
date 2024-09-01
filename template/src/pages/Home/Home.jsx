@@ -16,13 +16,15 @@ const Home = () => {
       <section className=" bg-base-200  mx-auto my-10 ">
        <Banner></Banner>
       </section>
-      <section className="  container mx-auto my-20 ">
-       <OurPartners></OurPartners>
-      </section>
-      <section className="  container mx-auto my-20 ">
+ 
+      <section className="   w-[95%] mx-auto lg:w-[86%] my-20 ">
        <PopularCourses></PopularCourses>
       </section>
-      <section className=" border container mx-auto my-20 ">
+     <section className="   w-[95%] mx-auto lg:w-[86%] my-20 ">
+       <OurPartners></OurPartners>
+      </section>
+
+      <section className=" border  w-[95%] mx-auto lg:w-[86%] my-20 ">
        <Reviews></Reviews>
       </section>
       <section className=" my-10">
@@ -31,7 +33,7 @@ const Home = () => {
       <section className=" my-10">
         <FaQ></FaQ>
       </section>
-      <section className="container mx-auto border bg-base-200 my-10">
+      <section className=" w-[95%] mx-auto lg:w-[86%] border bg-base-200 my-10">
         <TeachOn></TeachOn>
       </section>
       <section className="  my-10">

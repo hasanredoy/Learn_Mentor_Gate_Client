@@ -7,6 +7,7 @@ import "swiper/css/navigation";
 import {  Pagination, Navigation } from "swiper/modules";
 import useAllClasses from "../../../hooks/useAllClasses";
 import { Link } from "react-router-dom";
+import Heading from "../../../ReuseableCompo/Heading";
 
 const PopularCourses = () => {
  
@@ -14,10 +15,11 @@ const PopularCourses = () => {
   //  //console.log(courses);
   return (
     <div className="">
-      <h1 className=" text-2xl mb-10 lg:text-4xl font-bold text-center">
+      {/* <h1 className=" text-2xl mb-10 lg:text-4xl font-bold text-center">
         Have a Look Some of Our{" "}
         <span className=" text-green-600 ">Popular</span> Courses
-      </h1>
+      </h1> */}
+      <Heading description={'Have a look at'} title1={'Our Popular '} imp={'Courses'}></Heading>
       <div>
         <Swiper
           spaceBetween={30}

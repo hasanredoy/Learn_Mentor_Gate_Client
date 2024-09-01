@@ -32,7 +32,7 @@ const Carousel = () => {
         spaceBetween={30}
         centeredSlides={true}
         autoplay={{
-          delay: 1500,
+          delay: 2500,
           disableOnInteraction: false,
         }}
         pagination={{
@@ -44,32 +44,32 @@ const Carousel = () => {
       >
         <SwiperSlide><div className='bg-black relative'>
           <img className=' w-full  h-[400px] lg:h-[500px] ' src={slide1} alt="" />
-       <div className=' flex gap-2 items-center bg-opacity-60 bg-green-800 absolute top-0 left-0 '>
-        <h1 className=' text-3xl lg:text-5xl font-bold text-white text-center'>{allApprovedClassCount} Courses </h1>
-        <img className=' w-20 h-20' src={courseIcon} alt="" />
+       <div className=' flex gap-2 justify-center items-center bg-opacity-60 bg-green-800 absolute w-full text-center top-0 left-0 '>
+        <h1 className=' text-xl lg:text-2xl font-bold text-white text-center'>{allApprovedClassCount}+ Courses </h1>
+        <img className=' w-14 h-14' src={courseIcon} alt="" />
        </div>
           </div></SwiperSlide>
         <SwiperSlide><div className=' bg-black relative'>
           <img className=' w-full  h-[400px] lg:h-[500px] ' src={slide2} alt="" />
-          <div className=' flex gap-2 items-center bg-opacity-60 bg-green-800 absolute top-0 left-0 '>
-        <h1 className=' text-3xl lg:text-5xl font-bold text-white text-center'>{allTeacherReqCount} Teachers </h1>
-        <img className=' w-20 h-20' src={teachersIcon} alt="" />
+          <div className='  flex gap-2 justify-center items-center bg-opacity-60 bg-green-800 absolute w-full text-center top-0 left-0 '>
+        <h1 className=' text-xl lg:text-2xl font-bold text-white text-center'>{allTeacherReqCount}+ Teachers </h1>
+        <img className=' w-14 h-14' src={teachersIcon} alt="" />
        </div>
 
           </div></SwiperSlide>
         <SwiperSlide><div className=' bg-black relative'>
           <img className=' w-full  h-[400px] lg:h-[500px] ' src={slide3} alt="" />
-          <div className=' flex gap-2 items-center bg-opacity-60 bg-green-800 absolute top-0 left-0 '>
-        <h1 className=' text-3xl lg:text-5xl font-bold text-white text-center'>100+ Videos  </h1>
-        <img className=' w-20 h-20' src={videosIcon} alt="" />
+          <div className='  flex gap-2 justify-center items-center bg-opacity-60 bg-green-800 absolute w-full text-center top-0 left-0 '>
+        <h1 className=' text-xl lg:text-2xl font-bold text-white text-center'>100+ Videos  </h1>
+        <img className=' w-14 h-14' src={videosIcon} alt="" />
        </div>
 
           </div></SwiperSlide>
         <SwiperSlide><div className=' bg-black relative'>
           <img className=' w-full  h-[400px] lg:h-[500px] ' src={slide4} alt="" />
-          <div className=' flex gap-2 items-center bg-opacity-60 bg-green-800 absolute top-0 left-0 '>
-        <h1 className=' text-3xl lg:text-5xl font-bold text-white text-center'>{allUserCount} Students </h1>
-        <img className=' w-20 h-20' src={studentsIcon} alt="" />
+          <div className='  flex gap-2 justify-center items-center bg-opacity-60 bg-green-800 absolute w-full text-center top-0 left-0'>
+        <h1 className=' text-xl lg:text-2xl font-bold text-white text-center'>{allUserCount}+ Students </h1>
+        <img className=' w-14 h-14' src={studentsIcon} alt="" />
        </div>
 
           </div></SwiperSlide>
