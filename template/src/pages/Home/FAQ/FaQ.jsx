@@ -1,21 +1,17 @@
+import Heading from "../../../ReuseableCompo/Heading";
+
 const FaQ = () => {
   return (
     <div>
-      <section className="bg-base-200 container mx-auto my-10 rounded-md ">
-        <div className="container flex flex-col justify-center p-4 mx-auto md:p-8">
-          <div>
-            <p className="p-2 text-lg text-[#428b0a] font-bold tracking-wider text-center ">
-              --?-- Some Asked QnA About Us --?-- 
-            </p>
-            <h2 className="mb-12 text-4xl font-bold leading-none text-center sm:text-5xl">
-              Frequently Asked Questions
-            </h2>
-          </div>
+      <section className=" bg-base-200">
+        <div className=" w-[95%] mx-auto md:w-[90%] lg:w-[86%] my-20 flex flex-col justify-center p-4 md:p-8">
+
+          <Heading description={'Some Asked QnA About Us '} title1={'Frequently Asked Questions'}></Heading>
           {/* main content  */}
           <div className=" flex flex-col-reverse lg:flex-row gap-5 ">
             <div className="flex flex-col w-full lg:w-[60%] divide-y sm:px-8 lg:px-10 divide-gray-600 gap-3">
               <details className=" border border-gray-300 rounded-md pl-2">
-                <summary className="py-2 font-bold text-xl outline-none cursor-pointer hover:underline">
+                <summary className="py-2 font-bold   outline-none cursor-pointer hover:underline">
                 What is Learn Mentor Gate?
                 </summary>
                 <div className="pl-7 pb-4">
@@ -25,7 +21,7 @@ const FaQ = () => {
                 </div>
               </details>
               <details className=" border border-gray-300 rounded-md pl-2">
-                <summary className="py-2 font-bold text-xl outline-none cursor-pointer hover:underline">
+                <summary className="py-2 font-bold   outline-none cursor-pointer hover:underline">
                 How does Learn Mentor Gate work?
                 </summary>
                 <div className="pl-7 pb-4">
@@ -35,7 +31,7 @@ const FaQ = () => {
                 </div>
               </details>
               <details className=" border border-gray-300 rounded-md pl-2">
-                <summary className="py-2 font-bold text-xl outline-none cursor-pointer hover:underline">
+                <summary className="py-2 font-bold   outline-none cursor-pointer hover:underline">
                 What types of courses are available?
                 </summary>
                 <div className="pl-7 pb-4">
@@ -45,7 +41,7 @@ const FaQ = () => {
                 </div>
               </details>
               <details className=" border border-gray-300 rounded-md pl-2">
-                <summary className="py-2 font-bold text-xl outline-none cursor-pointer hover:underline">
+                <summary className="py-2 font-bold   outline-none cursor-pointer hover:underline">
                 Can I access my courses at any time?
                 </summary>
                 <div className="pl-7 pb-4">
@@ -55,7 +51,7 @@ const FaQ = () => {
                 </div>
               </details>
               <details className=" border border-gray-300 rounded-md pl-2">
-                <summary className="py-2 font-bold text-xl outline-none cursor-pointer hover:underline">
+                <summary className="py-2 font-bold   outline-none cursor-pointer hover:underline">
                 Do I get a certificate after completing a course?
                 </summary>
                 <div className="pl-7 pb-4">
@@ -65,7 +61,7 @@ const FaQ = () => {
                 </div>
               </details>
               <details className=" border border-gray-300 rounded-md pl-2">
-                <summary className="py-2 font-bold text-xl outline-none cursor-pointer hover:underline">
+                <summary className="py-2 font-bold   outline-none cursor-pointer hover:underline">
                 How do I pay for a course?
                 </summary>
                 <div className="pl-7 pb-4">
@@ -75,7 +71,7 @@ const FaQ = () => {
                 </div>
               </details>
               <details className=" border border-gray-300 rounded-md pl-2">
-                <summary className="py-2 font-bold text-xl outline-none cursor-pointer hover:underline">
+                <summary className="py-2 font-bold   outline-none cursor-pointer hover:underline">
                 How is my personal information protected?
                 </summary>
                 <div className="pl-7 pb-4">

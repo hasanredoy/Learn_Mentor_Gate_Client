@@ -10,6 +10,7 @@ import { useQuery } from "@tanstack/react-query";
 import { FaQuoteRight } from "react-icons/fa6";
 
 import feedback  from '../../../assets/icons/feedback.png'
+import Heading from "../../../ReuseableCompo/Heading";
 
 const Reviews = () => {
   const axiosCommon = useAxiosCommon();
@@ -24,9 +25,8 @@ const Reviews = () => {
   //console.log(reviews);
   return (
     <div className=" ">
-       <div>
-        <h1 className=" my-5 text-3xl text-center font-bold">Hear What People Says About Us?</h1>
-      </div>
+   
+      <Heading description={'Hear what our client  '} title1={'Says About Us?'}></Heading>
      <div className=" flex flex-col-reverse lg:flex-row gap-5">
      <Swiper
       
@@ -40,8 +40,8 @@ const Reviews = () => {
       className="mySwiper w-full lg:w-[60%] mx-auto "
     >
       {reviews?.map((review) => (
-        <SwiperSlide className=" py-10" key={review?._id}>
-          <div className="container flex flex-col w-full  lg:max-w-lg p-6 mx-auto divide-y rounded-md divide-gray-200 ">
+        <SwiperSlide className="" key={review?._id}>
+          <div className="flex flex-col w-full md:w-[60%]   lg:max-w-lg p-6 mx-auto divide-y rounded-md divide-gray-200 ">
             <div className="flex justify-between p-4">
               <div className="flex space-x-4">
                 <div>
@@ -68,8 +68,8 @@ const Reviews = () => {
               </div>
             </div>
             <div className="p-4 space-y-2 text-sm ">
-              <FaQuoteRight className=" text-5xl mx-auto"></FaQuoteRight>
-              <p className=" text-lg">
+              <FaQuoteRight className=" text-2xl mx-auto"></FaQuoteRight>
+              <p className=" font-medium">
              {review?.feedback_text}
               </p>
             </div>
@@ -77,8 +77,8 @@ const Reviews = () => {
         </SwiperSlide>
       ))}
     </Swiper>
-   <div className="w-full md:w-1/2 mx-auto lg:w-[38%]">
-    <img className=" h-[300px] w-full" src={feedback} alt="" />
+   <div className=" my-5 lg:my-0  w-1/2 mx-auto lg:w-[38%]">
+    <img className=" h-auto md:h-[200px] lg:h-[300px] w-full" src={feedback} alt="" />
    </div>
      </div>
     </div>

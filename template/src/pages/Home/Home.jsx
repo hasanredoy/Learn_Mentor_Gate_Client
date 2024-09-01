@@ -11,32 +11,32 @@ import Banner from "./banner/Banner";
 
 const Home = () => {
   return (
-    <div className=" mt-28" >
+    <div className=" mt-20" >
       <HelmetPorvider title={'Home'}></HelmetPorvider>
-      <section className=" bg-base-200  mx-auto my-10 ">
+      <section className=" bg-base-200  mx-auto mb-20 ">
        <Banner></Banner>
       </section>
  
-      <section className="   w-[95%] mx-auto lg:w-[86%] my-20 ">
+      <section className="    w-[95%] mx-auto md:w-[90%] lg:w-[86%] my-20 ">
        <PopularCourses></PopularCourses>
       </section>
-     <section className="   w-[95%] mx-auto lg:w-[86%] my-20 ">
+     <section className="    w-[95%] mx-auto md:w-[90%] lg:w-[86%] my-20 ">
        <OurPartners></OurPartners>
       </section>
 
-      <section className=" border  w-[95%] mx-auto lg:w-[86%] my-20 ">
+      <section className="w-[95%] mx-auto md:w-[90%] lg:w-[86%] my-20 ">
        <Reviews></Reviews>
       </section>
-      <section className=" my-10">
+      <section className="w-[95%] mx-auto md:w-[90%] lg:w-[86%] my-20 ">
         <Achievements></Achievements>
       </section>
-      <section className=" my-10">
+      <section className=" ">
         <FaQ></FaQ>
       </section>
-      <section className=" w-[95%] mx-auto lg:w-[86%] border bg-base-200 my-10">
+      <section className="   bg-base-200 my-20">
         <TeachOn></TeachOn>
       </section>
-      <section className="  my-10">
+      <section className="  my-20">
         <WhyChooseUs></WhyChooseUs>
       </section>
     </div>

@@ -9,7 +9,7 @@ const Footer = () => {
     <footer className=" p-10 bg-base-300 flex flex-col md:flex-row  justify-between ">
       <aside className=" w-full lg:w-1/3 flex flex-col justify-center items-center md:items-start">
        <Link to={'/'}>
-       <img className=" h-20" src={logo} alt="" />
+       <img className=" h-14" src={logo} alt="" />
        </Link>
         <p  className=" my-4">
          All rights reserved &copy; || by Learn  Mentor Gate 
