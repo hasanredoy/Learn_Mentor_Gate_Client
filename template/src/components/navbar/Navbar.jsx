@@ -36,12 +36,13 @@ const Navbar = () => {
         {navLinks}
       </ul>
     </div>
-    <Link to={'/'} className=" text-xl font-bold"> <img className=' h-12 md:h-14' src={logo} alt="" /></Link>
+    <Link to={'/'} className="hidden lg:block"> <img className=' h-10  ' src={logo} alt="" /></Link>
   </div>
-  <div className="navbar-center hidden lg:flex">
-    <ul className="menu menu-horizontal px-1">
+  <div className="navbar-center flex items-center ">
+    <ul className="hidden lg:flex  menu menu-horizontal px-1">
    {navLinks}
     </ul>
+    <Link to={'/'} className="block lg:hidden"> <img className=' h-9  ' src={logo} alt="" /></Link>
   </div>
   <div className="navbar-end">
     <div className=' mr-3 hidden md:flex'>
@@ -54,10 +55,10 @@ const Navbar = () => {
           user?.photoURL?<img src={user?.photoURL} className=' w-8 lg:w-12 h-8 lg:h-12 border border-green-600 rounded-full' alt="" />:<FaUser className=' text-5xl  border border-green-600 rounded-full'></FaUser>
         }
       </div></div>
-      <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52 flex flex-col gap-3">
-        <li className=' text-xl font-bold'>{user?.displayName?user?.displayName:'Anonymous'}</li>
-        <Link to={`/dashboard/profile`}><button className=' text-lg font-bold text-white bg-green-700 px-4 py-2 rounded-lg hover:bg-white hover:text-green-600 hover:border hover:border-green-700 w-full flex gap-2 justify-center items-center '>Dashboard <RxDashboard></RxDashboard></button></Link>
-        <button onClick={handleLogout} className=' text-lg font-bold text-white bg-amber-500 px-4 py-2 rounded-lg hover:bg-white hover:text-amber-500 hover:border hover:border-amber-700 flex gap-2 justify-center items-center '>Logout <FaSignOutAlt></FaSignOutAlt></button>
+      <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52 flex flex-col gap-3 border border-gray-400">
+        <li className=' text-base font-bold'>{user?.displayName?user?.displayName:'Anonymous'}</li>
+        <Link to={`/dashboard/profile`}className='btn-primary flex gap-2 justify-center items-center '>Dashboard <RxDashboard></RxDashboard></Link>
+        <button onClick={handleLogout} className='btn-secondary flex gap-2 justify-center items-center '>Logout <FaSignOutAlt></FaSignOutAlt></button>
       </ul>
     </div>: <Link to={'/login'}><button className=' btn-primary'>Login</button></Link>
     }
