@@ -9,8 +9,16 @@ import LoadingSpinner from "../../ReuseableCompo/LoadingSpinner";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import Heading from "../../ReuseableCompo/Heading";
+import moment from 'moment'
 
 const AllClasses = () => {
+
+// category state 
+const [category,setCategory] = useState('')
+
+// search state 
+const [search,setSearch] = useState('')
+console.log(category,search);
   //  get all classes length
   const [currentPage, setCurrentPage] = useState(0);
   const allApprovedClassCount = useGetAllCallsesForAllClassesPageCount();
@@ -36,11 +44,11 @@ const AllClasses = () => {
       setCurrentPage(currentPage + 1);
     }
   };
-  const [courses, isFetching] = useAllClasses(currentPage, itemsPerPage);
+  const [courses, isFetching] = useAllClasses(currentPage, itemsPerPage,category,search);
   //console.log(courses);
   console.log(courses);
   const sortedCourses = courses.sort((a, b) => b.Enrollment - a.Enrollment);
-  console.log("sorted array", sortedCourses);
+  // console.log("sorted array", sortedCourses);
   if (isFetching) {
     return <LoadingSpinner></LoadingSpinner>;
   }
@@ -54,9 +62,9 @@ const AllClasses = () => {
           imp={"Learn Mentor Gate"}
         ></Heading>
 
-        {/* sort section  */}
+        {/* sort and search section  */}
         <section className=" md:mx-10 flex justify-between items-center">
-          <select name="category" className="select select-bordered  w-32">
+          <select onChange={(e)=>setCategory(e.target.value)} name="category" className="select select-bordered  w-32">
             <option disabled selected>
               Category
             </option>
@@ -65,28 +73,30 @@ const AllClasses = () => {
             <option value={'Programming'}>Programming</option>
           </select>
 
-          <div className="join">
+          <div  className="join">
             <input
               type="text"
+              onBlur={(e)=>setSearch(e.target.value)}              
               placeholder="Search"
               className="input input-bordered join-item"
             />
             <button className="btn btn-primary join-item">Search</button>
           </div>
         </section>
+        {search&&sortedCourses.length<1&&<div className=" flex justify-center items-center min-h-[300px]"><h1 className=" text-xl text-center font-semibold">No Data Found</h1></div>}
         <div className=" my-20 grid grid-cols-1 gap-10 lg:grid-cols-2 ">
           {sortedCourses?.map((course, index) => (
             <div
               data-aos-duration={1000}
               data-aos={index % 2 === 0 ? "fade-up" : "fade-down"}
               key={course._id}
-              className=" border bg-base-200 bg-opacity-30 flex flex-col w-full p-6 space-y-6 overflow-hidden rounded-lg shadow-md  "
+              className=" border bg-base-200 bg-opacity-30 flex flex-col w-full p-6 space-y-2 overflow-hidden rounded-lg shadow-md  "
             >
-              <div className="flex border-b pb-1 border-gray-400 space-x-4">
+              <div className="flex border-b pb-1 border-gray-400 space-x-2">
                 <img
                   alt=""
                   src={course?.Instructor_Image}
-                  className="object-cover h-14 w-14 lg:w-20 lg:h-20 rounded-full shadow  "
+                  className="object-cover h-14 w-14 lg:w-16 lg:h-16 rounded-full shadow  "
                 />
                 <div className="flex flex-col space-y-1">
                   <a
@@ -96,8 +106,8 @@ const AllClasses = () => {
                   >
                     {course?.Instructor}
                   </a>
-                  <span className=" text-sm lg:text-base ">
-                    {course?.Posted_on?.split("T")[0]}
+                  <span className=" text-green-500 text-sm lg:text-base ">
+                   { moment(course?.Posted_on).startOf('hours').fromNow()}
                   </span>
                 </div>
               </div>
@@ -105,12 +115,12 @@ const AllClasses = () => {
                 <img
                   src={course?.Course_Image}
                   alt=""
-                  className=" w-full mb-4 h-60 sm:h-96  "
+                  className=" w-full mb-4 h-60  "
                 />
-                <h2 className="mb-1 text-xl lg:text-2xl font-bold">
+                <h2 className="mb-1 text-lg lg:text-xl font-bold">
                   {course?.Title}
                 </h2>
-                <p className="text-base ">
+                <p className=" text-base md:text-base ">
                   {course?.["Short_description"]}
                   <Link
                     to={`/class/${course?._id}`}
@@ -121,25 +131,25 @@ const AllClasses = () => {
                 </p>
               </div>
               <div className=" flex flex-col lg:flex-row  justify-between my-3 gap-3">
-                <h3 className=" font-bold text-base lg:text-lg">
+                <h3 className=" text-base ">
                   Price:{" "}
-                  <span className=" text-amber-500">{course?.Price} $</span>
+                  <span className=" text-primary">{course?.Price} $</span>
                 </h3>
-                <h3 className=" font-bold text-base lg:text-lg flex items-center gap-2 ">
+                <h3 className="  text-base  flex items-center gap-2 ">
                   Total Enrollments:{" "}
-                  <span className="flex gap-2 items-center text-amber-500 ">
+                  <span className="flex gap-2 items-center text-primary ">
                     {course?.Enrollment}{" "}
                     <FaUsers className=" text-2xl"></FaUsers>
                   </span>
                 </h3>
               </div>
-              <h3 className=" text-base pb-3 lg:text-lg font-bold ">
+              <h3 className=" text-base pb-3   ">
                 Duration:{" "}
-                <span className=" text-amber-500">{course?.Duration}</span>
+                <span className=" text-primary">{course?.Duration}</span>
               </h3>
               <div className=" mb-3">
                 <Link to={`/class/${course?._id}`}>
-                  <button className="text-white bg-green-500 p-2 rounded-lg font-black hover:bg-white hover:text-green-700  hover:border hover:border-green-500 ">
+                  <button className="btn-primary ">
                     Enroll Now!
                   </button>
                 </Link>
@@ -152,7 +162,7 @@ const AllClasses = () => {
         <div
           className={` ${
             pages.length > 10 && "overflow-scroll"
-          } flex justify-center  gap-5 bg-gray-200 w-full my-5`}
+          } flex justify-center  gap-5  w-full my-5`}
         >
           <button onClick={handlePrev} className=" btn bg-gray-300">
             <FaLessThan></FaLessThan>
