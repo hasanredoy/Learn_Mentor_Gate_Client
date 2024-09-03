@@ -74,7 +74,7 @@ const TeachOnLMG = () => {
 
       {isTeacherPending?.status === "approved" ? (
         <div className=" flex flex-col gap-3 h-[500px] items-center justify-center">
-          <h1 className=" text-5xl font-bold text-center">
+          <h1 className=" text-xl  md:text-2xl lg:text-3xl font-bold text-center">
             Hi, <span className=" text-green-600">{user?.displayName}</span> Now
             Your Teacher
           </h1>
@@ -88,10 +88,10 @@ const TeachOnLMG = () => {
         </div>
       ) : (
         <div>
-          <h1 className=" text-2xl lg:text-4xl py-4 font-bold text-center">
+          <h1 className=" text-xl  md:text-2xl lg:text-3xl py-4 font-bold text-center">
             Hi Welcome{" "}
             {user?.displayName ? (
-              <span className=" text-amber-600">{user?.displayName}</span>
+              <span className=" ">{user?.displayName}</span>
             ) : (
               "Back"
             )}

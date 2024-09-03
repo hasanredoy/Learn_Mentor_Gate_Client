@@ -63,7 +63,7 @@ console.log(category,search);
         ></Heading>
 
         {/* sort and search section  */}
-        <section className=" md:mx-10 flex justify-between items-center">
+        <section className=" md:mx-10 flex flex-col-reverse md:flex-row justify-between lg:items-center gap-10">
           <select onChange={(e)=>setCategory(e.target.value)} name="category" className="select select-bordered  w-32">
             <option disabled selected>
               Category
@@ -120,7 +120,7 @@ console.log(category,search);
                 <h2 className="mb-1 text-lg lg:text-xl font-bold">
                   {course?.Title}
                 </h2>
-                <p className=" text-base md:text-base ">
+                <p className=" text-sm md:text-base ">
                   {course?.["Short_description"]}
                   <Link
                     to={`/class/${course?._id}`}
