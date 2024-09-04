@@ -200,7 +200,7 @@ const isTeacher=role?.role
         </div>
        </div>
       </div>
-      <div className=" w-full p-5 lg:w-[70%] ">
+      <div className=" w-full p-5 md:p-10 lg:w-[70%] ">
         <Outlet></Outlet>
       </div>
     </div>
