@@ -73,39 +73,39 @@ const TeachOnLMG = () => {
       <HelmetPorvider title={"Teach on"}></HelmetPorvider>
 
       {isTeacherPending?.status === "approved" ? (
-        <div className=" flex flex-col gap-3 h-[500px] items-center justify-center">
+        <div className=" flex flex-col gap-3 min-h-screen h-screen items-center justify-center">
           <h1 className=" text-xl  md:text-2xl lg:text-3xl font-bold text-center">
             Hi, <span className=" text-green-600">{user?.displayName}</span> Now
             Your Teacher
           </h1>
           <div className=" flex justify-center items-center">
             <Link to={"/dashboard/profile"}>
-              <button className=" text-lg font-bold text-white bg-green-700 px-4 py-2 rounded-lg hover:bg-white hover:text-green-600 hover:border hover:border-green-700 ">
-                My Class
-              </button>
+              <button className=" btn-primary">My Class</button>
             </Link>
           </div>
         </div>
       ) : (
         <div>
-          <h1 className=" text-xl  md:text-2xl lg:text-3xl py-4 font-bold text-center">
-            Hi Welcome{" "}
-            {user?.displayName ? (
-              <span className=" ">{user?.displayName}</span>
-            ) : (
-              "Back"
-            )}
-            ,Teach on{" "}
-            <span className=" text-green-600">Learn Mentor Gate?</span>
-          </h1>
-          <h3 className=" text-lg text-center ">
-            Answer some easy questions and apply for Teacher post.
-          </h3>
+          <div className=" flex flex-col items-center justify-center h-[300px]">
+            <h1 className=" text-xl  md:text-2xl lg:text-3xl py-4 font-bold text-center">
+              Hi Welcome{" "}
+              {user?.displayName ? (
+                <span className=" ">{user?.displayName}</span>
+              ) : (
+                "Back"
+              )}
+              ,Teach on{" "}
+              <span className=" text-green-600">Learn Mentor Gate?</span>
+            </h1>
+            <h3 className=" text-lg text-center ">
+              Answer some easy questions and apply for Teacher post.
+            </h3>
+          </div>
           {showForm ? (
-            <div className=" my-36 flex justify-center">
+            <div className=" mb-10 flex justify-center">
               <button
                 onClick={() => setShowForm(false)}
-                className=" text-lg font-bold text-white bg-green-700 px-4 py-2 rounded-lg hover:bg-white hover:text-green-600 hover:border hover:border-green-700 "
+                className="btn-primary "
               >
                 Get Started !
               </button>{" "}
