@@ -61,12 +61,12 @@ const isAdmin=role?.role
 const isTeacher=role?.role
 
   return (
-    <div className=" flex gap-10 container mx-auto">
+    <div className=" flex gap-10    mx-auto">
 
       {/* sidebar */}
        <button onClick={()=>setMenu(!menu)} className={` z-50 lg:hidden text-2xl  absolute`}><TiThMenu></TiThMenu></button>
-      <div className={` ${menu?"block":'hidden'} absolute z-40 w-[50%] lg:hidden min-h-screen  px-5 pt-4  bg-[#03962A] `}>
-       <div className=" h-full flex max-h-screen flex-col justify-evenly">
+      <div className={` ${menu?"block":'hidden'}  absolute z-40 w-[60%] md:w-[40%] lg:hidden min-h-screen  px-5 pt-4  bg-[#15803D] `}>
+       <div className=" h-full flex min-h-screen max-h-screen flex-col justify-evenly">
        <div className=" flex-1">
 
        <div
@@ -79,7 +79,7 @@ const isTeacher=role?.role
                 {theme === "dark" && <FaMoon></FaMoon>}
               </span>
               <select
-                className=" bg-[#03962A] text-white font-bold outline-none border-0"
+                className=" bg-[#15803D] text-white font-bold outline-none border-0"
                 defaultValue={
                   localStorage.getItem("theme")
                     ? localStorage.getItem("theme")
@@ -132,7 +132,7 @@ const isTeacher=role?.role
        </div>
       </div>
       {/* links for lg  */}
-      <div className={` hidden lg:block w-[20%] min-h-screen  px-5 pt-4  bg-[#03962a] `}>
+      <div className={` hidden lg:block w-[25%] p-10 min-h-screen  bg-[#15803D] `}>
        <div className=" h-full flex max-h-screen flex-col justify-evenly">
        <div className=" flex-1">
 
@@ -146,7 +146,7 @@ const isTeacher=role?.role
                 {theme === "dark" && <FaMoon></FaMoon>}
               </span>
               <select
-                className=" bg-[#03962a] text-white font-bold outline-none border-0"
+                className=" bg-[#15803D] text-white font-bold outline-none border-0"
                 defaultValue={
                   localStorage.getItem("theme")
                     ? localStorage.getItem("theme")
@@ -200,7 +200,7 @@ const isTeacher=role?.role
         </div>
        </div>
       </div>
-      <div className=" w-full lg:w-[70%] ">
+      <div className=" w-full p-5 lg:w-[70%] ">
         <Outlet></Outlet>
       </div>
     </div>
