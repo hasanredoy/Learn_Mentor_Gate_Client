@@ -3,19 +3,37 @@ import HelmetPorvider from "../../../ReuseableCompo/HelmetPorvider";
 import LoadingSpinner from "../../../ReuseableCompo/LoadingSpinner";
 import useAuth from "../../../hooks/useAuth";
 import useGetSingleUser from "../../../hooks/useGetSingleUser";
-import { useState } from "react";
-
-const Profile = () => {
+import {useState } from "react";
+import useUploadImage from "../../../hooks/useUploadImage";
+import swal from "sweetalert";
+import { Navigate, useNavigate, useNavigation } from "react-router-dom";
+const Profile =() => {
   // state to control update profile form
   const [showForm , setShowForm] = useState(true)
   const {user,updateUserProfile}=useAuth() 
    const email = user?.email;
    const [singleUser,isPending]=useGetSingleUser(email)
   //  console.log(singleUser);
+  // state to handle upload photo 
+  const [photo , setPhoto] = useState()
+ 
+const uploadedImage =  useUploadImage(photo)
 
+const navigate = useNavigate()
 const handleUpdateUserProfile=(e)=>{
   e.preventDefault()
-  const name = e.name.value
+  const name = e.target.name.value
+  const photoURL = e.target.imageUrl.value
+  if(uploadedImage||photoURL){
+    updateUserProfile(name,uploadedImage||photoURL)
+    .then(res=>{
+      console.log("res")
+      swal('Updated Successfully')
+      location.reload()
+      navigate('/dashboard/myEnrollClass')
+    })
+    .catch(err=>console.log(err))
+  }
 }
 
    if(isPending){
@@ -43,26 +61,26 @@ const handleUpdateUserProfile=(e)=>{
       <div className="card my-10 bg-base-300 w-full max-w-sm shrink-0 shadow-2xl">
       <button onClick={()=>setShowForm(!showForm)} className=" rounded-md bg-gray-200 hover:bg-white  absolute top-1 text-lg right-2">X</button>
       <h3 className=" text-base text-center mt-5 font-bold md:text-lg ">Please provide your credentials </h3>
-      <form className="card-body">
+      <form onSubmit={handleUpdateUserProfile} className="card-body">
         <div className="form-control">
           <label className="label">
             <span className="label-text font-bold">Name</span>
           </label>
-          <input type="text" placeholder="name" className="input input-bordered" required />
+          <input type="text" defaultValue={user?.displayName} name="name" placeholder="name" className="input input-bordered" required />
         </div>
         <div className="form-control">
           <label className="label">
             <span className="label-text font-bold">Photo URL</span>
           </label>
-          <input type="url" name="imageUrl" placeholder="photo Url" className="input input-bordered" />
+          <input type="url" defaultValue={user?.photoURL} name="imageUrl" placeholder="photo Url" className="input input-bordered" />
   
         </div>
-        <span> or</span>
+        <span className="ml-2"> or</span>
         <div className="form-control">
           <label className="label">
             <span className="label-text font-bold">Choose form gallery</span>
           </label>
-          <input type="file" className="file-input" />
+          <input onChange={(e)=>setPhoto(e.target.files[0])} type="file" className="file-input file-input-bordered file-input-success w-full max-w-xs" />
   
         </div>
         <div className="form-control mt-6">
