@@ -8,10 +8,16 @@ import { useState } from "react";
 const Profile = () => {
   // state to control update profile form
   const [showForm , setShowForm] = useState(true)
-  const {user}=useAuth() 
+  const {user,updateUserProfile}=useAuth() 
    const email = user?.email;
    const [singleUser,isPending]=useGetSingleUser(email)
   //  console.log(singleUser);
+
+const handleUpdateUserProfile=(e)=>{
+  e.preventDefault()
+  const name = e.name.value
+}
+
    if(isPending){
     return <LoadingSpinner></LoadingSpinner>
    }
@@ -33,30 +39,38 @@ const Profile = () => {
        <button onClick={()=>setShowForm(!showForm)} className=" btn-primary">Update <FaPen></FaPen></button>
       </div>
     </div>:
-    <div className="card my-10 bg-base-300 w-full max-w-sm shrink-0 shadow-2xl">
+    <div className=" flex justify-center items-center">
+      <div className="card my-10 bg-base-300 w-full max-w-sm shrink-0 shadow-2xl">
       <button onClick={()=>setShowForm(!showForm)} className=" rounded-md bg-gray-200 hover:bg-white  absolute top-1 text-lg right-2">X</button>
       <h3 className=" text-base text-center mt-5 font-bold md:text-lg ">Please provide your credentials </h3>
       <form className="card-body">
         <div className="form-control">
           <label className="label">
-            <span className="label-text">Email</span>
+            <span className="label-text font-bold">Name</span>
           </label>
-          <input type="email" placeholder="email" className="input input-bordered" required />
+          <input type="text" placeholder="name" className="input input-bordered" required />
         </div>
         <div className="form-control">
           <label className="label">
-            <span className="label-text">Password</span>
+            <span className="label-text font-bold">Photo URL</span>
           </label>
-          <input type="password" placeholder="password" className="input input-bordered" required />
+          <input type="url" name="imageUrl" placeholder="photo Url" className="input input-bordered" />
+  
+        </div>
+        <span> or</span>
+        <div className="form-control">
           <label className="label">
-            <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
+            <span className="label-text font-bold">Choose form gallery</span>
           </label>
+          <input type="file" className="file-input" />
+  
         </div>
         <div className="form-control mt-6">
-          <button className="btn btn-primary">Login</button>
+          <button className=" btn-primary">Update</button>
         </div>
       </form>
-    </div>}
+    </div>
+      </div>}
     </>
   );
 };
