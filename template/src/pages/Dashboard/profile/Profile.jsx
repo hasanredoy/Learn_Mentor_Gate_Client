@@ -70,7 +70,7 @@ const handleUpdateUserProfile=(e)=>{
         </div>
         <div className="form-control">
           <label className="label">
-            <span className="label-text font-bold">Photo URL</span>
+            <span className="label-text font-bold">Image URL</span>
           </label>
           <input type="url" defaultValue={user?.photoURL} name="imageUrl" placeholder="photo Url" className="input input-bordered" />
   
