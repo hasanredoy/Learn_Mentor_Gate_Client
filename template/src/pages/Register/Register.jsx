@@ -98,13 +98,13 @@ const Register = () => {
         className=" 
    min-h-screen mt-20 w-full flex justify-center items-center py-5 "
       >
-        <div className="card shrink-0 shadow-2xl  w-full h-full  lg:w-1/2 bg-base-200">
-        <h1 className="text-2xl font-bold text-center">Please Register !!</h1>
+        <div className="card shrink-0 shadow-2xl  w-full h-full  max-w-xl bg-base-200">
+        <h1 className=" text-lg md:text-xl font-bold text-center">Please Register !!</h1>
           <form onSubmit={handleSubmit(handleRegister)} className="card-body">
             {/* name */}
             <div className="  form-control">
               <label className="label">
-                <span className="text-xl font-semibold">
+                <span className="font-semibold">
                   You&apos;re Full Name
                 </span>
               </label>
@@ -121,7 +121,7 @@ const Register = () => {
             {/* Photo */}
             <div className="overflow-auto form-control">
               <label className="label">
-                <span className="text-xl font-semibold">Your Photo</span>
+                <span className=" font-semibold"> Photo</span>
               </label>
               <input
                 onChange={handeleIMage}
@@ -132,7 +132,7 @@ const Register = () => {
             {/* number */}
             <div className="form-control">
               <label className="label">
-                <span className="text-xl font-semibold">Your Phone Number</span>
+                <span className="font-semibold">Phone Number</span>
               </label>
               <PhoneInput
                 className="input"
@@ -146,7 +146,7 @@ const Register = () => {
             {/* email */}
             <div className="form-control">
               <label className="label">
-                <span className="text-xl font-semibold">You&apos;re Email</span>
+                <span className=" font-semibold">Email</span>
               </label>
               <input
                 type="Email"
@@ -161,7 +161,7 @@ const Register = () => {
             {/* pass */}
             <div className="form-control relative">
               <label className="label">
-                <span className="text-xl font-semibold">Password</span>
+                <span className=" font-semibold">Password</span>
               </label>
               <input
                 type={eye ? "password" : "text"}
@@ -189,7 +189,7 @@ const Register = () => {
               )}
             </div>
             <div className="form-control mt-6">
-              <button type="submit" className="btn btn-success">
+              <button type="submit" className="btn-primary">
                 Register
               </button>
             </div>

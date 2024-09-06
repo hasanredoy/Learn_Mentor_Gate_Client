@@ -71,15 +71,15 @@ const Login = () => {
           className="
   w-full flex justify-center items-center py-5 "
         >
-          <div className="card shrink-0 shadow-2xl  w-full h-full  lg:w-1/2 bg-base-300 ">
-            <h2 className=" font-bold text-3xl text-center pt-4">
+          <div className="card shrink-0 shadow-2xl  w-full h-full  max-w-xl bg-base-300 ">
+            <h2 className=" font-bold text-lg md:text-xl text-center pt-4">
               {" "}
               Please Login!
             </h2>
             <form onSubmit={handleSubmit(onSubmit)} className="card-body">
               <div className="form-control">
                 <label className="label">
-                  <span className="text-xl font-semibold">Email</span>
+                  <span className="font-semibold">Email</span>
                 </label>
                 <input
                   {...register("email", { required: true })}
@@ -95,7 +95,7 @@ const Login = () => {
               </div>
               <div className="form-control relative">
                 <label className="label">
-                  <span className="text-xl font-semibold">Password</span>
+                  <span className=" font-semibold">Password</span>
                 </label>
                 <input
                  {...register("password", { required: true,pattern: !/^[A-Za-z]/ })}
@@ -127,7 +127,7 @@ const Login = () => {
               <div className="form-control mt-6">
                 <button
                   type="submit"
-                  className="text-lg font-bold text-white bg-green-700 px-4 py-2 rounded-lg hover:bg-white hover:text-green-600 hover:border hover:border-green-700 "
+                  className=" btn-primary"
                 >
                   Sing In
                 </button>
