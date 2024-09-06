@@ -56,7 +56,7 @@ const UserClasses = () => {
   return (
     <div className=" my-20 ">
       <HelmetPorvider title={"My Class| Dashboard"}></HelmetPorvider>
-      <h1 className=" text-5xl font-bold text-center">
+      <h1 className=" text-xl lg:text-3xl font-bold text-center">
         Welcome{" "}
         <span className=" text-green-600">
           {user?.displayName ? user.displayName : "Back"}
@@ -65,8 +65,8 @@ const UserClasses = () => {
       </h1>
       {
         enrollClasses.length<1
-        ?<div className=" flex flex-col gap-5 items-center">
-          <h3 className=" text-2xl font-bold mt-[20%]">
+        ?<div className=" flex flex-col gap-5 items-center mt-[10%]">
+          <h3 className=" text-lg font-bold mt-[0%]">
           You Have&apos;nt Enroll any Class..
         </h3>
         <Link to={`/allClasses`}>
